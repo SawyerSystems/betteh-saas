@@ -1,11 +1,11 @@
 {
-  "name": "Coach Will Tumbles",
-  "short_name": "Coach Will",
-  "description": "Private gymnastics coaching by Coach Will Tumbles",
+  "name": "Betteh - Gymnastics Coaching Platform",
+  "short_name": "Betteh",
+  "description": "Multi-tenant gymnastics coaching SaaS platform",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#9333ea",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "/icons/icon-192.png",

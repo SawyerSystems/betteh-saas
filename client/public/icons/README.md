@@ -1,19 +1,32 @@
-# Favicon Instructions
+# Betteh Platform Icons
 
-Due to the limitations in the current environment (missing ImageMagick/convert), you should manually create properly sized favicon images:
+✅ **UPDATED**: All icons have been updated to use the new Betteh branding!
 
-1. For ideal results, create the following sizes from the CWT_Circle_LogoSPIN.svg or .png file:
-   - favicon-16x16.png (16x16 pixels)
-   - favicon-32x32.png (32x32 pixels)
-   - icon-192.png (192x192 pixels)
-   - icon-512.png (512x512 pixels)
+## Current Icon Files:
+- `favicon-16x16.png` (16x16 pixels) - Betteh logo
+- `favicon-32x32.png` (32x32 pixels) - Betteh logo  
+- `icon-192.png` (192x192 pixels) - Betteh logo
+- `icon-512.png` (512x512 pixels) - Betteh logo
+- `../favicon.ico` (32x32 ICO format) - Betteh logo
 
-2. If possible, also create a favicon.ico file that includes multiple sizes (16x16, 32x32)
+## Generated From:
+All icons were generated from `../assets/betteh_logo_black_font.png` using macOS `sips` command.
 
-3. You can use online tools like:
-   - https://realfavicongenerator.net/ 
-   - https://favicon.io/favicon-converter/
+## Usage:
+These icons are automatically referenced in the HTML head and PWA manifest files for:
+- Browser favicon display
+- PWA app icons
+- Bookmark icons
+- Tab icons
 
-4. Place all generated files in the `client/public/icons/` directory
+## Regeneration (if needed):
+```bash
+# From project root:
+sips -s format png -z 16 16 client/public/assets/betteh_logo_black_font.png --out client/public/icons/favicon-16x16.png
+sips -s format png -z 32 32 client/public/assets/betteh_logo_black_font.png --out client/public/icons/favicon-32x32.png
+sips -s format png -z 192 192 client/public/assets/betteh_logo_black_font.png --out client/public/icons/icon-192.png
+sips -s format png -z 512 512 client/public/assets/betteh_logo_black_font.png --out client/public/icons/icon-512.png
+sips -s format ico -z 32 32 client/public/assets/betteh_logo_black_font.png --out client/public/favicon.ico
+```
 
-The HTML and manifest files have already been updated to reference these files at their expected locations.
+**Last Updated**: August 24, 2025 - Betteh SaaS Platform Migration

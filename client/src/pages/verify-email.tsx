@@ -1,3 +1,4 @@
+import { useBrand } from "@/contexts/BrandContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { apiRequest } from "@/lib/queryClient";
@@ -7,7 +8,7 @@ import { useLocation } from "wouter";
 import SEOHead from "@/components/SEOHead";
 
 export default function VerifyEmail() {
-  const [loading, setLoading] = useState(true);
+  const brand = useBrand();  const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [, setLocation] = useLocation();
@@ -52,7 +53,7 @@ export default function VerifyEmail() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50 p-4">
       <SEOHead
-        title="Verify Email — Coach Will Tumbles"
+        title={`Verify Email — ${brand.businessName}`}
         description="Email verification in progress."
         canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/verify-email` : '/verify-email'}
         robots="noindex,follow"

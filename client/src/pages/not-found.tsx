@@ -1,12 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { useBrand } from "@/contexts/BrandContext";
 
 export default function NotFound() {
+  const brand = useBrand();
+  
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
       <SEOHead
-        title="Page Not Found — Coach Will Tumbles"
+        title={`Page Not Found — ${brand.businessName}`}
         description="The page you're looking for doesn't exist."
         canonicalUrl={typeof window !== 'undefined' ? window.location.href : '/404'}
         robots="noindex,follow"

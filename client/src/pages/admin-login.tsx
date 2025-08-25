@@ -12,6 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, Shield } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import { useBrand } from '@/contexts/BrandContext';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -23,6 +24,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const brand = useBrand();
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
@@ -78,7 +80,7 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen theme-smooth flex items-center justify-center bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black p-4">
       <SEOHead
-        title="Admin Login — Coach Will Tumbles"
+        title={`Admin Login — ${brand.businessName}`}
         description="Administrator sign in."
         canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin-login` : '/admin-login'}
         robots="noindex,follow"

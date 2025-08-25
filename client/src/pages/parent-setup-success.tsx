@@ -1,3 +1,4 @@
+import { useBrand } from "@/contexts/BrandContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, CheckCircle, Mail } from "lucide-react";
@@ -6,7 +7,7 @@ import { useLocation } from "wouter";
 import SEOHead from "@/components/SEOHead";
 
 export default function ParentSetupSuccess() {
-  const [, setLocation] = useLocation();
+  const brand = useBrand();  const [, setLocation] = useLocation();
   const [email, setEmail] = useState<string>("");
 
   // Extract email from query parameter
@@ -21,7 +22,7 @@ export default function ParentSetupSuccess() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-blue-50 to-teal-50 p-4">
       <SEOHead
-        title="Account Created — Coach Will Tumbles"
+        title={`Account Created — ${brand.businessName}`}
         description="Parent account created."
         canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-setup-success` : '/parent-setup-success'}
         robots="noindex,follow"

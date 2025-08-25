@@ -1,3 +1,4 @@
+import { useBrand } from "@/contexts/BrandContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -18,7 +19,7 @@ import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
 
 export default function BookingSuccess() {
-  const { toast } = useToast();
+  const brand = useBrand();  const { toast } = useToast();
   const urlParams = new URLSearchParams(window.location.search);
   const sessionId = urlParams.get("session_id");
   const bookingId = urlParams.get("booking_id");
@@ -188,7 +189,7 @@ export default function BookingSuccess() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-green-50 dark:bg-gradient-to-br dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black py-12 px-4">
       <SEOHead
-        title="Booking Success — Coach Will Tumbles"
+        title={`Booking Success — ${brand.businessName}`}
         description="Your booking was successful."
         canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/booking-success` : '/booking-success'}
         robots="noindex,follow"
@@ -343,7 +344,7 @@ export default function BookingSuccess() {
         {/* Contact Info */}
         <div className="text-center mt-8 p-4 bg-white dark:bg-[#2A4A9B]/30 rounded-lg shadow-sm dark:border dark:border-[#D8BD2A]/20">
           <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
-            Coach Will Tumbles
+            {brand.businessName}
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             Phone: {siteContent?.contact?.phone || '(585) 755-8122'} | Email: {siteContent?.contact?.email || '{siteContent?.contact?.email || brand.contact.email}'}

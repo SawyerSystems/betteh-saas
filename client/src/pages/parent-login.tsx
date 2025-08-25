@@ -1,3 +1,4 @@
+import { useBrand } from "@/contexts/BrandContext";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -21,7 +22,7 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>;
 
 export default function ParentLogin() {
-  const [, setLocation] = useLocation();
+  const brand = useBrand();  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -79,7 +80,7 @@ export default function ParentLogin() {
   return (
     <div className="min-h-screen theme-smooth flex items-center justify-center bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black p-4">
       <SEOHead
-        title="Parent Login — Coach Will Tumbles"
+        title={`Parent Login — ${brand.businessName}`}
         description="Sign in to your parent account."
         canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-login` : '/parent-login'}
         robots="noindex,follow"

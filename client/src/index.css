@@ -34,43 +34,48 @@
   }
 }
 
+/* Betteh Brand Palette (matching brand.ts) */
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(240, 100%, 9%);
-  --muted: hsl(45, 100%, 92%);
-  --muted-foreground: hsl(240, 100%, 9%);
-  --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(240, 100%, 9%);
-  --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(240, 100%, 9%);
-  --border: hsl(45, 100%, 85%);
-  --input: hsl(45, 100%, 85%);
-  --primary: hsl(240, 100%, 25%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(45, 100%, 85%);
-  --secondary-foreground: hsl(240, 100%, 9%);
-  --accent: hsl(0, 89%, 47%);
-  --accent-foreground: hsl(0, 0%, 100%);
-  --destructive: hsl(0, 89%, 47%);
-  --destructive-foreground: hsl(0, 0%, 100%);
-  --ring: hsl(45, 100%, 42%);
+  /* Core Betteh Colors */
+  --brand-primary: #000000;      /* Black - main brand color */
+  --brand-secondary: #f1f5f9;    /* Pure light gray - secondary brand color */
+  --brand-white: #ffffff;        /* White */
+  --brand-black: #000000;        /* Black */
+  --brand-light-bg: #ffffff;     /* Light theme background */
+  --brand-dark-bg: #111827;      /* Dark theme background - matches gray-900 */
+  --brand-border: #e2e8f0;       /* Pure gray border color */
+
+  /* Semantic tokens mapped to Betteh brand */
+  --background: var(--brand-light-bg);
+  --foreground: var(--brand-primary);
+  --muted: var(--brand-secondary);
+  --muted-foreground: var(--brand-primary);
+  --popover: var(--brand-white);
+  --popover-foreground: var(--brand-primary);
+  --card: var(--brand-white);
+  --card-foreground: var(--brand-primary);
+  --border: var(--brand-border);
+  --input: var(--brand-border);
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--brand-white);
+  --secondary: var(--brand-secondary);
+  --secondary-foreground: var(--brand-primary);
+  --accent: var(--brand-primary);
+  --accent-foreground: var(--brand-white);
+  --destructive: #dc2626; /* kept semantic red for errors */
+  --destructive-foreground: var(--brand-white);
+  --ring: var(--brand-primary);
   --radius: 0.5rem;
 
-  /* Coach Will Tumbles Athletic Brand Colors */
-  --cwt-gold: #D8BD2A;
-  --cwt-navy: #0F0276;
-  --cwt-red: #E10B0B;
-  --cwt-black: #000000;
-  --cwt-white: #FFFFFF;
+  /* Deprecated legacy brand (gold/navy/red) kept for backward compatibility — will be removed */
+  --cwt-gold: var(--brand-secondary);
+  --cwt-navy: var(--brand-primary);
+  --cwt-red: var(--brand-primary);
+  --cwt-black: var(--brand-black);
+  --cwt-white: var(--brand-white);
   
-  /* Athletic Theme Colors */
-  --athletic-gold: hsl(45, 100%, 42%);
-  --athletic-gold-light: hsl(45, 100%, 85%);
-  --athletic-navy: hsl(240, 100%, 25%);
-  --athletic-navy-light: hsl(240, 100%, 95%);
-  --athletic-red: hsl(0, 89%, 47%);
-  --athletic-red-light: hsl(0, 89%, 95%);
-  --athletic-shadow: hsla(0, 0%, 0%, 0.3);
+  /* Neutral theme shadows */
+  --athletic-shadow: hsla(0, 0%, 0%, 0.25);
 
   /* Glassmorphism (Light) */
   --glass-blur: 12px; /* 8–15px target */
@@ -83,25 +88,25 @@
 }
 
 .dark {
-  --background: hsl(240, 100%, 9%);
-  --foreground: hsl(0, 0%, 100%);
-  --muted: hsl(240, 100%, 15%);
-  --muted-foreground: hsl(45, 100%, 85%);
-  --popover: hsl(240, 100%, 9%);
-  --popover-foreground: hsl(0, 0%, 100%);
-  --card: hsl(240, 100%, 9%);
-  --card-foreground: hsl(0, 0%, 100%);
-  --border: hsl(240, 100%, 20%);
-  --input: hsl(240, 100%, 20%);
-  --primary: hsl(45, 100%, 42%);
-  --primary-foreground: hsl(240, 100%, 9%);
-  --secondary: hsl(240, 100%, 15%);
-  --secondary-foreground: hsl(45, 100%, 85%);
-  --accent: hsl(0, 89%, 47%);
-  --accent-foreground: hsl(0, 0%, 100%);
-  --destructive: hsl(0, 89%, 47%);
-  --destructive-foreground: hsl(0, 0%, 100%);
-  --ring: hsl(45, 100%, 42%);
+  --background: var(--brand-dark-bg);     /* #111827 - gray-900 */
+  --foreground: var(--brand-white);       /* #ffffff */
+  --muted: #374151;                       /* gray-700 for muted backgrounds */
+  --muted-foreground: #d1d5db;            /* gray-300 for muted text */
+  --popover: #1f2937;                     /* gray-800 for popovers */
+  --popover-foreground: var(--brand-white);
+  --card: #1f2937;                        /* gray-800 to match homepage cards */
+  --card-foreground: var(--brand-white);
+  --border: #374151;                      /* gray-700 for borders */
+  --input: #374151;                       /* gray-700 for inputs */
+  --primary: var(--brand-white);          /* inverted for dark */
+  --primary-foreground: var(--brand-dark-bg);
+  --secondary: #374151;                   /* gray-700 */
+  --secondary-foreground: #f3f4f6;        /* gray-100 */
+  --accent: #4b5563;                      /* gray-600 */
+  --accent-foreground: var(--brand-white);
+  --destructive: #dc2626;
+  --destructive-foreground: var(--brand-white);
+  --ring: var(--brand-white);
 
   /* Glassmorphism (Dark) */
   --glass-blur: 12px;
@@ -232,70 +237,48 @@
   }
 
   /* Athletic Buttons */
-  .btn-athletic-gold {
-    @apply bg-[#D8BD2A] hover:bg-[#C7AA1F] text-black font-bold px-6 py-3 rounded-lg;
+  /* Betteh button variants (updated class names) */
+  .btn-athletic-gold { /* primary button */
+    @apply bg-black hover:bg-neutral-800 text-white font-bold px-6 py-3 rounded-lg;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     box-shadow: 0 4px 8px var(--athletic-shadow);
     transition: all 0.3s ease;
     font-family: 'Sunborn', sans-serif;
   }
-  
-  .btn-athletic-gold:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 12px var(--athletic-shadow);
-  }
-  
-  .btn-athletic-red {
-    @apply bg-[#E10B0B] hover:bg-[#C70A0A] text-white font-bold px-6 py-3 rounded-lg;
+  .btn-athletic-gold:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 12px var(--athletic-shadow); }
+
+  .btn-athletic-red { /* secondary button */
+    @apply bg-neutral-100 hover:bg-neutral-200 text-black font-bold px-6 py-3 rounded-lg border border-neutral-300;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     box-shadow: 0 4px 8px var(--athletic-shadow);
     transition: all 0.3s ease;
     font-family: 'Sunborn', sans-serif;
   }
-  
-  .btn-athletic-red:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 12px var(--athletic-shadow);
-  }
-  
-  .btn-athletic-navy {
-    @apply bg-[#0F0276] hover:bg-[#0A0159] text-white font-bold px-6 py-3 rounded-lg;
+  .btn-athletic-red:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 12px var(--athletic-shadow); }
+
+  .btn-athletic-navy { /* outline button */
+    @apply bg-white hover:bg-neutral-50 text-black font-bold px-6 py-3 rounded-lg border-2 border-black;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     box-shadow: 0 4px 8px var(--athletic-shadow);
     transition: all 0.3s ease;
     font-family: 'Sunborn', sans-serif;
   }
-  
-  .btn-athletic-navy:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 12px var(--athletic-shadow);
-  }
+  .btn-athletic-navy:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 6px 12px var(--athletic-shadow); }
   
   /* Athletic Cards */
   .athletic-card {
-    @apply bg-white rounded-lg shadow-lg border-2 border-[#D8BD2A] p-6;
+    @apply bg-white rounded-lg shadow-lg border-2 border-neutral-200 p-6 dark:bg-neutral-900 dark:border-neutral-700;
     transition: all 0.3s ease;
   }
-  
-  .athletic-card:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 16px var(--athletic-shadow);
-    border-color: #E10B0B;
-  }
+  .athletic-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 16px var(--athletic-shadow); border-color: var(--brand-primary); }
   
   /* Athletic Sections */
-  .athletic-section {
-    @apply py-12 px-4;
-    border-bottom: 2px solid #D8BD2A;
-  }
-  
-  .athletic-divider {
-    @apply w-full h-px bg-gradient-to-r from-transparent via-[#D8BD2A] to-transparent;
-    box-shadow: 0 1px 2px var(--athletic-shadow);
-  }
+  .athletic-section { @apply py-12 px-4; border-bottom: 2px solid var(--brand-border); }
+
+  .athletic-divider { @apply w-full h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent; box-shadow: 0 1px 2px var(--athletic-shadow); }
 }
 
 /* Athletic Animations */
@@ -360,33 +343,19 @@
   }
   
   @keyframes glow {
-    0% {
-      box-shadow: 0 0 5px #D8BD2A;
-    }
-    100% {
-      box-shadow: 0 0 20px #D8BD2A, 0 0 30px #D8BD2A;
-    }
+    0% { box-shadow: 0 0 5px var(--brand-primary); }
+    100% { box-shadow: 0 0 20px var(--brand-primary), 0 0 30px var(--brand-primary); }
   }
-  
-  @keyframes glowBlue {
-    0% {
-      box-shadow: 0 0 5px #0F0276;
-    }
-    100% {
-      box-shadow: 0 0 20px #0F0276, 0 0 30px #0F0276;
-    }
+
+  @keyframes glowBlue { /* now black glow */
+    0% { box-shadow: 0 0 5px var(--brand-primary); }
+    100% { box-shadow: 0 0 20px var(--brand-primary), 0 0 30px var(--brand-primary); }
   }
-  
-  @keyframes glowYellow {
-    0% {
-      box-shadow: 0 0 5px #D8BD2A;
-    }
-    100% {
-      box-shadow: 0 0 20px #D8BD2A, 0 0 30px #D8BD2A;
-    }
-  }
-  
-  .animate-glow-blue {
+
+  @keyframes glowYellow { /* now grey glow */
+    0% { box-shadow: 0 0 5px var(--brand-secondary); }
+    100% { box-shadow: 0 0 20px var(--brand-secondary), 0 0 30px var(--brand-secondary); }
+  }  .animate-glow-blue {
     animation: glowBlue 2s ease-in-out infinite alternate;
   }
   
@@ -394,13 +363,9 @@
     animation: glowYellow 2s ease-in-out infinite alternate;
   }
   
-  @keyframes pulseGold {
-    0%, 100% {
-      background-color: #D8BD2A;
-    }
-    50% {
-      background-color: #E10B0B;
-    }
+  @keyframes pulseGold { /* now black/grey pulse */
+    0%, 100% { background-color: var(--brand-primary); }
+    50% { background-color: var(--brand-secondary); }
   }
 }
 

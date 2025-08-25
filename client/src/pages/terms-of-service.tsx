@@ -1,11 +1,12 @@
+import { useBrand } from "@/contexts/BrandContext";
 import SEOHead from "@/components/SEOHead";
 import { LEGAL } from "@/constants/legal";
 
 export default function TermsOfService() {
-  return (
+  const brand = useBrand();  return (
     <div className="min-h-screen w-full bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <SEOHead
-        title="Terms of Service — Coach Will Tumbles"
+        title={`Terms of Service — ${brand.businessName}`}
         description="The rules and expectations for using our services."
         canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/terms` : '/terms'}
       />

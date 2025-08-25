@@ -1,3 +1,4 @@
+import { useBrand } from "@/contexts/BrandContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { apiRequest } from "@/lib/queryClient";
@@ -65,7 +66,7 @@ export default function ConfirmBookingPage() {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <SEOHead
-          title="Confirm Booking — Coach Will Tumbles"
+          title={`Confirm Booking — ${brand.businessName}`}
           description="Confirm your booking."
           canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent/confirm-booking` : '/parent/confirm-booking'}
           robots="noindex,follow"
@@ -92,7 +93,7 @@ export default function ConfirmBookingPage() {
             <CheckCircle className="mx-auto h-12 w-12 text-green-500" />
             <CardTitle className="mt-4">Booking Confirmed!</CardTitle>
             <CardDescription>
-              Thank you for confirming your booking with Coach Will Tumbles.
+              Thank you for confirming your booking with {brand.businessName}.
             </CardDescription>
           </CardHeader>
           <CardFooter>
@@ -111,7 +112,7 @@ export default function ConfirmBookingPage() {
         <CardHeader>
           <CardTitle>Confirm Your Booking</CardTitle>
           <CardDescription>
-            Please confirm your booking with Coach Will Tumbles.
+            Please confirm your booking with {brand.businessName}.
           </CardDescription>
         </CardHeader>
         <CardContent>

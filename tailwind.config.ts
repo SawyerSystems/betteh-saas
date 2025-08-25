@@ -13,6 +13,12 @@ export default {
       '2xl': '1536px',
     },
     extend: {
+      fontFamily: {
+        'sunborn': ['Sunborn', 'sans-serif'],
+        'oswald': ['Oswald', 'sans-serif'],
+        'bebas': ['Bebas Neue', 'sans-serif'],
+        'anton': ['Anton', 'sans-serif'],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

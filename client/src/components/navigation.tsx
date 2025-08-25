@@ -107,7 +107,7 @@ export const Navigation = memo(function Navigation() {
   <div className="container mx-auto flex h-20 md:h-20 items-center justify-between px-4 py-4 md:px-6 md:py-0">
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer relative flex-shrink-0">
-            <div className="w-14 h-14 animate-logo-spin flex-shrink-0">
+            <div className="w-20 h-20 flex-shrink-0 hidden">
               <BrandLogo 
                 type="circle"
                 alt={`${brand.businessName} Logo`}
@@ -131,7 +131,7 @@ export const Navigation = memo(function Navigation() {
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               <span
-                className={`text-[#0F0276] dark:text-[#D8BD2A] hover:text-[#E10B0B] transition-colors duration-200 font-semibold cursor-pointer athletic-title text-sm md:text-base xl:text-lg ${
+                className={`text-[#0F0276] dark:text-[#D8BD2A] hover:text-[#E10B0B] transition-colors duration-200 font-semibold cursor-pointer font-sunborn text-sm md:text-base xl:text-lg ${
                   isActive(item.href) ? "text-[#E10B0B] dark:text-[#D8BD2A] font-bold" : ""
                 }`}
                 onMouseEnter={() => {
@@ -168,7 +168,7 @@ export const Navigation = memo(function Navigation() {
                   onClick={handleAdminAction}
                   variant="outline"
                   size="sm"
-                  className="flex items-center space-x-1 border-[#0F0276] hover:bg-[#0F0276] hover:text-white text-[#0F0276] transition-all duration-200 font-semibold athletic-title"
+                  className="flex items-center space-x-1 border-[#0F0276] hover:bg-[#0F0276] hover:text-white text-[#0F0276] transition-all duration-200 font-semibold font-sunborn"
                 >
                   <Lock className="h-3 w-3" />
                   <span className="hidden xl:inline">ADMIN</span>
@@ -177,7 +177,7 @@ export const Navigation = memo(function Navigation() {
                   onClick={handleParentAction}
                   variant="outline"
                   size="sm"
-                  className="flex items-center space-x-1 border-[#D8BD2A] hover:bg-[#D8BD2A] hover:text-black text-[#D8BD2A] transition-all duration-200 font-semibold athletic-title"
+                  className="flex items-center space-x-1 border-[#D8BD2A] hover:bg-[#D8BD2A] hover:text-black text-[#D8BD2A] transition-all duration-200 font-semibold font-sunborn"
                 >
                   <UserCircle className="h-3 w-3" />
                   <span className="hidden xl:inline">PORTAL</span>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Anton&family=Sunborn:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -121,13 +121,13 @@
   
   body {
     @apply bg-background text-foreground;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Sunborn', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
   /* Athletic Headings */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bebas Neue', 'Oswald', sans-serif;
+    font-family: 'Sunborn', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -150,20 +150,20 @@
   
   /* Athletic Body Text */
   p, span, div {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Sunborn', sans-serif;
     font-weight: 400;
   }
   
   /* Strong Athletic Text */
   .athletic-title {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Sunborn', sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     text-shadow: 2px 2px 4px var(--athletic-shadow);
   }
   
   .coach-chant {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Sunborn', sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     font-size: 1.5rem;
@@ -238,7 +238,7 @@
     letter-spacing: 0.1em;
     box-shadow: 0 4px 8px var(--athletic-shadow);
     transition: all 0.3s ease;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Sunborn', sans-serif;
   }
   
   .btn-athletic-gold:hover {
@@ -252,7 +252,7 @@
     letter-spacing: 0.1em;
     box-shadow: 0 4px 8px var(--athletic-shadow);
     transition: all 0.3s ease;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Sunborn', sans-serif;
   }
   
   .btn-athletic-red:hover {
@@ -266,7 +266,7 @@
     letter-spacing: 0.1em;
     box-shadow: 0 4px 8px var(--athletic-shadow);
     transition: all 0.3s ease;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Sunborn', sans-serif;
   }
   
   .btn-athletic-navy:hover {
@@ -392,29 +392,6 @@
   
   .animate-glow-yellow {
     animation: glowYellow 2s ease-in-out infinite alternate;
-  }
-  
-  .animate-logo-spin {
-    animation: logoSpin 15s ease-in-out infinite;
-  }
-  
-  .animate-logo-spin:hover {
-    animation-play-state: paused;
-  }
-  
-  @keyframes logoSpin {
-    0%, 80% {
-      transform: rotate(0deg);
-    }
-    6.67%, 13.33% {
-      transform: rotate(360deg);
-    }
-    20%, 26.67% {
-      transform: rotate(720deg);
-    }
-    33.33%, 40% {
-      transform: rotate(1080deg);
-    }
   }
   
   @keyframes pulseGold {

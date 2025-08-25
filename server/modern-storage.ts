@@ -310,7 +310,7 @@ export class ModernSupabaseStorage {
       safetyVerificationSignedAt: data.safety_verification_signed_at ? new Date(data.safety_verification_signed_at) : null,
       stripeSessionId: data.stripe_session_id || null,
       progressNote: data.progress_note || null,
-      coachName: data.coach_name || 'Coach Will',
+      coachName: data.coach_name || brandConfig.coachName,
       // For backward compatibility during transition
       athlete1Name: data.athlete1_name,
       athlete1DateOfBirth: data.athlete1_date_of_birth,

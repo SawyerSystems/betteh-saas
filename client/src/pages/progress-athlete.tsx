@@ -64,7 +64,7 @@ export default function ProgressAthletePage() {
         <div className="bg-white/80 backdrop-blur-sm dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 rounded-xl shadow-lg p-8 max-w-md w-full text-center">
           <div className="mb-4">
             <img 
-              src="/CWT_Circle_LogoSPIN.png" 
+              src="/assets/betteh_logo_black_font.png" 
               alt="CoachWillTumbles Logo" 
               className="h-16 w-16 mx-auto animate-spin"
             />

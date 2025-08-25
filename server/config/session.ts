@@ -93,7 +93,7 @@ export const sessionMiddleware = session({
 export const corsMiddleware = cors({
   origin: function(origin, callback) {
     const allowedOrigins = isProd
-      ? ['https://coachwilltumbles.com']
+      ? [process.env.FRONTEND_URL || 'https://app.betteh.com']
       : ['http://localhost:6173', 'http://localhost:3000', 'http://localhost:6001'];
     
     // For null origins (like Postman) or allowed origins
@@ -137,7 +137,7 @@ export const sessionConfig = {
   secure: isProd,
   sameSite: isProd ? 'none' : 'lax',
   corsOrigins: isProd 
-    ? ['https://coachwilltumbles.com']
+    ? [process.env.FRONTEND_URL || 'https://app.betteh.com']
     : ['http://localhost:6173', 'http://localhost:3000', 'http://localhost:6001']
 };
 

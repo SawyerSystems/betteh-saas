@@ -1448,7 +1448,7 @@ export function AdminSiteContentManager() {
           </Button>
         </div>
         <div className="flex items-center justify-center h-64">
-          <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-8 h-8" />
+          <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-8 h-8" />
         </div>
       </div>
     );

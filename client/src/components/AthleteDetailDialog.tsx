@@ -316,7 +316,7 @@ export function AthleteDetailDialog({
                     )}
                     {uploadingPhoto && (
                       <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center" aria-live="polite">
-                        <img src="/CWT_Circle_LogoSPIN.png" alt="Uploading" className="animate-spin w-6 h-6" />
+                        <img src="/assets/betteh_logo_black_font.png" alt="Uploading" className="animate-spin w-6 h-6" />
                         <span className="sr-only">Uploading photo...</span>
                       </div>
                     )}
@@ -412,7 +412,7 @@ export function AthleteDetailDialog({
           >
             {parentLoading ? (
               <div className="flex items-center gap-2 text-slate-500 dark:text-blue-300 py-4">
-                <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-4 h-4" />
+                <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-4 h-4" />
                 <span>Loading parent information...</span>
               </div>
             ) : parentDetails || parentInfo ? (
@@ -490,7 +490,7 @@ export function AthleteDetailDialog({
           >
             {waiverLoading ? (
               <div className="flex items-center gap-2 text-slate-500 dark:text-blue-300 py-4">
-                <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-4 h-4" />
+                <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-4 h-4" />
                 <span>Checking waiver status...</span>
               </div>
             ) : waiverStatus ? (
@@ -744,7 +744,7 @@ export function AthleteDetailDialog({
                   >
                     {uploadingPhoto ? (
                       <>
-                        <img src="/CWT_Circle_LogoSPIN.png" alt="Uploading" className="animate-spin w-4 h-4 mr-2" />
+                        <img src="/assets/betteh_logo_black_font.png" alt="Uploading" className="animate-spin w-4 h-4 mr-2" />
                         Uploading...
                       </>
                     ) : (
@@ -782,7 +782,7 @@ export function AthleteDetailDialog({
                   >
                     {uploadingPhoto ? (
                       <>
-                        <img src="/CWT_Circle_LogoSPIN.png" alt="Uploading" className="animate-spin w-4 h-4 mr-2" />
+                        <img src="/assets/betteh_logo_black_font.png" alt="Uploading" className="animate-spin w-4 h-4 mr-2" />
                         Uploading...
                       </>
                     ) : (

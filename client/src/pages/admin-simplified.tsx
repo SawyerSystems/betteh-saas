@@ -18,7 +18,7 @@ const AdminSkillsManager = lazy(() => import("@/components/admin/AdminSkillsMana
 // Loading component
 const TabLoading = () => (
   <div className="p-8 flex items-center justify-center">
-    <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin h-12 w-12" />
+    <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin h-12 w-12" />
   </div>
 );
 
@@ -59,7 +59,7 @@ export default function Admin() {
   if (!authStatus) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin h-12 w-12" />
+        <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin h-12 w-12" />
       </div>
     );
   }

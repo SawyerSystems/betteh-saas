@@ -7,7 +7,7 @@ export default function TermsOfService() {
       <SEOHead
         title="Terms of Service — Coach Will Tumbles"
         description="The rules and expectations for using our services."
-        canonicalUrl="https://www.coachwilltumbles.com/terms"
+        canonicalUrl="{window.location.origin}/terms"
       />
       <div className="container mx-auto px-4 py-12">
         <header className="mb-8">

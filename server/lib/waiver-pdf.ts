@@ -187,14 +187,14 @@ export async function generateWaiverPDF(waiverData: WaiverData): Promise<Buffer>
   try {
     const logoPathCandidates = [
       // Repo root assets
-      path.join(process.cwd(), 'attached_assets', 'CWT_Circle_LogoSPIN.png'),
+      path.join(process.cwd(), 'attached_assets', 'betteh_logo_black_font.png'),
       path.join(process.cwd(), 'attached_assets', 'CoachWillTumblesText.png'),
       // When cwd differs, resolve relative to compiled server files
-      path.resolve(__dirname, '../../attached_assets/CWT_Circle_LogoSPIN.png'),
+      path.resolve(__dirname, '../../attached_assets/betteh_logo_black_font.png'),
       path.resolve(__dirname, '../../attached_assets/CoachWillTumblesText.png'),
       // Fallback to client/public where the web app serves the same asset
-      path.join(process.cwd(), 'client', 'public', 'CWT_Circle_LogoSPIN.png'),
-      path.resolve(__dirname, '../../client/public/CWT_Circle_LogoSPIN.png'),
+      path.join(process.cwd(), 'client', 'public', 'betteh_logo_black_font.png'),
+      path.resolve(__dirname, '../../client/public/betteh_logo_black_font.png'),
     ];
     let logoBytes: Buffer | null = null;
     let logoPathUsed: string | null = null;

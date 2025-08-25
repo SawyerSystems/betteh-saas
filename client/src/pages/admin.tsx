@@ -27,6 +27,7 @@ import { AdminModal, AdminModalSection, AdminModalDetailRow, AdminModalGrid } fr
 import { AdminAnalyticsMetrics, type MetricCard } from "@/components/admin-ui/AdminAnalyticsMetrics";
 import { AdminTabButtonsRow } from "@/components/admin-ui/AdminTabButtons";
 import { AdminContentTabs } from "@/components/admin-ui/AdminContentTabs";
+import { useBrand } from "@/contexts/BrandContext";
 import {
     Dialog,
     DialogContent,
@@ -108,6 +109,8 @@ import { MainContentContainer } from "@/components/admin-ui/MainContentContainer
 const AdminSkillsManager = lazy(() => import("@/components/admin/AdminSkillsManager"));
 
 export default function Admin() {
+  const brand = useBrand();
+  
   // Legend color map - centralized for calendar and legend consistency
   const legendColors: Record<string, { bg: string; border: string }> = {
     'Coaching: Team Meet/Competition': { bg: '#8B5CF6', border: '#7C3AED' }, // purple
@@ -1555,7 +1558,7 @@ export default function Admin() {
     return (
       <div className="min-h-screen theme-smooth bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black flex items-center justify-center">
         <img 
-          src="/CWT_Circle_LogoSPIN.png" 
+          src="/assets/betteh_logo_black_font.png" 
           alt="Loading" 
           className="animate-spin w-16 h-16" 
         />
@@ -1568,7 +1571,7 @@ export default function Admin() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black p-6 text-center">
         <img
-          src="/CWT_Circle_LogoSPIN.png"
+          src="/assets/betteh_logo_black_font.png"
           alt="Redirecting"
           className="animate-spin w-16 h-16 mb-6"
         />
@@ -1887,9 +1890,9 @@ export default function Admin() {
   return (
     <div className="min-h-screen theme-smooth bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black">
       <SEOHead
-        title="Admin Dashboard — Coach Will Tumbles"
+        title={`Admin Dashboard — ${brand.businessName}`}
         description="Admin dashboard."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin` : 'https://www.coachwilltumbles.com/admin'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin` : window.location.origin + '/admin'}
         robots="noindex,follow"
         structuredData={{ '@context': 'https://schema.org', '@type': 'WebPage' }}
       />
@@ -2345,7 +2348,7 @@ export default function Admin() {
                   <div className="flex items-center justify-center py-12">
                     <div className="text-center space-y-4">
                       <img 
-                        src="/CWT_Circle_LogoSPIN.png" 
+                        src="/assets/betteh_logo_black_font.png" 
                         alt="Loading" 
                         className="h-8 w-8 animate-spin mx-auto" 
                       />
@@ -3402,7 +3405,7 @@ export default function Admin() {
                         <div className="space-y-4 max-h-96 overflow-y-auto px-2">
                           <div className="flex justify-start">
                               <div className="rounded-xl p-4 max-w-xs shadow-md border border-slate-200/60 bg-white/70 supports-[backdrop-filter]:bg-white/40 backdrop-blur-md">
-                              <p className="text-sm text-slate-700 leading-relaxed">Hi Coach Will! Emma is really excited about her upcoming competition.</p>
+                              <p className="text-sm text-slate-700 leading-relaxed">Hi {brand.coachName}! Emma is really excited about her upcoming competition.</p>
                               <p className="text-xs text-slate-500 mt-2 font-medium">Yesterday, 3:45 PM</p>
                             </div>
                           </div>
@@ -3991,7 +3994,7 @@ export default function Admin() {
                       {uploadingPhoto && (
                         <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center">
                           <img 
-                            src="/CWT_Circle_LogoSPIN.png" 
+                            src="/assets/betteh_logo_black_font.png" 
                             alt="Loading" 
                             className="animate-spin w-6 h-6" 
                           />

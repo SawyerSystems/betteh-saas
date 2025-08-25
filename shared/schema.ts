@@ -280,7 +280,7 @@ export const bookings = pgTable("bookings", {
   focusAreas: text("focus_areas").array(),
   focusAreaOther: text("focus_area_other"),
   progressNote: text("progress_note"),
-  coachName: text("coach_name").default("Coach Will"),
+  coachName: text("coach_name").default("Betteh Coach"),
   dropoffPersonName: text("dropoff_person_name").notNull(),
   dropoffPersonRelationship: text("dropoff_person_relationship").notNull(),
   dropoffPersonPhone: text("dropoff_person_phone").notNull(),

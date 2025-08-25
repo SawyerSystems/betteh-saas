@@ -71,7 +71,7 @@ export function WaiverStep() {
     return (
       <div className="space-y-6 py-4">
         <div className="bg-white/60 backdrop-blur-sm border-slate-200/60 dark:bg-[rgba(0,0,102,0.1)] dark:border-[rgba(0,0,102,0.3)] p-6 rounded-lg text-center">
-          <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin h-8 w-8 mx-auto mb-3" />
+          <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin h-8 w-8 mx-auto mb-3" />
           <h3 className="text-lg font-semibold text-[#0F0276] dark:text-[#D8BD2A]">Checking Waiver Status</h3>
           <p className="text-sm text-[#0F0276]/70 dark:text-white mt-2">
             Verifying if {displayName} has a signed waiver on file...

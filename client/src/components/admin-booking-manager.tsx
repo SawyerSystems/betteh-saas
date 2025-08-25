@@ -775,7 +775,7 @@ export function AdminBookingManager({ prefilledData, onClose, openAthleteModal, 
       <Card>
         <CardContent className="p-6">
           <div className="flex items-center justify-center">
-            <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-6 h-6" />
+            <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-6 h-6" />
           </div>
         </CardContent>
       </Card>
@@ -1408,7 +1408,7 @@ export function AdminBookingManager({ prefilledData, onClose, openAthleteModal, 
           
           {loadingArchived ? (
             <div className="flex items-center justify-center py-8">
-              <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-6 h-6" />
+              <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-6 h-6" />
             </div>
           ) : (
             <>

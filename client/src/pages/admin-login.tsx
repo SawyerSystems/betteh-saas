@@ -80,7 +80,7 @@ export default function AdminLogin() {
       <SEOHead
         title="Admin Login — Coach Will Tumbles"
         description="Administrator sign in."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin-login` : 'https://www.coachwilltumbles.com/admin-login'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin-login` : window.location.origin + '/admin-login'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />
@@ -139,7 +139,7 @@ export default function AdminLogin() {
                 {loginMutation.isPending ? (
                   <>
                     <img 
-                      src="/CWT_Circle_LogoSPIN.png" 
+                      src="/assets/betteh_logo_black_font.png" 
                       alt="Loading" 
                       className="mr-2 h-4 w-4 animate-spin" 
                     />

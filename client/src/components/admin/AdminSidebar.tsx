@@ -169,7 +169,7 @@ export function AdminSidebar({
             <div className="flex items-center space-x-2">
               <div className="h-9 w-9">
                 <img 
-                  src="/CWT_Circle_LogoSPIN.png" 
+                  src="/assets/betteh_logo_black_font.png" 
                   alt="Coach Will Tumbles Circle Logo" 
                   className="w-full h-full object-contain"
                 />
@@ -180,7 +180,7 @@ export function AdminSidebar({
             <div className="flex items-center justify-center">
               <div className="h-9 w-9">
                 <img 
-                  src="/CWT_Circle_LogoSPIN.png" 
+                  src="/assets/betteh_logo_black_font.png" 
                   alt="Coach Will Tumbles Circle Logo" 
                   className="w-full h-full object-contain"
                 />
@@ -253,7 +253,7 @@ export function AdminSidebar({
               <div className="flex items-center space-x-2">
                 <div className="h-9 w-9">
                   <img 
-                    src="/CWT_Circle_LogoSPIN.png" 
+                    src="/assets/betteh_logo_black_font.png" 
                     alt="Coach Will Tumbles Circle Logo" 
                     className="w-full h-full object-contain"
                   />

@@ -24,7 +24,7 @@ export function WaiverStatusDisplay({ athleteId, athleteName, onResendWaiver }: 
         </CardHeader>
         <CardContent className="pt-4">
           <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-            <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="h-4 w-4 animate-spin" />
+            <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="h-4 w-4 animate-spin" />
             <span>Checking waiver status...</span>
           </div>
         </CardContent>

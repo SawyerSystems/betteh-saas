@@ -441,7 +441,7 @@ export function AdminPaymentStep() {
         >
           {isProcessing || createAdminBooking.isPending || isSubmittingRef.current ? (
             <>
-              <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="h-4 w-4 mr-2 animate-spin" />
+              <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="h-4 w-4 mr-2 animate-spin" />
               Creating Booking...
             </>
           ) : !state.adminPaymentMethod ? (

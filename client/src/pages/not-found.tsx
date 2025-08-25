@@ -8,13 +8,13 @@ export default function NotFound() {
       <SEOHead
         title="Page Not Found — Coach Will Tumbles"
         description="The page you’re looking for doesn’t exist."
-        canonicalUrl={typeof window !== 'undefined' ? window.location.href : 'https://www.coachwilltumbles.com/404'}
+        canonicalUrl={typeof window !== 'undefined' ? window.location.href : window.location.origin + '/404'}
         robots="noindex,follow"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": typeof window !== 'undefined' ? window.location.origin : 'https://www.coachwilltumbles.com' }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": typeof window !== 'undefined' ? window.location.origin : window.location.origin }
           ]
         }}
       />

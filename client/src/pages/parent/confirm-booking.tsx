@@ -67,13 +67,13 @@ export default function ConfirmBookingPage() {
         <SEOHead
           title="Confirm Booking — Coach Will Tumbles"
           description="Confirm your booking."
-          canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent/confirm-booking` : 'https://www.coachwilltumbles.com/parent/confirm-booking'}
+          canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent/confirm-booking` : window.location.origin + '/parent/confirm-booking'}
           robots="noindex,follow"
           structuredData={{ '@context': 'https://schema.org', '@type': 'WebPage' }}
         />
         <div className="text-center">
           <img 
-            src="/CWT_Circle_LogoSPIN.png" 
+            src="/assets/betteh_logo_black_font.png" 
             alt="Loading" 
             className="mx-auto h-12 w-12 animate-spin" 
           />
@@ -133,7 +133,7 @@ export default function ConfirmBookingPage() {
           >
             {isSubmitting ? (
               <>
-                <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />
+                <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />
                 Confirming...
               </>
             ) : (

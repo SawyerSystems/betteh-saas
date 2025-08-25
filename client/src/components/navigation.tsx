@@ -8,22 +8,20 @@ import { apiRequest, queryClient, queryKeys } from "@/lib/queryClient";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "@/contexts/ThemeContext";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-
-// Import logo assets for fallback
-import defaultLogoSpin from "/CWT_Circle_LogoSPIN.png";
-import defaultLogoText from "/assets/CoachWillTumblesText.png";
+import { useBrand, BrandLogo } from "@/contexts/BrandContext";
 
 export const Navigation = memo(function Navigation() {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const { actualTheme } = useTheme();
+  const brand = useBrand();
   
   // Use optimized auth hooks
   const { data: adminAuth } = useAuthStatus();
   const { data: parentAuth } = useParentAuthStatus();
   const { prefetchBlogPosts, prefetchTips, prefetchStripeProducts } = usePrefetchQueries();
   
-  // Fetch site content for logo
+  // Fetch site content for additional customization
   const { data: siteContent } = useQuery({
     queryKey: ['/api/site-content'],
     queryFn: async () => {
@@ -31,9 +29,6 @@ export const Navigation = memo(function Navigation() {
       return response.json();
     },
   });
-
-  const logoSpin = siteContent?.logo?.circle || defaultLogoSpin;
-  const logoText = siteContent?.logo?.text || defaultLogoText;
   
   const isAdminLoggedIn = (adminAuth as any)?.loggedIn || false;
   const isParentLoggedIn = (parentAuth as any)?.loggedIn || false;
@@ -113,18 +108,18 @@ export const Navigation = memo(function Navigation() {
         <Link href="/">
           <div className="flex items-center space-x-2 cursor-pointer relative flex-shrink-0">
             <div className="w-14 h-14 animate-logo-spin flex-shrink-0">
-              <img 
-                src={logoSpin} 
-                alt="Coach Will Tumbles Logo" 
+              <BrandLogo 
+                type="circle"
+                alt={`${brand.businessName} Logo`}
                 className="w-full h-full object-contain flex-shrink-0"
               />
             </div>
             {/* Hidden text for SEO but visually replaced with PNG */}
-            <span className="sr-only">Coach Will Tumbles</span>
+            <span className="sr-only">{brand.businessName}</span>
             <div className="h-12 flex-shrink-0">
-              <img 
-                src={logoText} 
-                alt="Coach Will Tumbles" 
+              <BrandLogo 
+                type="text"
+                alt={brand.businessName}
                 className="h-full object-contain flex-shrink-0"
               />
             </div>

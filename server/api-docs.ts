@@ -4,7 +4,7 @@ export function setupApiDocs(app: Express) {
   // API Documentation endpoint
   app.get('/api/docs', (req, res) => {
     const apiEndpoints = {
-      "API Documentation": "Coach Will Tumbles / Betteh Platform API",
+      "API Documentation": "Betteh Platform API",
       "Authentication": {
         "POST /api/auth/login": "Admin login with email/password",
         "GET /api/auth/status": "Check authentication status", 
@@ -111,7 +111,7 @@ export function setupApiDocs(app: Express) {
     };
 
     res.json({
-      title: "Coach Will Tumbles / Betteh Platform API Documentation",
+      title: "Betteh Platform API Documentation",
       version: "1.0.0",
       description: "Gymnastics booking platform API - transitioning to multi-tenant SaaS",
       baseUrl: req.get('host')?.includes('localhost') ? 
@@ -160,7 +160,7 @@ export function setupApiDocs(app: Express) {
     <p><strong>Base URL:</strong> <code>${baseUrl}</code></p>
     
     <div class="note">
-        <strong>🔄 Migration in Progress:</strong> This platform is actively transitioning from single-tenant "Coach Will Tumbles" to multi-tenant "Betteh" SaaS platform. 
+        <strong>🔄 Migration in Progress:</strong> This platform is actively transitioning from legacy single-tenant system to multi-tenant "Betteh" SaaS platform. 
         All new endpoints use Supabase Auth with JWT-based tenant isolation.
     </div>
 

@@ -25,6 +25,7 @@ import { Activity, AlertCircle, Award, BookMarked, Calendar, CheckCircle, CheckC
 import { Switch } from '@/components/ui/switch';
 import { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'wouter';
+import { useBrand } from '@/contexts/BrandContext';
 
 // Import new parent UI components
 import {
@@ -492,6 +493,7 @@ import SEOHead from '@/components/SEOHead';
 function ParentDashboard() {
   const [, setLocation] = useLocation();
   const queryClient = useQueryClient();
+  const brand = useBrand();
   const [cancelBookingId, setCancelBookingId] = useState<number | null>(null);
   const [editingBookingId, setEditingBookingId] = useState<number | null>(null);
   const [reschedulingBookingId, setReschedulingBookingId] = useState<number | null>(null);
@@ -682,7 +684,7 @@ function ParentDashboard() {
     return (
       <div className="min-h-screen theme-smooth bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black flex items-center justify-center">
         <img 
-          src="/CWT_Circle_LogoSPIN.png" 
+          src="/assets/betteh_logo_black_font.png" 
           alt="Loading" 
           className="animate-spin w-16 h-16" 
         />
@@ -695,7 +697,7 @@ function ParentDashboard() {
     return (
       <div className="min-h-screen theme-smooth bg-gradient-to-b from-[#D8BD2A]/10 via-white to-[#0F0276]/5 dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black flex items-center justify-center">
         <img 
-          src="/CWT_Circle_LogoSPIN.png" 
+          src="/assets/betteh_logo_black_font.png" 
           alt="Loading" 
           className="animate-spin w-16 h-16" 
         />
@@ -706,9 +708,9 @@ function ParentDashboard() {
   return (
     <>
       <SEOHead
-        title="Parent Dashboard — Coach Will Tumbles"
+        title={`Parent Dashboard — ${brand.businessName}`}
         description="Private parent dashboard."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-dashboard` : 'https://www.coachwilltumbles.com/parent-dashboard'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-dashboard` : window.location.origin + '/parent-dashboard'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />
@@ -1147,7 +1149,7 @@ function ParentDashboard() {
                                     </div>
                                     <div className="flex items-center gap-1">
                                       <User className="w-3 h-3 xs:w-3.5 xs:h-3.5" />
-                                      {booking.coachName || 'Coach Will'}
+                                      {booking.coachName || brand.coachName}
                                     </div>
                                   </div>
                                 </div>
@@ -1639,10 +1641,10 @@ function ParentDashboard() {
                     
                     <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                        Need help or have questions? Coach Will is here to assist you.
+                        Need help or have questions? {brand.coachName} is here to assist you.
                       </p>
                       <div className="text-sm text-gray-500 dark:text-gray-400">
-                        <p>📧 Email: admin@coachwilltumbles.com</p>
+                        <p>📧 Email: {brand.contact.email}</p>
                         <p>📞 Phone: (585) 755-8122</p>
                       </div>
                     </div>

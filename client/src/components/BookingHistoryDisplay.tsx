@@ -82,7 +82,7 @@ export function BookingHistoryDisplay({ athleteId, fallbackBookings = [] }: Book
     return (
       <AdminModalSection title="Booking History" className="mb-6">
         <div className="flex items-center justify-center py-4">
-          <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-5 h-5" />
+          <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-5 h-5" />
           <span className="ml-2 text-gray-600 dark:text-gray-400">Loading booking history...</span>
         </div>
       </AdminModalSection>

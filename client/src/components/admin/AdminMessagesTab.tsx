@@ -132,7 +132,7 @@ export default function AdminMessagesTab() {
 
             {inquiries.isLoading ? (
               <div className="flex items-center gap-2 text-slate-600 dark:text-white/80">
-                <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="h-4 w-4 animate-spin" /> Loading inquiries…
+                <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="h-4 w-4 animate-spin" /> Loading inquiries…
               </div>
             ) : (inquiries.data?.length ? (
               <div className="space-y-3">

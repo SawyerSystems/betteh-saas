@@ -109,7 +109,7 @@ export default function BookingSuccess() {
       <div className="min-h-screen bg-gradient-to-br from-orange-50 to-green-50 dark:bg-gradient-to-br dark:from-[#0F0276]/40 dark:via-[#0F0276]/20 dark:to-black flex items-center justify-center">
         <div className="text-center">
           <img 
-            src="/CWT_Circle_LogoSPIN.png" 
+            src="/assets/betteh_logo_black_font.png" 
             alt="Loading" 
             className="h-8 w-8 animate-spin mx-auto mb-4" 
           />
@@ -190,7 +190,7 @@ export default function BookingSuccess() {
       <SEOHead
         title="Booking Success — Coach Will Tumbles"
         description="Your booking was successful."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/booking-success` : 'https://www.coachwilltumbles.com/booking-success'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/booking-success` : window.location.origin + '/booking-success'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />
@@ -346,7 +346,7 @@ export default function BookingSuccess() {
             Coach Will Tumbles
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Phone: {siteContent?.contact?.phone || '(585) 755-8122'} | Email: {siteContent?.contact?.email || 'admin@coachwilltumbles.com'}
+            Phone: {siteContent?.contact?.phone || '(585) 755-8122'} | Email: {siteContent?.contact?.email || '{siteContent?.contact?.email || brand.contact.email}'}
           </p>
         </div>
       </div>

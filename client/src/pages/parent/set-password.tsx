@@ -140,7 +140,7 @@ export default function SetPasswordPage() {
         <CardHeader className="text-center pb-4">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center">
             <img 
-              src="/CWT_Circle_LogoSPIN.png" 
+              src="/assets/betteh_logo_black_font.png" 
               alt="Coach Will Tumbles" 
               className="h-16 w-16"
             />
@@ -194,7 +194,7 @@ export default function SetPasswordPage() {
               >
                 {isSubmitting ? (
                   <>
-                    <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />
+                    <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />
                     Setting Password...
                   </>
                 ) : (

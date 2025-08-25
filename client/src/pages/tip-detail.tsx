@@ -79,14 +79,14 @@ export default function TipDetail() {
       <SEOHead
         title={`${tip.title} | Gymnastics Tip | Coach Will Tumbles`}
         description={(tip.sections?.[0]?.content || tip.content || '').slice(0, 160)}
-        canonicalUrl={`https://www.coachwilltumbles.com/tips/${tip.id}`}
+        canonicalUrl={`${window.location.origin}/tips/${tip.id}`}
         robots="index,follow"
         structuredData={{
           "@context": "https://schema.org",
           "@type": tip.sections && tip.sections.length > 0 ? "HowTo" : "Article",
           name: tip.title,
           description: (tip.sections?.[0]?.content || tip.content || '').slice(0, 200),
-          url: `https://www.coachwilltumbles.com/tips/${tip.id}`,
+          url: `${window.location.origin}/tips/${tip.id}`,
           step: (tip.sections || []).map((s: any, i: number) => ({ "@type": "HowToStep", position: i + 1, name: s.title, text: s.content }))
         }}
       />

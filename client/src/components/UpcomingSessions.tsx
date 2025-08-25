@@ -127,7 +127,7 @@ export function UpcomingSessions({ onBookingSelect }: UpcomingSessionsProps = {}
         <Card className="rounded-2xl border border-slate-200/60 bg-white/70 supports-[backdrop-filter]:bg-white/40 backdrop-blur-md shadow-lg dark:border-white/10 dark:bg-white/10 dark:text-white">
           <CardContent className="p-8">
             <div className="flex items-center justify-center">
-              <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin h-8 w-8" />
+              <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin h-8 w-8" />
             </div>
           </CardContent>
         </Card>

@@ -178,7 +178,7 @@ export function BookingLoginModal({ isOpen, onClose, onLoginSuccess }: BookingLo
           className="w-full bg-[#0F0276] hover:bg-[#0F0276]/90 text-white dark:bg-[#B8860B] dark:hover:bg-[#B8860B]/90 dark:text-[#0F0276]"
           disabled={isLoading}
         >
-          {isLoading && <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />}
+          {isLoading && <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />}
           Login
         </Button>
 

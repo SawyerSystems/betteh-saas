@@ -257,11 +257,11 @@ export default function FeaturesPage() {
         canonicalUrl="https://www.coachwilltumbles.com/features"
         robots="index,follow"
         og={{
-          "og:image": "https://www.coachwilltumbles.com/assets/CWT_Circle_LogoSPIN.png",
+          "og:image": "https://www.coachwilltumbles.com/assets/assets/betteh_logo_black_font.png",
           "og:url": "https://www.coachwilltumbles.com/features",
         }}
         twitter={{
-          "twitter:image": "https://www.coachwilltumbles.com/assets/CWT_Circle_LogoSPIN.png",
+          "twitter:image": "https://www.coachwilltumbles.com/assets/assets/betteh_logo_black_font.png",
         }}
         structuredData={{
           "@context": "https://schema.org",
@@ -294,7 +294,7 @@ export default function FeaturesPage() {
           style={{ transform: `translateY(${parallaxOffset * 0.03}px)` }}
         >
           <img
-            src="/CWT_Circle_LogoSPIN.png"
+            src="/assets/betteh_logo_black_font.png"
             alt="Coach Will Tumbles Logo"
             className="object-contain animate-spin w-[900px] h-[900px] md:w-[1200px] md:h-[1200px] lg:w-[1500px] lg:h-[1500px]"
             style={{ animationDuration: '45s' }}

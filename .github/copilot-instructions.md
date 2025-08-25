@@ -1,4 +1,4 @@
-# CoachWillTumbles - AI Coding Agent Instructions
+# Betteh SaaS Platform - AI Coding Agent Instructions
 
 ## PRIMARY DATABASE RULES (TOP PRIORITY)
 

@@ -8,12 +8,13 @@ import { Route, Switch, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ConsentProvider } from "@/contexts/ConsentManager";
+import { BrandProvider } from "@/contexts/BrandContext";
 // Simple loading component
 const PageLoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-[400px]">
     <div className="text-center space-y-4">
       <img 
-        src="/CWT_Circle_LogoSPIN.png" 
+        src="/assets/betteh_logo_black_font.png" 
         alt="Loading" 
         className="animate-spin h-12 w-12 mx-auto" 
       />
@@ -128,14 +129,16 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <ConsentProvider>
-          <div className="app-root">
-            <TooltipProvider>
-              <Toaster />
-              <Router />
-            </TooltipProvider>
-          </div>
-        </ConsentProvider>
+        <BrandProvider>
+          <ConsentProvider>
+            <div className="app-root">
+              <TooltipProvider>
+                <Toaster />
+                <Router />
+              </TooltipProvider>
+            </div>
+          </ConsentProvider>
+        </BrandProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

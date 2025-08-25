@@ -70,7 +70,7 @@ export function StripePaymentForm({ onSuccess, onError, amount }: StripePaymentF
       >
         {isProcessing ? (
           <>
-            <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />
+            <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="mr-2 h-4 w-4 animate-spin" />
             Processing...
           </>
         ) : (

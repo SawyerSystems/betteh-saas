@@ -54,7 +54,7 @@ export default function VerifyEmail() {
       <SEOHead
         title="Verify Email — Coach Will Tumbles"
         description="Email verification in progress."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/verify-email` : 'https://www.coachwilltumbles.com/verify-email'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/verify-email` : window.location.origin + '/verify-email'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />
@@ -62,7 +62,7 @@ export default function VerifyEmail() {
         <CardHeader className="text-center">
           {loading ? (
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
-              <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="h-6 w-6 animate-spin" />
+              <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="h-6 w-6 animate-spin" />
             </div>
           ) : success ? (
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">

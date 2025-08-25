@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { MapPin, Phone, Mail, Clock, Instagram, Youtube, MessageCircle, Facebook } from "lucide-react";
-import cwtLogo from "/CWT_Circle_LogoSPIN.png";
+import cwtLogo from "/assets/betteh_logo_black_font.png";
 
 interface HourSchedule {
   available: boolean;

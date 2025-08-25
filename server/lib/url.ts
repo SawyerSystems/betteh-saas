@@ -2,7 +2,7 @@
 export function getBaseUrl(): string {
   // In production, use the environment variable or default to production domain
   if (process.env.NODE_ENV === 'production') {
-    return process.env.BASE_URL || process.env.FRONTEND_URL || 'https://www.coachwilltumbles.com';
+    return process.env.BASE_URL || process.env.FRONTEND_URL || 'https://app.betteh.com';
   }
   // In development, use localhost
   return process.env.BASE_URL || process.env.FRONTEND_URL || 'http://localhost:6173';

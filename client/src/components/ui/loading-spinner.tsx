@@ -15,7 +15,7 @@ export function LoadingSpinner({ className, size = "md" }: LoadingSpinnerProps) 
   return (
     <div className={cn("flex items-center justify-center", className)}>
       <img 
-        src="/CWT_Circle_LogoSPIN.png" 
+        src="/assets/betteh_logo_black_font.png" 
         alt="Loading" 
         className={cn("animate-spin", sizeClasses[size])} 
       />

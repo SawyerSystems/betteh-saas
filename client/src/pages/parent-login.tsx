@@ -81,7 +81,7 @@ export default function ParentLogin() {
       <SEOHead
         title="Parent Login — Coach Will Tumbles"
         description="Sign in to your parent account."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-login` : 'https://www.coachwilltumbles.com/parent-login'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-login` : window.location.origin + '/parent-login'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />
@@ -140,7 +140,7 @@ export default function ParentLogin() {
                 {loginMutation.isPending ? (
                   <>
                     <img 
-                      src="/CWT_Circle_LogoSPIN.png" 
+                      src="/assets/betteh_logo_black_font.png" 
                       alt="Loading" 
                       className="mr-2 h-4 w-4 animate-spin" 
                     />

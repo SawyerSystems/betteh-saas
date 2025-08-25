@@ -387,12 +387,12 @@ export function PaymentStep() {
       >
         {createBooking.isPending || isProcessing ? (
           <>
-            <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="h-5 w-5 mr-2 animate-spin" />
+            <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="h-5 w-5 mr-2 animate-spin" />
             Processing...
           </>
         ) : areFocusAreasLoading ? (
           <>
-            <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="h-5 w-5 mr-2 animate-spin" />
+            <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="h-5 w-5 mr-2 animate-spin" />
             Loading Focus Areas...
           </>
         ) : (

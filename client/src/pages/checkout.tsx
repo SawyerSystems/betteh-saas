@@ -119,7 +119,7 @@ export default function Checkout() {
   if (!clientSecret || !bookingDetails) {
     return (
       <div className="h-screen flex items-center justify-center">
-        <img src="/CWT_Circle_LogoSPIN.png" alt="Loading" className="animate-spin w-8 h-8" aria-label="Loading"/>
+        <img src="/assets/betteh_logo_black_font.png" alt="Loading" className="animate-spin w-8 h-8" aria-label="Loading"/>
       </div>
     );
   }

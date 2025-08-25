@@ -26,20 +26,374 @@ Comprehensive step‑by‑step roadmap to evolve the single‑tenant "Coach Will
 | Infrastructure | Single node build | IaC + environment separation (dev/stage/prod) |
 
 ---
-## 2. Naming & Branding Refactor
-### 2.1 Inventory References
+## 2. User Types & Tenant Architecture
+
+### 2.1 User Type Hierarchy
+
+Our multi-tenant SaaS will support the following user types and tenant structures:
+
+#### **Platform Level**
+- **Platform Admin**: System-wide administration, tenant management, billing oversight
+
+#### **Organizational Tenants (Gyms/Large Coaching Organizations)**
+- **Gym Owner/Admin**: Tenant administration, staff management, billing management
+- **Head Coach**: Program management, scheduling oversight, staff coordination
+- **Assistant Coach**: Limited coaching duties, athlete interaction
+- **Front Desk Staff**: Registration, basic scheduling, customer service
+- **Parents**: Book sessions, view athlete progress, manage family accounts
+- **Athletes**: View personal progress, upcoming sessions (optional login)
+
+#### **Individual Tenants (Solo Coaches)**
+- **Solo Coach** (Solo Plan): Basic features, limited athletes/bookings
+- **Pro Coach** (Pro Plan): Advanced features, unlimited athletes, video analysis
+- **Parents**: Book with individual coaches
+- **Athletes**: View progress with individual coaches
+
+### 2.2 Tenant Types & Plans
+
+#### **Tenant Type Enum**
+```sql
+CREATE TYPE tenant_type AS ENUM (
+  'individual',      -- Solo coach operations
+  'organization'     -- Gym/multi-coach operations
+);
+```
+
+#### **Plan Structure**
+```typescript
+// Feature Plans by Tenant Type
+const FEATURE_PLANS = {
+  // Individual Coach Plans
+  individual: {
+    solo: {
+      maxAthletes: 25,
+      maxMonthlyBookings: 100,
+      maxStaff: 1,
+      videoAnalysis: false,
+      advancedReporting: false,
+      customBranding: false,
+      apiAccess: false,
+      price: 29  // per month
+    },
+    pro: {
+      maxAthletes: -1,  // unlimited
+      maxMonthlyBookings: -1,
+      maxStaff: 1,
+      videoAnalysis: true,
+      advancedReporting: true,
+      customBranding: true,
+      apiAccess: true,
+      price: 89  // per month
+    }
+  },
+  
+  // Organizational Plans (per coach seat)
+  organization: {
+    starter: {
+      maxAthletes: -1,
+      maxMonthlyBookings: -1,
+      maxStaff: 5,
+      videoAnalysis: true,
+      advancedReporting: true,
+      customBranding: true,
+      apiAccess: true,
+      multiLocation: false,
+      price: 49  // per coach per month
+    },
+    professional: {
+      maxAthletes: -1,
+      maxMonthlyBookings: -1,
+      maxStaff: 25,
+      videoAnalysis: true,
+      advancedReporting: true,
+      customBranding: true,
+      apiAccess: true,
+      multiLocation: true,
+      whiteLabel: false,
+      price: 79  // per coach per month
+    },
+    enterprise: {
+      maxAthletes: -1,
+      maxMonthlyBookings: -1,
+      maxStaff: -1,
+      videoAnalysis: true,
+      advancedReporting: true,
+      customBranding: true,
+      apiAccess: true,
+      multiLocation: true,
+      whiteLabel: true,
+      customIntegrations: true,
+      price: 149  // per coach per month
+    }
+  }
+};
+```
+### 3.1 Inventory References
 - Code search terms: `Coach Will`, `CoachWill`, `coachwilltumbles`, `coach-will`, domain references `coachwilltumbles.com`.
-### 2.2 Introduce Betteh Constants
+## 3. Naming & Branding Refactor
 - Create `branding/brand.ts` exporting brand metadata (platform + fallbacks).
+### 3.2 Introduce Betteh Constants
 - Replace hardcoded strings with brand provider / context.
-### 2.3 Domain Strategy
+### 3.3 Domain Strategy
 - Primary: `betteh.com`.
 - Tenant subdomains: `<coachSlug>.betteh.app` via wildcard DNS + edge middleware to resolve tenant.
-### 2.4 Transitional Redirects
+### 3.4 Transitional Redirects
 - Configure 301 redirects from legacy domain paths to new host once migrated.
 
 ---
-## 3. Multi‑Tenant Data Model
+## 4. Enhanced Multi‑Tenant Data Model
+
+### 4.1 Updated Core Entities
+
+Based on our user type analysis, we need to enhance our existing schema:
+
+#### **Enhanced Tenants Table**
+```sql
+-- Add tenant type and organizational structure
+ALTER TABLE tenants ADD COLUMN tenant_type TEXT NOT NULL DEFAULT 'individual';
+ALTER TABLE tenants ADD COLUMN parent_tenant_id UUID REFERENCES tenants(id); -- For multi-location orgs
+ALTER TABLE tenants ADD COLUMN coach_count INTEGER DEFAULT 1; -- For seat-based billing
+
+-- Add constraint for tenant type
+ALTER TABLE tenants ADD CONSTRAINT tenants_tenant_type_check 
+  CHECK (tenant_type IN ('individual', 'organization'));
+```
+
+#### **Enhanced Tenant User Roles**
+```sql
+-- Update tenant_user_role enum to include organizational roles
+ALTER TYPE tenant_user_role ADD VALUE 'gym_owner';
+ALTER TYPE tenant_user_role ADD VALUE 'head_coach';
+ALTER TYPE tenant_user_role ADD VALUE 'assistant_coach';
+ALTER TYPE tenant_user_role ADD VALUE 'front_desk';
+
+-- Updated role hierarchy:
+-- platform_admin (system-wide)
+-- gym_owner (organization tenant admin)
+-- head_coach (senior coaching staff)
+-- coach_admin (individual tenant admin - legacy)
+-- assistant_coach (junior coaching staff)
+-- coach_staff (general coaching staff - legacy)
+-- front_desk (administrative staff)
+-- parent (booking/viewing)
+-- athlete (optional login)
+```
+
+#### **Enhanced Feature Plans**
+```sql
+-- Add tenant type specific plans
+ALTER TABLE feature_plans ADD COLUMN tenant_type TEXT NOT NULL DEFAULT 'individual';
+ALTER TABLE feature_plans ADD COLUMN is_per_seat BOOLEAN DEFAULT false;
+ALTER TABLE feature_plans ADD COLUMN max_coaches INTEGER DEFAULT 1;
+
+-- Update feature limits structure
+-- limits JSON will now include:
+{
+  "maxAthletes": -1,           -- -1 = unlimited
+  "maxMonthlyBookings": -1,
+  "maxStaff": 5,
+  "maxLocations": 1,
+  "features": {
+    "videoAnalysis": true,
+    "advancedReporting": true,
+    "customBranding": true,
+    "apiAccess": true,
+    "multiLocation": false,
+    "whiteLabel": false,
+    "customIntegrations": false
+  }
+}
+```
+
+#### **New Tables for Enhanced Structure**
+
+```sql
+-- Locations for multi-location organizations
+CREATE TABLE locations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  address JSONB,
+  timezone TEXT NOT NULL DEFAULT 'UTC',
+  is_primary BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Staff assignments to locations
+CREATE TABLE staff_locations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  location_id UUID NOT NULL REFERENCES locations(id) ON DELETE CASCADE,
+  is_primary BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(tenant_id, user_id, location_id)
+);
+
+-- Organization structure for multi-level orgs
+CREATE TABLE organization_hierarchy (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  parent_tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  child_tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  relationship_type TEXT NOT NULL DEFAULT 'location', -- 'location', 'franchise', 'division'
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(parent_tenant_id, child_tenant_id)
+);
+```
+
+### 4.2 Permission Matrix by User Type
+
+```typescript
+// Enhanced permission matrix
+export const PERMISSIONS = {
+  // Platform Level
+  platform_admin: [
+    'tenants:*', 'users:*', 'billing:*', 'analytics:*', 'system:*'
+  ],
+  
+  // Organizational Tenant Roles
+  gym_owner: [
+    'tenant:manage', 'staff:*', 'locations:*', 'billing:read',
+    'athletes:*', 'bookings:*', 'programs:*', 'reports:*'
+  ],
+  
+  head_coach: [
+    'staff:invite', 'staff:manage:coaches', 'programs:*', 'schedules:*',
+    'athletes:*', 'bookings:*', 'reports:read', 'locations:read'
+  ],
+  
+  assistant_coach: [
+    'athletes:read', 'athletes:update:assigned', 'bookings:read', 
+    'bookings:update:assigned', 'schedules:read', 'programs:read'
+  ],
+  
+  front_desk: [
+    'athletes:read', 'athletes:create', 'bookings:*', 'schedules:read',
+    'payments:process', 'waivers:manage'
+  ],
+  
+  // Individual Tenant Roles  
+  coach_admin: [
+    'athletes:*', 'bookings:*', 'schedules:*', 'programs:*',
+    'billing:read', 'settings:update', 'reports:*'
+  ],
+  
+  coach_staff: [
+    'athletes:read', 'athletes:update', 'bookings:read', 'bookings:update',
+    'schedules:read', 'programs:read'
+  ],
+  
+  // Client Roles (shared across tenant types)
+  parent: [
+    'athletes:read:own', 'bookings:read:own', 'bookings:create:own',
+    'waivers:sign:own', 'payments:view:own'
+  ],
+  
+  athlete: [
+    'profile:read:own', 'progress:read:own', 'bookings:view:own'
+  ]
+} as const;
+```
+
+### 4.3 Database Migration Requirements
+
+To implement this enhanced structure, we need:
+
+1. **Schema Updates** (can be done with zero downtime):
+   - Add new columns to existing tables
+   - Create new tables for locations and hierarchy
+   - Add new enum values for roles
+
+2. **Data Migration** (low impact):
+   - Set all existing tenants to `tenant_type = 'individual'`
+   - Create default location for each existing tenant
+   - Update existing feature plans with new structure
+
+3. **New Seed Data**:
+   - Create feature plans for each tenant type and tier
+      - Set up default organizational structures
+
+### 4.4 Current Database Assessment
+
+#### **✅ What We Already Have**
+- ✅ `tenants` table with basic structure
+- ✅ `tenant_users` table with role-based access
+- ✅ `feature_plans` table for plan management
+- ✅ `tenant_id` columns on all relevant tables (32 tables)
+- ✅ Row Level Security policies (38 tables, 33 tenant isolation policies)
+- ✅ Basic tenant user roles: `platform_admin`, `coach_admin`, `coach_staff`, `parent`, `athlete`
+
+#### **🔧 What Needs Enhancement**
+- 🔧 **Tenant Type Support**: Add `tenant_type` column to distinguish individual vs organizational
+- 🔧 **Enhanced Role System**: Add organizational roles (`gym_owner`, `head_coach`, `assistant_coach`, `front_desk`)
+- 🔧 **Location Support**: New `locations` table for multi-location organizations
+- 🔧 **Hierarchical Organizations**: Support for parent/child tenant relationships
+- 🔧 **Enhanced Feature Plans**: Plan structure for different tenant types and seat-based billing
+- 🔧 **Usage Tracking**: Track seat usage for organizational billing
+
+#### **📋 Migration Tasks Required**
+
+**Phase 4A: Enhanced Schema (1-2 days)**
+```sql
+-- 1. Add tenant type support
+ALTER TABLE tenants ADD COLUMN tenant_type TEXT NOT NULL DEFAULT 'individual';
+ALTER TABLE tenants ADD COLUMN parent_tenant_id UUID REFERENCES tenants(id);
+ALTER TABLE tenants ADD COLUMN coach_count INTEGER DEFAULT 1;
+
+-- 2. Add new user roles
+ALTER TYPE tenant_user_role ADD VALUE 'gym_owner';
+ALTER TYPE tenant_user_role ADD VALUE 'head_coach'; 
+ALTER TYPE tenant_user_role ADD VALUE 'assistant_coach';
+ALTER TYPE tenant_user_role ADD VALUE 'front_desk';
+
+-- 3. Enhance feature plans
+ALTER TABLE feature_plans ADD COLUMN tenant_type TEXT NOT NULL DEFAULT 'individual';
+ALTER TABLE feature_plans ADD COLUMN is_per_seat BOOLEAN DEFAULT false;
+ALTER TABLE feature_plans ADD COLUMN max_coaches INTEGER DEFAULT 1;
+
+-- 4. Create new tables
+CREATE TABLE locations (...);
+CREATE TABLE staff_locations (...);
+CREATE TABLE organization_hierarchy (...);
+```
+
+**Phase 4B: Seed Data (1 day)**
+```sql
+-- Create tiered feature plans
+INSERT INTO feature_plans (code, name, tenant_type, limits, price_lookup_key) VALUES
+-- Individual Plans
+('individual-solo', 'Solo Coach', 'individual', '{"maxAthletes": 25, "maxMonthlyBookings": 100, "features": {"videoAnalysis": false}}', 'solo_monthly'),
+('individual-pro', 'Pro Coach', 'individual', '{"maxAthletes": -1, "maxMonthlyBookings": -1, "features": {"videoAnalysis": true}}', 'pro_monthly'),
+
+-- Organizational Plans  
+('org-starter', 'Starter', 'organization', '{"maxAthletes": -1, "maxStaff": 5, "features": {"multiLocation": false}}', 'org_starter_monthly'),
+('org-professional', 'Professional', 'organization', '{"maxAthletes": -1, "maxStaff": 25, "features": {"multiLocation": true}}', 'org_pro_monthly'),
+('org-enterprise', 'Enterprise', 'organization', '{"maxAthletes": -1, "maxStaff": -1, "features": {"whiteLabel": true}}', 'org_enterprise_monthly');
+```
+
+**Phase 4C: Update Permissions (1 day)**
+- Update RLS policies to handle new roles
+- Implement role hierarchy checking
+- Add location-based access controls for multi-location orgs
+
+#### **🚀 Implementation Priority**
+
+**HIGH PRIORITY** (Blocking other features):
+1. Tenant type distinction (individual vs organization)
+2. Enhanced role system for organizational tenants
+3. Tiered feature plans (Solo/Pro for individuals)
+
+**MEDIUM PRIORITY** (Can implement later):
+1. Multi-location support
+2. Organization hierarchy
+3. Advanced permission granularity
+
+**LOW PRIORITY** (Future enhancements):
+1. White-label customization
+2. Custom integrations API
+3. Advanced organizational reporting
+
+---
 ### 3.1 Core Entities (New / Adjusted)
 - tenants (id, slug, name, status, plan_id, timezone, created_at)
 - tenant_settings (tenant_id FK, branding JSON, feature_flags JSON)
@@ -65,7 +419,7 @@ Comprehensive step‑by‑step roadmap to evolve the single‑tenant "Coach Will
 - On delete cascade for tenant-owned child rows (or archive strategy) using `ON DELETE CASCADE` or soft deletes.
 
 ---
-## 4. Supabase / Postgres Migration Steps
+## 5. Supabase / Postgres Migration Steps
 1. Snapshot current schema (`pg_dump --schema-only`).
 2. Create migrations adding `tenants`, `tenant_users`, `feature_plans` first.
 3. Add `tenant_id` with default placeholder to existing tables (nullable initially).
@@ -81,7 +435,7 @@ Comprehensive step‑by‑step roadmap to evolve the single‑tenant "Coach Will
 10. Write migration verification script (counts per table, constraint checks).
 
 ---
-## 5. Authentication & Authorization
+## 6. Authentication & Authorization
 
 ### 5.1 Auth Strategy: **Supabase Auth with Multi-Tenant JWT Claims**
 
@@ -602,7 +956,34 @@ async function parentSignupViBooking(email: string, tenantSlug: string) {
 - [x] Write backfill script (Node + SQL) for legacy data.
 - [x] Implement RLS policies (template + generator script).
 
-### **PHASE 2: JWT & AUTHENTICATION** ✅ **COMPLETE** 
+### **PHASE 1.5: ENHANCED USER TYPES & PLANS** 🔄 **IN PROGRESS**
+- [ ] **Enhanced Schema Updates**:
+  - [ ] Add `tenant_type` column to `tenants` table ('individual' vs 'organization')
+  - [ ] Add `parent_tenant_id` and `coach_count` to `tenants` table
+  - [ ] Add new roles to `tenant_user_role` enum (gym_owner, head_coach, assistant_coach, front_desk)
+  - [ ] Enhance `feature_plans` table with tenant_type, is_per_seat, max_coaches columns
+  - [ ] Create `locations` table for multi-location organizations
+  - [ ] Create `staff_locations` and `organization_hierarchy` tables
+
+- [ ] **Tiered Feature Plans**:
+  - [ ] Create Individual Coach Plans (Solo: $29/mo, Pro: $89/mo)
+  - [ ] Create Organizational Plans (Starter: $49/coach, Professional: $79/coach, Enterprise: $149/coach)
+  - [ ] Update plan limits structure with enhanced features
+  - [ ] Implement usage tracking for seat-based billing
+
+- [ ] **Enhanced Permissions**:
+  - [ ] Update permission matrix for new organizational roles
+  - [ ] Implement role hierarchy (gym_owner > head_coach > assistant_coach)
+  - [ ] Add location-based access controls
+  - [ ] Update RLS policies for new roles and structures
+
+- [ ] **Migration & Seed Data**:
+  - [ ] Migrate existing tenants to 'individual' type
+  - [ ] Create default locations for existing tenants
+  - [ ] Seed feature plans for all tenant types and tiers
+  - [ ] Update existing tenant assignments to new plan structure
+
+### **PHASE 2: AUTHENTICATION & ROLE MANAGEMENT** 🔄 **UPDATED SCOPE**
 - [x] Database hooks for custom JWT claims (`update_user_jwt_claims` function)
 - [x] RLS policies using JWT claims (38 tables, 33 tenant isolation policies)
 - [x] Server-side auth middleware (`server/supabase-auth.ts`)
@@ -612,7 +993,45 @@ async function parentSignupViBooking(email: string, tenantSlug: string) {
 - [x] Role-based authorization middleware (`requireRole`, `requireCoachAdmin`, etc.)
 - [x] API documentation system created (`/api/docs`, `/api/docs/html`)
 
-### **PHASE 3: BRANDING SYSTEM** 🔄 **NEXT UP**
+**NEW REQUIREMENTS FOR ENHANCED USER TYPES:**
+- [ ] **Enhanced Authentication Flow**:
+  - [ ] Update admin authentication to support Platform Admins
+  - [ ] Create organization signup flow for gym owners
+  - [ ] Create individual coach signup flow with plan selection
+  - [ ] Implement role-based dashboard routing
+
+- [ ] **Role-based Authorization Updates**:
+  - [ ] Update middleware for new role hierarchy (gym_owner > head_coach > assistant_coach)
+  - [ ] Implement location-based access controls
+  - [ ] Add tenant-type specific permissions
+  - [ ] Create role transition workflows (e.g., staff promotions)
+
+- [ ] **Session Management Enhancements**:
+  - [ ] Update session structure for tenant context
+  - [ ] Add role and location switching capabilities
+  - [ ] Implement cross-tenant access for Platform Admins
+  - [ ] Add audit logging for role changes
+
+### **PHASE 3: BILLING & SUBSCRIPTION MANAGEMENT** 🔄 **ENHANCED SCOPE**
+- [ ] **Stripe Integration Updates**:
+  - [ ] Create pricing tables for Individual and Organizational plans
+  - [ ] Implement seat-based billing for organizational plans
+  - [ ] Add usage tracking and overage billing
+  - [ ] Create plan upgrade/downgrade workflows
+
+- [ ] **Subscription Management**:
+  - [ ] Build subscription management dashboard
+  - [ ] Implement billing contact management
+  - [ ] Add payment method management
+  - [ ] Create invoice and usage reporting
+
+- [ ] **Plan Feature Enforcement**:
+  - [ ] Implement feature gates based on plan limits
+  - [ ] Add usage monitoring and alerts
+  - [ ] Create plan comparison and upgrade prompts
+  - [ ] Implement trial and onboarding flows
+
+### **PHASE 4: BRANDING SYSTEM** 🔄 **NEXT UP**
 - [ ] Extract branding constants into `branding/` module.
 - [ ] Replace hardcoded brand strings (search & incremental PRs).
 - [ ] Update server/routes.ts (20+ "Coach Will" references)
@@ -620,22 +1039,17 @@ async function parentSignupViBooking(email: string, tenantSlug: string) {
 - [ ] Update client components (15+ files with hardcoded text)
 - [ ] Dynamic email sender names per tenant
 
-### **PHASE 4: TENANT ROUTING** ⏳ **PENDING**
+### **PHASE 5: TENANT ROUTING** ⏳ **PENDING**
 - [ ] Add `TenantContext` to frontend.
 - [ ] Implement tenant slug middleware.
 - [ ] Subdomain resolution (coach1.betteh.app)
 - [ ] Path-based tenant routing (/t/coach1)
 
-### **PHASE 5: PLATFORM FEATURES** ⏳ **PENDING**
+### **PHASE 6: PLATFORM FEATURES** ⏳ **PENDING**
 - [ ] Add platform admin dashboard skeleton.
 - [ ] Build invitation flow (API + UI).
 - [ ] Usage metering worker implementation.
 - [ ] Namespace storage objects; migration script for videos.
-
-### **PHASE 6: BILLING & PAYMENTS** ⏳ **PENDING**
-- [ ] Stripe setup: products, prices, webhook handlers (subscription + usage).
-- [ ] Stripe Connect integration for per-coach payouts
-- [ ] Subscription management and billing automation
 
 ### **PHASE 7: FINALIZATION** ⏳ **PENDING**
 - [ ] Email template system & per-tenant sender config.

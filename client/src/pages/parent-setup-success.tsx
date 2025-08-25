@@ -23,7 +23,7 @@ export default function ParentSetupSuccess() {
       <SEOHead
         title="Account Created — Coach Will Tumbles"
         description="Parent account created."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-setup-success` : window.location.origin + '/parent-setup-success'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-setup-success` : '/parent-setup-success'}
         robots="noindex,follow"
         structuredData={{ '@context': 'https://schema.org', '@type': 'WebPage' }}
       />

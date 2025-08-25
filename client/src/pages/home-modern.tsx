@@ -116,23 +116,18 @@ export default function HomeModern() {
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center">
             {/* Main headline - VEED.io style */}
-            <h1 className="font-sunborn text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-              CREATE 
-              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent"> PRO LEVEL</span>
+            <h1 className="font-sunborn text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+              Modern booking
               <br />
-              GYMNASTICS TRAINING
-              <br />
-              IN THE{" "}
-              <span className="relative">
-                <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">BLINK</span>
-                <Sparkles className="absolute -top-2 -right-2 w-8 h-8 text-yellow-400 animate-pulse" />
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                management
               </span>
-              <span className="text-4xl md:text-6xl"> ⚡</span>
+              <br />
+              for gymnastics coaches
             </h1>
-
-            {/* Subheading */}
-            <p className="font-sunborn text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-              Make better coaching decisions faster. AI-powered gymnastics platform for teams.
+            
+            <p className="font-sunborn text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Streamline your private lesson bookings, manage athlete progress, and grow your coaching business with our all-in-one platform.
             </p>
 
             {/* CTA Buttons */}
@@ -141,11 +136,10 @@ export default function HomeModern() {
                 size="lg"
                 className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-sunborn font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
                 onClick={handleStartBooking}
-                disabled={parentAuth?.loggedIn && parentInfoLoading}
               >
-                {parentAuth?.loggedIn && parentInfoLoading ? "Loading..." : "Start for free"}
+                Start your free trial
               </Button>
-              <p className="text-sm text-gray-500 font-sunborn">* No credit card required</p>
+              <p className="font-sunborn text-sm text-gray-500 mt-4">* No credit card required</p>
             </div>
 
             {/* Feature pills */}
@@ -202,7 +196,7 @@ export default function HomeModern() {
               </span>
             </h2>
             <p className="font-sunborn text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Create, collaborate and track gymnastics progress, directly in your browser.
+              Manage bookings, track athlete progress, and grow your coaching business, directly in your browser.
             </p>
           </div>
 
@@ -212,13 +206,13 @@ export default function HomeModern() {
               {
                 icon: <Calendar className="w-8 h-8" />,
                 title: "Smart Scheduling",
-                description: "Create pro-looking schedules, effortlessly.",
+                description: "Automated booking system with availability management.",
                 color: "from-blue-500 to-cyan-500"
               },
               {
                 icon: <Brain className="w-8 h-8" />,
-                title: "AI Coach Assistant",
-                description: "Make better coaching decisions faster, with AI insights.",
+                title: "Business Analytics",
+                description: "Track revenue, popular lesson times, and growth trends.",
                 color: "from-purple-500 to-pink-500"
               },
               {
@@ -235,8 +229,8 @@ export default function HomeModern() {
               },
               {
                 icon: <Users className="w-8 h-8" />,
-                title: "Team Collaboration",
-                description: "Seamlessly work as a team with smart collaboration tools.",
+                title: "Client Management",
+                description: "Organize athletes, track attendance, and manage waitlists.",
                 color: "from-teal-500 to-blue-500"
               },
               {
@@ -396,16 +390,221 @@ export default function HomeModern() {
         </div>
       </section>
 
+      {/* Plans Section */}
+      <section className="relative py-32 px-4 bg-white dark:bg-black">
+        <div className="container mx-auto max-w-7xl">
+        <div className="text-center mb-16">
+          <h2 className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            Choose your
+            <br />
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              business plan
+            </span>
+          </h2>
+          <p className="font-sunborn text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            From solo coaches to large academies, we have the perfect plan to streamline your gymnastics coaching business.
+          </p>
+        </div>          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Starter Plan */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="mb-8">
+                <h3 className="font-sunborn text-2xl font-bold text-gray-900 dark:text-white mb-2">Solo Coach</h3>
+                <p className="font-sunborn text-gray-600 dark:text-gray-300 mb-6">Perfect for independent coaches</p>
+                <div className="flex items-baseline">
+                  <span className="font-sunborn text-4xl font-bold text-gray-900 dark:text-white">$29</span>
+                  <span className="font-sunborn text-gray-600 dark:text-gray-300 ml-2">/month</span>
+                </div>
+              </div>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Up to 50 bookings/month
+                </li>
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Online booking system
+                </li>
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Payment processing
+                </li>
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Basic email support
+                </li>
+              </ul>
+              
+              <Button 
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-sunborn font-semibold py-3 rounded-lg transition-colors duration-200"
+                onClick={handleStartBooking}
+              >
+                Start free trial
+              </Button>
+            </div>
+
+            {/* Pro Plan - Featured */}
+            <div className="relative bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:scale-105 transform">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-yellow-400 text-black px-4 py-1 rounded-full font-sunborn font-semibold text-sm">
+                  Most Popular
+                </span>
+              </div>
+              
+              <div className="mb-8">
+                <h3 className="font-sunborn text-2xl font-bold text-white mb-2">Pro Coach</h3>
+                <p className="font-sunborn text-blue-100 mb-6">For growing coaching businesses</p>
+                <div className="flex items-baseline">
+                  <span className="font-sunborn text-4xl font-bold text-white">$69</span>
+                  <span className="font-sunborn text-blue-100 ml-2">/month</span>
+                </div>
+              </div>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center font-sunborn text-white">
+                  <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Unlimited bookings
+                </li>
+                <li className="flex items-center font-sunborn text-white">
+                  <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Advanced scheduling tools
+                </li>
+                <li className="flex items-center font-sunborn text-white">
+                  <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Automated reminders
+                </li>
+                <li className="flex items-center font-sunborn text-white">
+                  <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Athlete progress tracking
+                </li>
+                <li className="flex items-center font-sunborn text-white">
+                  <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Priority support
+                </li>
+              </ul>
+              
+              <Button 
+                className="w-full bg-white hover:bg-gray-100 text-blue-600 font-sunborn font-semibold py-3 rounded-lg transition-colors duration-200"
+                onClick={handleStartBooking}
+              >
+                Start free trial
+              </Button>
+            </div>
+
+            {/* Elite Plan */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="mb-8">
+                <h3 className="font-sunborn text-2xl font-bold text-gray-900 dark:text-white mb-2">Academy</h3>
+                <p className="font-sunborn text-gray-600 dark:text-gray-300 mb-6">For large gymnastics academies</p>
+                <div className="flex items-baseline">
+                  <span className="font-sunborn text-4xl font-bold text-gray-900 dark:text-white">$199</span>
+                  <span className="font-sunborn text-gray-600 dark:text-gray-300 ml-2">/month</span>
+                </div>
+              </div>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Everything in Pro Coach
+                </li>
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Multi-coach management
+                </li>
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Revenue reporting & analytics
+                </li>
+                <li className="flex items-center font-sunborn text-gray-700 dark:text-gray-300">
+                  <div className="w-5 h-5 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                    <svg className="w-3 h-3 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  Dedicated account manager
+                </li>
+              </ul>
+              
+              <Button 
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-sunborn font-semibold py-3 rounded-lg transition-colors duration-200"
+                onClick={handleStartBooking}
+              >
+                Contact sales
+              </Button>
+            </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <p className="font-sunborn text-gray-600 dark:text-gray-300 mb-4">
+              All plans include our 30-day money-back guarantee
+            </p>
+            <div className="flex justify-center items-center space-x-8 text-sm text-gray-500 dark:text-gray-400">
+              <span className="font-sunborn">No setup fees</span>
+              <span className="font-sunborn">Cancel anytime</span>
+              <span className="font-sunborn">14-day free trial</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="relative py-32 px-4 bg-gradient-to-b from-white via-gray-50/50 to-gray-100 dark:from-gray-900 dark:via-gray-800/50 dark:to-gray-800">
         {/* Smooth transition overlay */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <h2 className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            Coaching so good they'll think you've
+            Business management so good
             <br />
             <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              hired a professional
+              you'll feel like a pro
             </span>
           </h2>
           
@@ -414,7 +613,7 @@ export default function HomeModern() {
             className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-sunborn font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg mt-8"
             onClick={handleStartBooking}
           >
-            Create your first training plan
+            Start your free trial today
           </Button>
           <p className="font-sunborn text-sm text-gray-500 mt-4">* No credit card required</p>
         </div>

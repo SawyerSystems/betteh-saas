@@ -81,7 +81,7 @@ export default function ParentLogin() {
       <SEOHead
         title="Parent Login — Coach Will Tumbles"
         description="Sign in to your parent account."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-login` : window.location.origin + '/parent-login'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-login` : '/parent-login'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />

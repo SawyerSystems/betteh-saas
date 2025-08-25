@@ -28,6 +28,11 @@ interface BrandContextType {
   // Tenant management
   setTenant: (tenantId: string, tenantData?: Partial<TenantBrand>) => void;
   isLegacyTenant: boolean;
+  
+  // Legacy properties for backward compatibility
+  businessName?: string;
+  coachName?: string;
+  tenantName?: string;
 }
 
 const BrandContext = createContext<BrandContextType | undefined>(undefined);
@@ -64,7 +69,12 @@ export function BrandProvider({
     getLogo,
     getColor,
     setTenant,
-    isLegacyTenant
+    isLegacyTenant,
+    
+    // Legacy properties for backward compatibility
+    businessName: brand.businessName,
+    coachName: brand.coachName,
+    tenantName: brand.tenantName
   };
 
   return (

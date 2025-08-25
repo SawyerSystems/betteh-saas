@@ -67,7 +67,7 @@ export default function ConfirmBookingPage() {
         <SEOHead
           title="Confirm Booking — Coach Will Tumbles"
           description="Confirm your booking."
-          canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent/confirm-booking` : window.location.origin + '/parent/confirm-booking'}
+          canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent/confirm-booking` : '/parent/confirm-booking'}
           robots="noindex,follow"
           structuredData={{ '@context': 'https://schema.org', '@type': 'WebPage' }}
         />

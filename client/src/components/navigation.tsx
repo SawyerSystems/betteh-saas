@@ -103,10 +103,10 @@ export const Navigation = memo(function Navigation() {
   }, [isAdminLoggedIn, isParentLoggedIn]);
 
   return (
-  <header className="sticky top-0 z-50 w-full border-b-4 border-[#D8BD2A] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-lg dark:bg-slate-900/80">
-  <div className="container mx-auto flex h-20 md:h-20 items-center justify-between px-4 py-4 md:px-6 md:py-0">
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800 backdrop-blur-lg">
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
         <Link href="/">
-          <div className="flex items-center space-x-2 cursor-pointer relative flex-shrink-0">
+          <div className="flex items-center cursor-pointer">
             <div className="w-20 h-20 flex-shrink-0 hidden">
               <BrandLogo 
                 type="circle"
@@ -114,28 +114,26 @@ export const Navigation = memo(function Navigation() {
                 className="w-full h-full object-contain flex-shrink-0"
               />
             </div>
-            {/* Hidden text for SEO but visually replaced with PNG */}
-            <span className="sr-only">{brand.businessName}</span>
-            <div className="h-12 flex-shrink-0">
+            {/* Text logo - VEED.io style */}
+            <div className="flex-shrink-0">
               <BrandLogo 
                 type="text"
                 alt={brand.businessName}
-                className="h-full object-contain flex-shrink-0"
+                className="h-8 object-contain flex-shrink-0"
               />
             </div>
           </div>
         </Link>
 
-    {/* Desktop Navigation - Hide on smaller screens to prevent tablet horizontal scrolling */}
-  <nav className="hidden lg:flex items-center space-x-3 xl:space-x-6 ml-4 xl:ml-16 min-w-0 flex-shrink">
+        {/* Desktop Navigation - VEED.io style */}
+        <nav className="hidden lg:flex items-center space-x-8">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               <span
-                className={`text-[#0F0276] dark:text-[#D8BD2A] hover:text-[#E10B0B] transition-colors duration-200 font-semibold cursor-pointer font-sunborn text-sm md:text-base xl:text-lg ${
-                  isActive(item.href) ? "text-[#E10B0B] dark:text-[#D8BD2A] font-bold" : ""
+                className={`font-sunborn text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200 cursor-pointer text-sm font-medium ${
+                  isActive(item.href) ? "text-gray-900 dark:text-white font-semibold" : ""
                 }`}
                 onMouseEnter={() => {
-                  // Prefetch resources on hover for better UX
                   const page = item.href.replace('/', '') || 'home';
                   handleNavHover(page);
                 }}
@@ -144,239 +142,138 @@ export const Navigation = memo(function Navigation() {
               </span>
             </Link>
           ))}
-          <div className="flex items-center space-x-3">
-            <Link href="/booking">
-              <Button className="btn-athletic-red text-white px-6 py-3 rounded-lg font-bold hover:scale-105 transform transition-all duration-300 shadow-lg animate-glow">
-                BOOK NOW
-              </Button>
-            </Link>
-            
-            {/* Dynamic buttons based on login state */}
-            {isAdminLoggedIn || isParentLoggedIn ? (
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-1 border-red-300 hover:bg-red-50 transition-all duration-200"
-              >
-                <LogOut className="h-3 w-3" />
-                <span className="hidden xl:inline">Logout</span>
-              </Button>
-            ) : (
-              <>
-                <Button
-                  onClick={handleAdminAction}
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center space-x-1 border-[#0F0276] hover:bg-[#0F0276] hover:text-white text-[#0F0276] transition-all duration-200 font-semibold font-sunborn"
-                >
-                  <Lock className="h-3 w-3" />
-                  <span className="hidden xl:inline">ADMIN</span>
-                </Button>
-                <Button
-                  onClick={handleParentAction}
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center space-x-1 border-[#D8BD2A] hover:bg-[#D8BD2A] hover:text-black text-[#D8BD2A] transition-all duration-200 font-semibold font-sunborn"
-                >
-                  <UserCircle className="h-3 w-3" />
-                  <span className="hidden xl:inline">PORTAL</span>
-                </Button>
-              </>
-            )}
-            
-            {/* Dashboard button for logged in users */}
-            {(isAdminLoggedIn || isParentLoggedIn) && (
-              <Button
-                onClick={isAdminLoggedIn ? handleAdminAction : handleParentAction}
-                variant="default"
-                size="sm"
-                className={`flex items-center space-x-1 transition-all duration-200 ${
-                  isAdminLoggedIn 
-                    ? "bg-green-600 hover:bg-green-700 text-white"
-                    : "bg-purple-600 hover:bg-purple-700 text-white"
-                }`}
-              >
-                <User className="h-3 w-3" />
-                <span className="hidden xl:inline">Dashboard</span>
-              </Button>
-            )}
-
-            {/* Theme Toggle - Positioned after dashboard buttons */}
-            <div className="hidden md:inline-flex">
-              <ThemeToggle />
-            </div>
-          </div>
         </nav>
 
-  {/* Tablet Navigation - Simplified for medium screens */}
-  <nav className="hidden md:flex lg:hidden items-center space-x-3 ml-2 md:ml-6 min-w-0">
-          {/* Theme toggle for tablet */}
-          <ThemeToggle />
-          <Link href="/booking">
-            <Button className="coach-will-gradient text-white px-4 py-2 rounded-full font-medium hover:scale-105 transform transition-all duration-200 shadow-lg">
-              Book Now
-            </Button>
-          </Link>
-          
-          {/* Simplified buttons for tablet */}
+        {/* Right side actions - VEED.io style */}
+        <div className="hidden lg:flex items-center space-x-3">
           {isAdminLoggedIn || isParentLoggedIn ? (
             <>
+              {/* Dashboard button for logged in users */}
               <Button
                 onClick={isAdminLoggedIn ? handleAdminAction : handleParentAction}
-                variant="default"
+                variant="ghost"
                 size="sm"
-                className={`flex items-center space-x-1 transition-all duration-200 ${
-                  isAdminLoggedIn 
-                    ? "bg-green-600 hover:bg-green-700 text-white"
-                    : "bg-purple-600 hover:bg-purple-700 text-white"
-                }`}
+                className="font-sunborn text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
-                <User className="h-3 w-3" />
-                <span>Dashboard</span>
+                Dashboard
               </Button>
               <Button
                 onClick={handleLogout}
-                variant="outline"
+                variant="ghost"
                 size="sm"
-                className="flex items-center space-x-1 border-red-300 hover:bg-red-50 transition-all duration-200"
+                className="font-sunborn text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
               >
-                <LogOut className="h-3 w-3" />
+                Logout
               </Button>
             </>
           ) : (
             <>
               <Button
                 onClick={handleAdminAction}
-                variant="outline"
+                variant="ghost"
                 size="sm"
-                className="flex items-center space-x-1 border-gray-300 hover:bg-gray-50 transition-all duration-200"
+                className="font-sunborn text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium"
               >
-                <Lock className="h-3 w-3" />
-                <span>Admin</span>
+                Login
               </Button>
               <Button
                 onClick={handleParentAction}
-                variant="outline"
-                size="sm"
-                className="flex items-center space-x-1 border-purple-300 hover:bg-purple-50 transition-all duration-200"
+                className="bg-black hover:bg-gray-800 text-white font-sunborn font-medium px-4 py-2 rounded-lg text-sm transition-colors duration-200"
               >
-                <UserCircle className="h-3 w-3" />
-                <span>Parent</span>
+                Get Started
               </Button>
             </>
           )}
-        </nav>
+          <ThemeToggle />
+        </div>
 
-        {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="lg:hidden glass-button text-slate-900 dark:text-white">
-              <Menu className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          {/* Full-height sheet with scrollable content and sticky footer */}
-          <SheetContent side="right" className="w-[300px] sm:w-[380px] p-0 flex h-full flex-col overflow-hidden">
-            {/* Header / Theme toggle */}
-            <div className="flex items-center justify-between px-3 pt-4 pb-2 border-b border-slate-200 dark:border-slate-800">
-              <span className="text-[0.9rem] font-medium text-slate-900 dark:text-slate-100 leading-tight">Theme</span>
-              <ThemeToggle />
-            </div>
+        {/* Mobile menu button */}
+        <div className="lg:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-gray-700 dark:text-gray-300">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80 p-0 bg-white dark:bg-black">
+              <div className="flex flex-col h-full bg-white dark:bg-black">
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-black">
+                  <span className="font-sunborn font-semibold text-gray-900 dark:text-white">Menu</span>
+                  <ThemeToggle />
+                </div>
 
-            {/* Non-scrollable nav list with responsive sizing */}
-            <div className="flex-1">
-              <nav className="flex flex-col space-y-1.5 py-3">
-                {navItems.map((item) => (
-                  <Link key={item.href} href={item.href}>
-                    <span
-                      className={`block px-3 py-[clamp(8px,2vh,12px)] text-[clamp(0.95rem,3.2vw,1.125rem)] leading-tight rounded-lg transition-colors duration-200 cursor-pointer min-h-[36px] flex items-center w-full ${
-                        isActive(item.href)
-                          ? "text-blue-600 font-semibold bg-blue-50 dark:text-[#D8BD2A] dark:bg-slate-800/60"
-                          : "text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-[#D8BD2A] dark:hover:text-white dark:hover:bg-slate-800/40"
-                      }`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </span>
-                  </Link>
-                ))}
-              </nav>
-            </div>
+                {/* Navigation links */}
+                <div className="flex-1 py-6 bg-white dark:bg-black">
+                  <nav className="space-y-1 px-6">
+                    {navItems.map((item) => (
+                      <Link key={item.href} href={item.href}>
+                        <span
+                          className={`block py-3 px-4 rounded-lg font-sunborn text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors duration-200 cursor-pointer ${
+                            isActive(item.href) ? "bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white font-semibold" : ""
+                          }`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.label}
+                        </span>
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
 
-            {/* Sticky footer with CTAs, always accessible */}
-            <div className="sticky bottom-0 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 p-3 space-y-2.5">
-              {/* Booking Button - Always First */}
-              <Link href="/booking">
-                <Button 
-                  className="w-full coach-will-gradient text-white px-4 py-2 text-[0.95rem] rounded-full font-medium hover:scale-[1.02] transform transition-all duration-200 shadow-lg"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Book Now
-                </Button>
-              </Link>
-
-              {/* Dashboard Button for Logged In Users */}
-              {(isAdminLoggedIn || isParentLoggedIn) && (
-                <Button
-                  onClick={() => {
-                    if (isAdminLoggedIn) handleAdminAction();
-                    else handleParentAction();
-                    setIsOpen(false);
-                  }}
-                  variant="default"
-                  className={`w-full flex items-center justify-center space-x-2 py-2 text-[0.95rem] transition-all duration-200 ${
-                    isAdminLoggedIn 
-                      ? "bg-green-600 hover:bg-green-700 text-white" 
-                      : "bg-purple-600 hover:bg-purple-700 text-white"
-                  }`}
-                >
-                  <User className="h-3 w-3" />
-                  <span>Dashboard</span>
-                </Button>
-              )}
-
-              {/* Dynamic Login/Logout Buttons */}
-              {isAdminLoggedIn || isParentLoggedIn ? (
-                <Button
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
-                  variant="outline"
-                  className="w-full flex items-center justify-center space-x-2 py-2 text-[0.95rem] border-red-300 hover:bg-red-50 transition-all duration-200"
-                >
-                  <LogOut className="h-3 w-3" />
-                  <span>Logout</span>
-                </Button>
-              ) : (
-                <>
-                  <Button
-                    onClick={() => {
-                      handleAdminAction();
-                      setIsOpen(false);
-                    }}
-                    variant="outline"
-                    className="w-full flex items-center justify-center space-x-2 py-2 text-[0.95rem] border-gray-300 hover:bg-gray-50 transition-all duration-200"
-                  >
-                    <Lock className="h-3 w-3" />
-                    <span>Admin Login</span>
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      handleParentAction();
-                      setIsOpen(false);
-                    }}
-                    variant="outline"
-                    className="w-full flex items-center justify-center space-x-2 py-2 text-[0.95rem] border-purple-300 hover:bg-purple-50 transition-all duration-200"
-                  >
-                    <UserCircle className="h-3 w-3" />
-                    <span>Parent Portal</span>
-                  </Button>
-                </>
-              )}
-            </div>
-          </SheetContent>
-        </Sheet>
+                {/* Footer actions */}
+                <div className="p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-black space-y-3">
+                  {isAdminLoggedIn || isParentLoggedIn ? (
+                    <>
+                      <Button
+                        onClick={() => {
+                          isAdminLoggedIn ? handleAdminAction() : handleParentAction();
+                          setIsOpen(false);
+                        }}
+                        className="w-full font-sunborn"
+                        variant="outline"
+                      >
+                        Dashboard
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handleLogout();
+                          setIsOpen(false);
+                        }}
+                        className="w-full font-sunborn"
+                        variant="ghost"
+                      >
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        onClick={() => {
+                          handleAdminAction();
+                          setIsOpen(false);
+                        }}
+                        className="w-full font-sunborn"
+                        variant="ghost"
+                      >
+                        Login
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handleParentAction();
+                          setIsOpen(false);
+                        }}
+                        className="w-full bg-black hover:bg-gray-800 text-white font-sunborn"
+                      >
+                        Get Started
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

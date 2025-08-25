@@ -1892,7 +1892,7 @@ export default function Admin() {
       <SEOHead
         title={`Admin Dashboard — ${brand.businessName}`}
         description="Admin dashboard."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin` : window.location.origin + '/admin'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin` : '/admin'}
         robots="noindex,follow"
         structuredData={{ '@context': 'https://schema.org', '@type': 'WebPage' }}
       />

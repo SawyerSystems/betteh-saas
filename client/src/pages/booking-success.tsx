@@ -190,7 +190,7 @@ export default function BookingSuccess() {
       <SEOHead
         title="Booking Success — Coach Will Tumbles"
         description="Your booking was successful."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/booking-success` : window.location.origin + '/booking-success'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/booking-success` : '/booking-success'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />

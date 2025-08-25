@@ -20,7 +20,7 @@ export async function authenticateSupabaseUser(
   req: Request, 
   res: Response, 
   next: NextFunction
-): Promise<void> {
+): Promise<void | Response> {
   try {
     const authHeader = req.headers.authorization;
     

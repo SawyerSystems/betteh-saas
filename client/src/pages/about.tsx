@@ -59,22 +59,22 @@ export default function About() {
       <SEOHead
         title="About Coach Will | Private Gymnastics Coaching in Oceanside, CA"
         description={aboutData.bio}
-        canonicalUrl="{window.location.origin}/about"
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/about` : '/about'}
         robots="index,follow"
         structuredData={[
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "{window.location.origin}/" },
-              { "@type": "ListItem", position: 2, name: "About", item: "{window.location.origin}/about" }
+              { "@type": "ListItem", position: 1, name: "Home", item: typeof window !== 'undefined' ? `${window.location.origin}/` : '/' },
+              { "@type": "ListItem", position: 2, name: "About", item: typeof window !== 'undefined' ? `${window.location.origin}/about` : '/about' }
             ]
           },
           {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: "Coach Will Tumbles",
-            url: "{window.location.origin}/about",
+            url: typeof window !== 'undefined' ? `${window.location.origin}/about` : '/about',
             image: aboutData.photo || undefined,
             description: aboutData.bio
           }

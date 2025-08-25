@@ -1,4 +1,5 @@
 import { AttendanceStatusEnum, BookingMethodEnum, BookingStatusEnum, insertAthleteSchema, insertAvailabilitySchema, insertBlogPostSchema, insertBookingSchema, insertTipSchema, insertWaiverSchema, PaymentStatusEnum, ActivityActorType, ActivityActionType, ActivityCategory, ActivityTargetType } from "../shared/schema";
+import { brandConfig } from "../shared/branding/brand";
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import * as fs from 'fs/promises';
 import * as path from 'path';
@@ -24,7 +25,6 @@ import { expandSeriesForRange } from './recurrence';
 import { timeSlotLocksRouter } from "./time-slot-locks";
 import { LessonUtils, ResponseUtils, ValidationUtils } from "./utils";
 import { determineBookingStatus } from "./utils/booking-status";
-import { setupApiDocs } from "./api-docs";
 
 // ...existing code...
 
@@ -3248,7 +3248,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Right side: Company name
       const rightX = width - margin - 150; // Position from right edge
       const companyY = height - margin; // Reset to top for company name
-      drawText(brandConfig.businessName, rightX, companyY, 12, bold, textGray);
+      drawText(brandConfig.businessName || 'Business', rightX, companyY, 12, bold, textGray);
       y -= 18;
       if (notes) { drawText(`Notes: ${notes}`, margin, y, 10, font, textGray); y -= 14; }
       // Divider
@@ -12476,7 +12476,7 @@ setTimeout(async () => {
       });
     } catch (error) {
       console.error('Auth test error:', error);
-      res.status(500).json({ error: 'Auth test failed', details: error.message });
+      res.status(500).json({ error: 'Auth test failed', details: (error as Error).message });
     }
   });
 
@@ -12503,7 +12503,7 @@ setTimeout(async () => {
       console.error('Service role test error:', error);
       res.status(500).json({ 
         error: 'Service role test failed', 
-        details: error.message 
+        details: (error as Error).message 
       });
     }
   });

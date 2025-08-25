@@ -80,7 +80,7 @@ export default function AdminLogin() {
       <SEOHead
         title="Admin Login — Coach Will Tumbles"
         description="Administrator sign in."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin-login` : window.location.origin + '/admin-login'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/admin-login` : '/admin-login'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />

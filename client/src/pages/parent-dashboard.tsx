@@ -710,7 +710,7 @@ function ParentDashboard() {
       <SEOHead
         title={`Parent Dashboard — ${brand.businessName}`}
         description="Private parent dashboard."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-dashboard` : window.location.origin + '/parent-dashboard'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/parent-dashboard` : '/parent-dashboard'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />
@@ -1644,7 +1644,7 @@ function ParentDashboard() {
                         Need help or have questions? {brand.coachName} is here to assist you.
                       </p>
                       <div className="text-sm text-gray-500 dark:text-gray-400">
-                        <p>📧 Email: {brand.contact.email}</p>
+                        <p>📧 Email: {brand.brand.contact.email}</p>
                         <p>📞 Phone: (585) 755-8122</p>
                       </div>
                     </div>

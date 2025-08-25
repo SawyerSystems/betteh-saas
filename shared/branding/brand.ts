@@ -46,7 +46,7 @@ export interface BettehBrand {
   // Contact Information (Platform Level)
   contact: {
     supportEmail: string;
-    website: string;
+    website?: string;
   };
 }
 
@@ -228,6 +228,9 @@ export function mapLegacyAsset(legacyPath: string, theme: 'light' | 'dark' = 'li
   }
   return legacyPath;
 }
+
+// Legacy brandConfig export for backward compatibility
+export const brandConfig = LEGACY_COACH_WILL_TENANT;
 
 export default {
   DEFAULT_BETTEH_BRAND,

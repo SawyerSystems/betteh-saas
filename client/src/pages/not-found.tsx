@@ -7,14 +7,14 @@ export default function NotFound() {
     <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
       <SEOHead
         title="Page Not Found — Coach Will Tumbles"
-        description="The page you’re looking for doesn’t exist."
-        canonicalUrl={typeof window !== 'undefined' ? window.location.href : window.location.origin + '/404'}
+        description="The page you're looking for doesn't exist."
+        canonicalUrl={typeof window !== 'undefined' ? window.location.href : '/404'}
         robots="noindex,follow"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": typeof window !== 'undefined' ? window.location.origin : window.location.origin }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": typeof window !== 'undefined' ? window.location.origin : '/' }
           ]
         }}
       />
@@ -33,3 +33,5 @@ export default function NotFound() {
     </div>
   );
 }
+
+

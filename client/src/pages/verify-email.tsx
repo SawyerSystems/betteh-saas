@@ -54,7 +54,7 @@ export default function VerifyEmail() {
       <SEOHead
         title="Verify Email — Coach Will Tumbles"
         description="Email verification in progress."
-        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/verify-email` : window.location.origin + '/verify-email'}
+        canonicalUrl={typeof window !== 'undefined' ? `${window.location.origin}/verify-email` : '/verify-email'}
         robots="noindex,follow"
         structuredData={{ "@context": "https://schema.org", "@type": "WebPage" }}
       />

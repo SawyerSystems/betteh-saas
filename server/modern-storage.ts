@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { brandConfig } from '../shared/branding/brand';
 import type {
     Athlete,
     Booking,

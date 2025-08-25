@@ -24,7 +24,7 @@ const PageLoadingSpinner = () => (
 );
 
 // Lazy load all page components for better performance
-const Home = lazy(() => import("@/pages/home"));
+const Home = lazy(() => import("@/pages/home-modern"));
 const About = lazy(() => import("@/pages/about"));
 const Booking = lazy(() => import("@/pages/booking"));
 const Blog = lazy(() => import("@/pages/blog"));

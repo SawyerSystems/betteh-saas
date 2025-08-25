@@ -1,0 +1,445 @@
+import * as React from "react";
+import SEOHead from "@/components/SEOHead";
+import { useState, useEffect } from "react";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { UnifiedBookingModal } from "@/components/UnifiedBookingModal";
+import { ParentIdentificationEnhanced } from "@/components/parent-identification-enhanced";
+import { useStripePricing } from "@/hooks/use-stripe-products";
+import { apiRequest } from "@/lib/queryClient";
+import type { Athlete, Parent } from "@shared/schema";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Activity,
+  ArrowRight,
+  Brain,
+  Calendar,
+  CheckCircle,
+  Clock,
+  Dumbbell,
+  Play,
+  Shield,
+  Star,
+  Target,
+  TrendingUp,
+  Trophy,
+  Users,
+  Video,
+  Zap,
+  BarChart3,
+  MessageSquare,
+  Globe,
+  Sparkles
+} from "lucide-react";
+import { Link } from "wouter";
+
+export default function HomeModern() {
+  const [showParentModal, setShowParentModal] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [showParentIdentificationModal, setShowParentIdentificationModal] = useState(false);
+  const [parentData, setParentData] = useState<Parent | null>(null);
+  const [selectedAthletes, setSelectedAthletes] = useState<Athlete[]>([]);
+  const [isNewParent, setIsNewParent] = useState(false);
+  const { getLessonPrice } = useStripePricing();
+
+  // Check if parent is already logged in
+  const { data: parentAuth } = useQuery<{ loggedIn: boolean; parentId?: number; email?: string }>({
+    queryKey: ['/api/parent-auth/status'],
+  });
+
+  // Get complete parent information for logged-in parents
+  const { data: parentInfo, isLoading: parentInfoLoading, error: parentInfoError } = useQuery({
+    queryKey: ['/api/parent/info'],
+    queryFn: async () => {
+      const response = await apiRequest("GET", "/api/parent/info");
+      return response.json();
+    },
+    enabled: parentAuth?.loggedIn || false,
+  });
+
+  const handleStartBooking = () => {
+    if (parentAuth?.loggedIn && parentInfoLoading) {
+      return;
+    }
+    
+    if (parentAuth?.loggedIn) {
+      if (parentInfo && !parentInfoError) {
+        setParentData(parentInfo);
+        setSelectedAthletes([]);
+        setIsNewParent(false);
+        setShowBookingModal(true);
+      } else {
+        setParentData(null);
+        setSelectedAthletes([]);
+        setIsNewParent(false);
+        setShowBookingModal(true);
+      }
+    } else {
+      setShowParentIdentificationModal(true);
+    }
+  };
+
+  const handleParentConfirmed = (data: {
+    parent: Parent;
+    selectedAthletes: Athlete[];
+    isNewParent: boolean;
+  }) => {
+    setParentData(data.parent);
+    setSelectedAthletes(data.selectedAthletes);
+    setIsNewParent(data.isNewParent);
+    setShowBookingModal(true);
+  };
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      <SEOHead
+        title="Betteh | Professional Gymnastics Coaching Platform"
+        description="AI-powered gymnastics coaching platform for managing lessons, bookings, and athlete development. Better coaching, better results."
+        canonicalUrl="https://www.betteh.com/"
+        robots="index,follow"
+      />
+
+      {/* Hero Section - VEED.io inspired */}
+      <section className="relative pt-16 pb-32 px-4 overflow-hidden">
+        {/* Background gradient with smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent dark:from-gray-800 dark:to-transparent"></div>
+        
+        {/* Floating elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-4 -right-4 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+          <div className="absolute -bottom-8 -left-4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-500"></div>
+        </div>
+
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="text-center">
+            {/* Main headline - VEED.io style */}
+            <h1 className="font-sunborn text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+              CREATE 
+              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent"> PRO LEVEL</span>
+              <br />
+              GYMNASTICS TRAINING
+              <br />
+              IN THE{" "}
+              <span className="relative">
+                <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">BLINK</span>
+                <Sparkles className="absolute -top-2 -right-2 w-8 h-8 text-yellow-400 animate-pulse" />
+              </span>
+              <span className="text-4xl md:text-6xl"> ⚡</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="font-sunborn text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+              Make better coaching decisions faster. AI-powered gymnastics platform for teams.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+              <Button 
+                size="lg"
+                className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-sunborn font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+                onClick={handleStartBooking}
+                disabled={parentAuth?.loggedIn && parentInfoLoading}
+              >
+                {parentAuth?.loggedIn && parentInfoLoading ? "Loading..." : "Start for free"}
+              </Button>
+              <p className="text-sm text-gray-500 font-sunborn">* No credit card required</p>
+            </div>
+
+            {/* Feature pills */}
+            <div className="flex flex-wrap justify-center gap-3 mb-16">
+              {[
+                { icon: <Calendar className="w-4 h-4" />, text: "Smart Scheduling" },
+                { icon: <BarChart3 className="w-4 h-4" />, text: "Progress Tracking" },
+                { icon: <Video className="w-4 h-4" />, text: "Video Analysis" },
+                { icon: <Brain className="w-4 h-4" />, text: "AI Coaching" },
+                { icon: <Users className="w-4 h-4" />, text: "Team Management" },
+                { icon: <Trophy className="w-4 h-4" />, text: "Competition Prep" },
+              ].map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-md border border-gray-200 dark:border-gray-700"
+                >
+                  {feature.icon}
+                  <span className="font-sunborn text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {feature.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Demo video placeholder */}
+            <div className="relative mx-auto max-w-4xl">
+              <div className="relative bg-gradient-to-r from-purple-100 to-blue-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-8 shadow-2xl">
+                <div className="aspect-video bg-white dark:bg-gray-900 rounded-xl flex items-center justify-center border border-gray-200 dark:border-gray-600">
+                  <div className="text-center">
+                    <Play className="w-16 h-16 text-purple-600 mx-auto mb-4" />
+                    <p className="font-sunborn text-lg text-gray-600 dark:text-gray-400">
+                      Watch how Betteh transforms gymnastics coaching
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Everything You Need Section */}
+      <section className="relative py-32 px-4 bg-gradient-to-b from-gray-50 via-gray-50 to-white dark:from-gray-800 dark:via-gray-800 dark:to-gray-900">
+        {/* Smooth transition overlay */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-800"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+              EVERYTHING YOU NEED,
+              <br />
+              <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                ALL IN ONE PLACE
+              </span>
+            </h2>
+            <p className="font-sunborn text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Create, collaborate and track gymnastics progress, directly in your browser.
+            </p>
+          </div>
+
+          {/* Feature grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Calendar className="w-8 h-8" />,
+                title: "Smart Scheduling",
+                description: "Create pro-looking schedules, effortlessly.",
+                color: "from-blue-500 to-cyan-500"
+              },
+              {
+                icon: <Brain className="w-8 h-8" />,
+                title: "AI Coach Assistant",
+                description: "Make better coaching decisions faster, with AI insights.",
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                icon: <Video className="w-8 h-8" />,
+                title: "Video Analysis",
+                description: "Easily record and analyze technique. Review and share with athletes.",
+                color: "from-green-500 to-emerald-500"
+              },
+              {
+                icon: <BarChart3 className="w-8 h-8" />,
+                title: "Progress Tracking",
+                description: "Select from 100+ skills and track athlete development.",
+                color: "from-orange-500 to-red-500"
+              },
+              {
+                icon: <Users className="w-8 h-8" />,
+                title: "Team Collaboration",
+                description: "Seamlessly work as a team with smart collaboration tools.",
+                color: "from-teal-500 to-blue-500"
+              },
+              {
+                icon: <Globe className="w-8 h-8" />,
+                title: "Parent Portal",
+                description: "Keep parents engaged with powerful communication tools.",
+                color: "from-indigo-500 to-purple-500"
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="p-6 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-gray-900">
+                <CardContent className="p-0">
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center text-white mb-4`}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="font-sunborn text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="font-sunborn text-gray-600 dark:text-gray-400 mb-4">
+                    {feature.description}
+                  </p>
+                  <Link href="/features">
+                    <Button variant="ghost" className="p-0 h-auto font-sunborn text-purple-600 hover:text-purple-700">
+                      Explore <ArrowRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI-Powered Section */}
+      <section className="relative py-32 px-4 bg-gradient-to-b from-white via-purple-50/30 to-gray-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-800">
+        {/* Smooth transition overlays */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent dark:from-gray-800 dark:to-transparent"></div>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                AI POWERED
+              </span>{" "}
+              COACHING
+            </h2>
+            <p className="font-sunborn text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+              Make your coaching more engaging. Track progress, analyze technique and 
+              create personalized training plans with our AI Coaching Assistant.
+            </p>
+          </div>
+
+          {/* AI Features */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {[
+              "Skill Analysis",
+              "Progress Tracking", 
+              "Technique Breakdown",
+              "Training Plans",
+              "Performance Insights",
+              "Competition Prep",
+              "Injury Prevention",
+              "Goal Setting"
+            ].map((feature, index) => (
+              <div key={index} className="text-center p-4">
+                <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg p-3 inline-block mb-2">
+                  <Sparkles className="w-6 h-6 text-purple-600" />
+                </div>
+                <p className="font-sunborn font-medium text-gray-900 dark:text-white">
+                  {feature}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-xl font-sunborn font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+              onClick={handleStartBooking}
+            >
+              Try all features
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="relative py-32 px-4 bg-gradient-to-b from-gray-50 via-blue-50/30 to-white dark:from-gray-800 dark:via-blue-900/20 dark:to-gray-900">
+        {/* Smooth transition overlays */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-gray-50 to-transparent dark:from-gray-800 dark:to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+              LOVED BY COACHES.
+              <br />
+              <span className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                TRUSTED BY ATHLETES
+              </span>
+            </h2>
+          </div>
+
+          {/* Stats */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {[
+              { number: "10K+", label: "Active Athletes" },
+              { number: "500+", label: "Gymnastics Coaches" },
+              { number: "98%", label: "Parent Satisfaction" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-2">
+                  {stat.number}
+                </div>
+                <div className="font-sunborn text-lg text-gray-600 dark:text-gray-400">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Testimonials */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                quote: "Betteh has been game-changing. It's allowed us to create structured training programs and track athlete progress with ease.",
+                author: "Sarah Johnson",
+                role: "Head Coach, Elite Gymnastics Academy"
+              },
+              {
+                quote: "I love using Betteh. The progress tracking is the most accurate I've seen. It's helped take my coaching to the next level.",
+                author: "Mike Chen",
+                role: "Owner, Champions Gymnastics"
+              }
+            ].map((testimonial, index) => (
+              <Card key={index} className="p-8 border-0 shadow-lg bg-white dark:bg-gray-900">
+                <CardContent className="p-0">
+                  <div className="flex mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <blockquote className="font-sunborn text-lg text-gray-700 dark:text-gray-300 mb-6">
+                    "{testimonial.quote}"
+                  </blockquote>
+                  <div>
+                    <div className="font-sunborn font-semibold text-gray-900 dark:text-white">
+                      {testimonial.author}
+                    </div>
+                    <div className="font-sunborn text-gray-600 dark:text-gray-400">
+                      {testimonial.role}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="relative py-32 px-4 bg-gradient-to-b from-white via-gray-50/50 to-gray-100 dark:from-gray-900 dark:via-gray-800/50 dark:to-gray-800">
+        {/* Smooth transition overlay */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent dark:from-gray-900 dark:to-transparent"></div>
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
+          <h2 className="font-sunborn text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            Coaching so good they'll think you've
+            <br />
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              hired a professional
+            </span>
+          </h2>
+          
+          <Button 
+            size="lg"
+            className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-sunborn font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg mt-8"
+            onClick={handleStartBooking}
+          >
+            Create your first training plan
+          </Button>
+          <p className="font-sunborn text-sm text-gray-500 mt-4">* No credit card required</p>
+        </div>
+      </section>
+
+      {/* Modals */}
+      {showParentIdentificationModal && (
+        <ParentIdentificationEnhanced
+          isOpen={showParentIdentificationModal}
+          onClose={() => setShowParentIdentificationModal(false)}
+          onParentConfirmed={handleParentConfirmed}
+        />
+      )}
+
+      {showBookingModal && (
+        <UnifiedBookingModal
+          isOpen={showBookingModal}
+          onClose={() => setShowBookingModal(false)}
+          parentData={parentData}
+          selectedAthletes={selectedAthletes}
+          isNewParent={isNewParent}
+        />
+      )}
+
+      <Footer />
+    </div>
+  );
+}

@@ -204,7 +204,7 @@ export function Footer() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Quick Links</h3>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/booking" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Private Lessons</Link></li>
+                <li><Link href="/booking-demo" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Demo Experience</Link></li>
                 <li><Link href="/about" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About Us</Link></li>
                 <li><Link href="/blog" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</Link></li>
                 <li><Link href="/tips" className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tips & Drills</Link></li>

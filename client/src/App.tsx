@@ -26,7 +26,7 @@ const PageLoadingSpinner = () => (
 // Lazy load all page components for better performance
 const Home = lazy(() => import("@/pages/home-modern"));
 const About = lazy(() => import("@/pages/about"));
-const Booking = lazy(() => import("@/pages/booking"));
+const BookingDemo = lazy(() => import("@/pages/booking-demo"));
 const Blog = lazy(() => import("@/pages/blog"));
 const Tips = lazy(() => import("@/pages/tips"));
 const Contact = lazy(() => import("@/pages/contact"));
@@ -78,8 +78,9 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/index.html" component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/booking" component={Booking} />
-          <Route path="/booking/index.html" component={Booking} />
+          <Route path="/booking-demo" component={BookingDemo} />
+          <Route path="/booking" component={() => { window.location.href = '/booking-demo'; return null; }} />
+          <Route path="/booking/index.html" component={() => { window.location.href = '/booking-demo'; return null; }} />
           <Route path="/blog" component={Blog} />
           <Route path="/blog/index.html" component={Blog} />
           <Route path="/blog/:id" component={BlogPost} />

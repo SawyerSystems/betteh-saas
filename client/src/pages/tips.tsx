@@ -270,7 +270,7 @@ export default function Tips() {
         title="Ready to Master These Skills?"
         subtitle="Join Coach Will's gymnastics program where every training adventure builds confidence, strength, and technique!"
         primaryButtonText="Start Their Journey"
-        primaryButtonLink="/booking"
+        primaryButtonLink="/booking-demo"
         secondaryButtonText="View Class Schedule"
         secondaryButtonLink="/contact"
         features={[

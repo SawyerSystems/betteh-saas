@@ -516,7 +516,7 @@ export default function Blog() {
         title="Join the Adventure"
         subtitle="Ready to start your child's gymnastics journey? Book a lesson with Coach Will and watch them flip, tumble, and grow!"
         primaryButtonText="Book a Lesson"
-        primaryButtonLink="/booking"
+        primaryButtonLink="/booking-demo"
         secondaryButtonText="Get in Touch"
         secondaryButtonLink="/contact"
         features={[

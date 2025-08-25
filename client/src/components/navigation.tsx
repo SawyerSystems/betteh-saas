@@ -42,7 +42,7 @@ export const Navigation = memo(function Navigation() {
       case 'tips':
         prefetchTips();
         break;
-      case 'booking':
+      case 'booking-demo':
         prefetchStripeProducts();
         break;
     }
@@ -51,7 +51,7 @@ export const Navigation = memo(function Navigation() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/booking", label: "Booking" },
+    { href: "/booking-demo", label: "Demo Experience" },
   { href: "/features", label: "Features" },
     { href: "/blog", label: "Blog" },
     { href: "/tips", label: "Tips" },

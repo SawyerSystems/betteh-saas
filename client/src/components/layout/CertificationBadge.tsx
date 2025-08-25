@@ -21,7 +21,7 @@ export function CertificationBadge({
   icon: Icon,
   title,
   description,
-  variant = 'purple',
+  variant = 'default',
   size = 'default'
 }: CertificationBadgeProps) {
   
@@ -40,7 +40,7 @@ const badgeVariants = {
     return (
       <div className="flex items-start gap-3 p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
         {Icon && (
-          <div className={`flex-shrink-0 p-2 rounded-full ${variantClasses[variant]}`}>
+          <div className={`flex-shrink-0 p-2 rounded-full ${badgeVariants[variant]}`}>
             <Icon className="h-5 w-5" />
           </div>
         )}
@@ -59,7 +59,7 @@ const badgeVariants = {
   // Simple badge layout
   return (
     <Badge 
-      className={`${variantClasses[variant]} ${sizeClasses[size]} font-medium transition-colors duration-200 flex items-center gap-2`}
+      className={`${badgeVariants[variant]} ${sizeClasses[size]} font-medium transition-colors duration-200 flex items-center gap-2`}
     >
       {Icon && <Icon className="h-4 w-4" />}
       {title}

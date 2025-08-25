@@ -9,6 +9,7 @@ import SEOHead from "@/components/SEOHead";
 
 export default function ConfirmBookingPage() {
   const [, setLocation] = useLocation();
+  const brand = useBrand();
   const urlParams = new URLSearchParams(window.location.search);
   const bookingId = urlParams.get('bookingId');
 

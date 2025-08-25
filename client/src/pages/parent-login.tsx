@@ -135,7 +135,7 @@ export default function ParentLogin() {
               />
               <Button 
                 type="submit" 
-                className="w-full bg-[#0F0276] hover:bg-[#0F0276]/90 text-white dark:bg-[#D8BD2A] dark:hover:bg-[#D8BD2A]/90 dark:text-[#0F0276] font-semibold transition-all duration-200"
+                className="w-full gradient-primary text-white font-semibold transition-all duration-300"
                 disabled={loginMutation.isPending}
               >
                 {loginMutation.isPending ? (
@@ -160,7 +160,7 @@ export default function ParentLogin() {
             </p>
             <Button 
               variant="outline" 
-              className="w-full border-slate-200 bg-white/50 hover:bg-slate-50 text-[#0F0276] dark:border-[#2A4A9B]/40 dark:bg-[#0F0276]/20 dark:hover:bg-[#0F0276]/30 dark:text-white"
+              className="w-full gradient-border bg-white hover:bg-gray-50 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white transition-all duration-300"
               onClick={() => setLocation('/parent-register')}
             >
               <UserPlus className="mr-2 h-4 w-4" />

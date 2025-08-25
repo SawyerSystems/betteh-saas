@@ -12,12 +12,12 @@ import {
   Star,
   Trophy,
   Zap,
-  Shield,
   Target,
   TrendingUp,
   Brain,
   Activity,
-  Lock
+  Lock,
+  Shield
 } from "lucide-react";
 import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
@@ -102,7 +102,7 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/pricing">
-                <Button size="lg" className="bg-black hover:bg-gray-800 text-white px-8 py-6 font-semibold rounded-xl shadow-lg">
+                <Button size="lg" className="gradient-primary text-white px-8 py-6 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                   <Zap className="h-5 w-5 mr-2" /> Start Free Trial
                 </Button>
               </Link>
@@ -237,17 +237,17 @@ export default function About() {
           </div>
 
           {/* Core Platform - Full Width */}
-          <Card className="p-8 bg-gradient-to-r from-black to-gray-800 text-white shadow-2xl transition-all duration-300 mb-12 rounded-2xl">
+          <Card className="p-8 gradient-primary text-white shadow-2xl transition-all duration-300 mb-12 rounded-2xl hover:scale-105">
             <div className="text-center mb-8">
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
-                <Cloud className="h-10 w-10 text-black" />
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <Cloud className="h-10 w-10 text-cyan-600" />
               </div>
               <h3 className="text-3xl font-bold mb-2">CLOUD-BASED PLATFORM</h3>
               <p className="text-white/90 text-lg">Access your business from anywhere - seamless management at your fingertips</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {["Online Scheduling", "Payment Processing", "Athlete Management", "Progress Tracking", "Business Analytics", "Mobile Access"].map((feature) => (
-                <div key={feature} className="flex items-center justify-center p-4 rounded-lg bg-white/10 border border-white/30">
+                <div key={feature} className="flex items-center justify-center p-4 rounded-lg bg-white/20 border border-white/40 hover:bg-white/30 transition-all duration-300">
                   <span className="font-semibold text-white text-center">{feature}</span>
                 </div>
               ))}
@@ -257,13 +257,13 @@ export default function About() {
           {/* Features Grid */}
           <div className="grid md:grid-cols-3 gap-8">
             {/* Business Management */}
-            <Card className="p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 glass-surface glass-card glass-gradient">
+            <Card className="p-8 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-8 w-8 text-white" />
+                <div className="w-16 h-16 bg-black dark:bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <TrendingUp className="h-8 w-8 text-white dark:text-black" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Business Management</h3>
-                <p className="text-slate-700 dark:text-slate-300">Streamline operations with comprehensive tools</p>
+                <h3 className="text-2xl font-bold text-black dark:text-white mb-2">Business Management</h3>
+                <p className="text-gray-700 dark:text-gray-300">Streamline operations with comprehensive tools</p>
               </div>
               <div className="space-y-3">
                 {["Client Database", "Lesson Scheduling", "Automated Billing", "Income Tracking", "Expense Management", "Tax Reporting", "Business Insights"].map((feature) => (
@@ -276,32 +276,32 @@ export default function About() {
             </Card>
 
             {/* Athlete Development */}
-            <Card className="p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 glass-surface glass-card glass-gradient">
+            <Card className="p-8 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-8 w-8 text-gray-800" />
+                <div className="w-16 h-16 bg-black dark:bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Target className="h-8 w-8 text-white dark:text-black" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Athlete Development</h3>
-                <p className="text-slate-700 dark:text-slate-300">Track progress and build stronger relationships</p>
+                <h3 className="text-2xl font-bold text-black dark:text-white mb-2">Athlete Development</h3>
+                <p className="text-gray-700 dark:text-gray-300">Track progress and build stronger relationships</p>
               </div>
               <div className="space-y-3">
                 {["Progress Tracking", "Skill Assessments", "Goal Setting", "Performance Analytics", "Video Analysis", "Parent Communication", "Achievement Badges"].map((feature) => (
                   <div key={feature} className="flex items-center justify-between p-3 rounded-lg glass-surface">
                     <span className="font-medium text-slate-900 dark:text-slate-100">{feature}</span>
-                    <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                    <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
                   </div>
                 ))}
               </div>
             </Card>
 
             {/* Communication Tools */}
-            <Card className="p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 glass-surface glass-card glass-gradient">
+            <Card className="p-8 bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-200 dark:border-gray-700">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-white" />
+                <div className="w-16 h-16 bg-black dark:bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Users className="h-8 w-8 text-white dark:text-black" />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Communication Hub</h3>
-                <p className="text-slate-700 dark:text-slate-300">Stay connected with athletes and families</p>
+                <h3 className="text-2xl font-bold text-black dark:text-white mb-2">Communication Hub</h3>
+                <p className="text-gray-700 dark:text-gray-300">Stay connected with athletes and families</p>
               </div>
               <div className="space-y-3">
                 {["Messaging System", "Lesson Reminders", "Progress Reports", "Photo & Video Sharing", "Announcements", "Feedback Collection", "Event Notifications"].map((feature) => (
@@ -315,7 +315,7 @@ export default function About() {
           </div>
 
           {/* Platform Benefits Banner */}
-          <div className="mt-16 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 rounded-2xl p-8 text-center text-white shadow-xl">
+          <div className="mt-16 gradient-primary rounded-2xl p-8 text-center text-white shadow-xl hover:scale-105 transition-all duration-300">
             <h3 className="text-2xl font-bold mb-4">Transform Your Coaching Business</h3>
             <p className="text-lg mb-6 max-w-2xl mx-auto">
               From struggling with spreadsheets to running a professional operation—Betteh SaaS elevates every aspect of your coaching business.
@@ -438,64 +438,64 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Easy Setup */}
-            <div className="shadow-md rounded-lg p-6 border-t-4 border-gray-800 glass-surface glass-card glass-gradient">
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Quick Setup – Ready in Minutes</h3>
-              <p className="text-slate-700 dark:text-slate-300 mt-2">Get your coaching business online in under 30 minutes. No technical skills required—our intuitive setup wizard guides you through everything.</p>
-              <ul className="text-sm mt-4 list-disc list-inside text-slate-600 dark:text-slate-300/90">
+            <div className="gradient-card shadow-lg rounded-lg p-6 border-t-4 border-cyan-500">
+              <h3 className="text-xl font-semibold gradient-text">Quick Setup – Ready in Minutes</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Get your coaching business online in under 30 minutes. No technical skills required—our intuitive setup wizard guides you through everything.</p>
+              <ul className="text-sm mt-4 list-disc list-inside text-gray-600 dark:text-gray-300/90">
                 <li>Guided onboarding process</li>
                 <li>Pre-built templates for all sports</li>
                 <li>Instant payment integration</li>
               </ul>
               <Link href="/pricing">
-                <Button className="mt-4 px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-md shadow hover:scale-105 transform transition-all duration-200">
+                <Button className="mt-4 px-4 py-2 gradient-primary text-white rounded-md shadow hover:scale-105 transform transition-all duration-300">
                   Start Now
                 </Button>
               </Link>
             </div>
 
             {/* Professional Growth */}
-            <div className="shadow-md rounded-lg p-6 border-t-4 border-gray-600 glass-surface glass-card glass-gradient">
-              <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200">Professional Growth – Scale Your Business</h3>
-              <p className="text-slate-700 dark:text-slate-300 mt-2">Transform from part-time coaching to full-time business owner. Our tools help you manage more athletes, increase revenue, and build your reputation.</p>
-              <ul className="text-sm mt-4 list-disc list-inside text-slate-600 dark:text-slate-300/90">
+            <div className="gradient-card shadow-lg rounded-lg p-6 border-t-4 border-sky-500">
+              <h3 className="text-xl font-semibold gradient-text">Professional Growth – Scale Your Business</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Transform from part-time coaching to full-time business owner. Our tools help you manage more athletes, increase revenue, and build your reputation.</p>
+              <ul className="text-sm mt-4 list-disc list-inside text-gray-600 dark:text-gray-300/90">
                 <li>Automated scheduling & billing</li>
                 <li>Professional client portal</li>
                 <li>Business performance analytics</li>
               </ul>
               <Link href="/demo">
-                <Button className="mt-4 px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-md shadow hover:scale-105 transform transition-all duration-200">
+                <Button className="mt-4 px-4 py-2 gradient-primary text-white rounded-md shadow hover:scale-105 transform transition-all duration-300">
                   See Demo
                 </Button>
               </Link>
             </div>
 
             {/* Time Freedom */}
-            <div className="shadow-md rounded-lg p-6 border-t-4 border-gray-500 glass-surface glass-card glass-gradient">
-              <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200">Time Freedom – Focus on Coaching</h3>
-              <p className="text-slate-700 dark:text-slate-300 mt-2">Stop spending hours on admin work. Our automation handles scheduling, payments, reminders, and reporting so you can focus on what you love—coaching.</p>
-              <ul className="text-sm mt-4 list-disc list-inside text-slate-600 dark:text-slate-300/90">
+            <div className="gradient-card shadow-lg rounded-lg p-6 border-t-4 border-emerald-500">
+              <h3 className="text-xl font-semibold gradient-text">Time Freedom – Focus on Coaching</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Stop spending hours on admin work. Our automation handles scheduling, payments, reminders, and reporting so you can focus on what you love—coaching.</p>
+              <ul className="text-sm mt-4 list-disc list-inside text-gray-600 dark:text-gray-300/90">
                 <li>Automated lesson reminders</li>
                 <li>Instant payment processing</li>
                 <li>One-click progress reports</li>
               </ul>
               <Link href="/features">
-                <Button className="mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md shadow hover:scale-105 transform transition-all duration-200">
+                <Button className="mt-4 px-4 py-2 gradient-primary text-white rounded-md shadow hover:scale-105 transform transition-all duration-300">
                   Explore Features
                 </Button>
               </Link>
             </div>
 
             {/* Athlete Success */}
-            <div className="shadow-md rounded-lg p-6 border-t-4 border-gray-800 glass-surface glass-card glass-gradient">
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Athlete Success – Better Outcomes</h3>
-              <p className="text-slate-700 dark:text-slate-300 mt-2">Track every athlete's journey with detailed progress monitoring, goal setting, and performance analytics. Show parents real, measurable results.</p>
-              <ul className="text-sm mt-4 list-disc list-inside text-slate-600 dark:text-slate-300/90">
+            <div className="gradient-card shadow-lg rounded-lg p-6 border-t-4 border-teal-500">
+              <h3 className="text-xl font-semibold gradient-text">Athlete Success – Better Outcomes</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Track every athlete's journey with detailed progress monitoring, goal setting, and performance analytics. Show parents real, measurable results.</p>
+              <ul className="text-sm mt-4 list-disc list-inside text-gray-600 dark:text-gray-300/90">
                 <li>Visual progress tracking</li>
                 <li>Goal achievement system</li>
                 <li>Parent communication tools</li>
               </ul>
               <Link href="/contact">
-                <Button className="mt-4 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-md shadow hover:scale-105 transform transition-all duration-200">
+                <Button className="mt-4 px-4 py-2 gradient-primary text-white rounded-md shadow hover:scale-105 transform transition-all duration-300">
                   Learn More
                 </Button>
               </Link>
@@ -720,7 +720,7 @@ export default function About() {
             <Link href="/pricing">
               <Button 
                 size="lg"
-                className="bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transform transition-all duration-300 shadow-2xl hover:bg-gray-200 glass-button !border-0"
+                className="gradient-primary text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transform transition-all duration-300 shadow-2xl"
               >
                 <Zap className="h-5 w-5 mr-2" />
                 START FREE TRIAL

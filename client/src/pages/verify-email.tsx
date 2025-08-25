@@ -95,7 +95,7 @@ export default function VerifyEmail() {
               {success ? (
                 <Button 
                   variant="default"
-                  className="w-full" 
+                  className="w-full gradient-primary text-white transition-all duration-300" 
                   onClick={() => setLocation('/parent/login')}
                 >
                   Go to Login Page
@@ -103,7 +103,7 @@ export default function VerifyEmail() {
               ) : (
                 <Button 
                   variant="default"
-                  className="w-full" 
+                  className="w-full gradient-primary text-white transition-all duration-300" 
                   onClick={() => window.location.reload()}
                 >
                   Try Again

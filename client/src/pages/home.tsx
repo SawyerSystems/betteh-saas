@@ -210,7 +210,7 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg"
-                    className="bg-black hover:bg-gray-800 text-white px-8 py-4 font-semibold text-lg rounded-xl shadow-lg"
+                    className="gradient-primary text-white px-8 py-4 font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     onClick={handleStartBooking}
                     disabled={parentAuth?.loggedIn && parentInfoLoading}
                   >
@@ -403,16 +403,16 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* 30-Min Private */}
-            <Card className="p-6 bg-white dark:bg-gray-800 border-l-4 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-3">30-Minute Private Session</h3>
+            <Card className="gradient-card p-6 border-l-4 border-cyan-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <h3 className="text-xl font-semibold gradient-text mb-3">30-Minute Private Session</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">Focused one-on-one training to develop specific skills with personalized attention.</p>
               <ul className="text-sm mb-6 space-y-2 text-gray-600 dark:text-gray-300">
-                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></div>Individual coaching</li>
-                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></div>Targeted skill development</li>
-                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3"></div>Perfect for beginners</li>
+                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-cyan-500 rounded-full mr-3"></div>Individual coaching</li>
+                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-cyan-500 rounded-full mr-3"></div>Targeted skill development</li>
+                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-cyan-500 rounded-full mr-3"></div>Perfect for beginners</li>
               </ul>
               <Button 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-200"
+                className="w-full gradient-primary text-white py-2 px-4 rounded-md transition-all duration-300 hover:scale-105"
                 onClick={handleStartBooking}
               >
                 Book Session
@@ -437,16 +437,16 @@ export default function Home() {
             </Card>
 
             {/* 1-Hour Private */}
-            <Card className="p-6 bg-white dark:bg-gray-800 border-l-4 border-green-500 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-green-600 dark:text-green-400 mb-3">1-Hour Private Session</h3>
+            <Card className="gradient-card p-6 border-l-4 border-emerald-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <h3 className="text-xl font-semibold gradient-text mb-3">1-Hour Private Session</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">Extended training for advanced skills and comprehensive technique development.</p>
               <ul className="text-sm mb-6 space-y-2 text-gray-600 dark:text-gray-300">
-                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>Extended coaching time</li>
-                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>Complex skill development</li>
-                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>Competitive preparation</li>
+                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></div>Extended coaching time</li>
+                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></div>Complex skill development</li>
+                <li className="flex items-center"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3"></div>Competitive preparation</li>
               </ul>
               <Button 
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors duration-200"
+                className="w-full gradient-primary text-white py-2 px-4 rounded-md transition-all duration-300 hover:scale-105"
                 onClick={handleStartBooking}
               >
                 Book Session
@@ -651,7 +651,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg"
-                className="bg-white text-black hover:bg-gray-100 px-8 py-4 rounded-md font-semibold text-lg transition-colors duration-200"
+                className="gradient-primary text-white px-8 py-4 rounded-md font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-xl"
                 onClick={handleStartBooking}
               >
                 <Calendar className="h-5 w-5 mr-2" />

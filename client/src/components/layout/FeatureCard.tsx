@@ -1,5 +1,13 @@
 /**
- * FeatureCard Component
+ * Featexport interface FeatureCardProps {
+  Icon?: LucideIcon;
+  title: string;
+  description: string;
+  children?: React.ReactNode;
+  variant?: 'default' | 'highlight' | 'minimal' | 'gradient';
+  iconColor?: 'black' | 'gray' | 'green';
+  className?: string;
+}omponent
  * 
  * Reusable card component matching the homepage card styling
  * with glassmorphism effects and hover animations.
@@ -44,7 +52,8 @@ export function FeatureCard({
   const variantClasses = {
     default: "border border-gray-200/60 bg-white/70 supports-[backdrop-filter]:bg-white/40 backdrop-blur-md dark:border-gray-700/60 dark:bg-gray-800/90 shadow-lg hover:shadow-xl",
     highlight: "border border-gray-200/60 bg-gray-50/70 supports-[backdrop-filter]:bg-gray-50/40 backdrop-blur-md dark:border-white/60 dark:bg-white/20 shadow-lg hover:shadow-xl",
-    minimal: "border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 shadow-sm hover:shadow-md"
+    minimal: "border border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 shadow-sm hover:shadow-md",
+    gradient: "gradient-card shadow-lg hover:shadow-xl border-0"
   };
 
   return (

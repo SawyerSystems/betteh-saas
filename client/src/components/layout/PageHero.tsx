@@ -34,6 +34,7 @@ const backgroundVariants = {
   default: "bg-white dark:bg-gray-900",
   gradient: "bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-800/40 dark:via-gray-900/30 dark:to-gray-900/50",
   subtle: "bg-gray-50/50 dark:bg-gray-800/20",
+  minimal: "bg-transparent",
 };  const sizeClasses = {
     default: "py-16 lg:py-24",
     large: "py-20 lg:py-32", 
@@ -46,7 +47,7 @@ const backgroundVariants = {
   };
 
   return (
-    <section className={`${sizeClasses[size]} ${backgroundClasses[backgroundVariant]}`}>
+    <section className={`${sizeClasses[size]} ${backgroundVariants[backgroundVariant]}`}>
       <div className="container mx-auto px-4">
         <div className={`max-w-4xl ${textAlign === 'center' ? 'mx-auto' : ''}`}>
           <div className={textAlignClasses[textAlign]}>

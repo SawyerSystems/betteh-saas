@@ -135,7 +135,7 @@ export default function AdminLogin() {
               />
               <Button 
                 type="submit" 
-                className="w-full bg-[#0F0276] hover:bg-[#0F0276]/90 text-white dark:bg-[#D8BD2A] dark:hover:bg-[#D8BD2A]/90 dark:text-[#0F0276] font-semibold transition-all duration-200"
+                className="w-full gradient-primary text-white font-semibold transition-all duration-300"
                 disabled={loginMutation.isPending}
               >
                 {loginMutation.isPending ? (

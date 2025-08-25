@@ -1,0 +1,114 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Coach Will Tumbles | Private Gymnastics & Tumbling Lessons in Oceanside, CA</title>
+  <meta name="description" content="Book private gymnastics, tumbling, and cheer stunt lessons in Oceanside, CA. Personalized coaching for kids and teens by Coach Will Tumbles." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://www.coachwilltumbles.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Coach Will Tumbles | Private Gymnastics & Tumbling Lessons in Oceanside, CA" />
+  <meta property="og:description" content="Book private gymnastics, tumbling, and cheer stunt lessons in Oceanside, CA. Personalized coaching for kids and teens by Coach Will Tumbles." />
+  <meta property="og:url" content="https://www.coachwilltumbles.com/" />
+  <meta property="og:image" content="/icons/icon-512.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Coach Will Tumbles | Private Gymnastics & Tumbling Lessons in Oceanside, CA" />
+  <meta name="twitter:description" content="Book private gymnastics, tumbling, and cheer stunt lessons in Oceanside, CA. Personalized coaching for kids and teens by Coach Will Tumbles." />
+  <meta name="twitter:image" content="/icons/icon-512.png" />
+
+  <!-- Preconnects for performance -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="preconnect" href="https://js.stripe.com" />
+  <link rel="dns-prefetch" href="//js.stripe.com" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/icons/icon-512.png" />
+    
+    <!-- Web Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#9333ea" />
+    
+  <script src="https://js.stripe.com/v3/" defer></script>
+  
+    <!-- JSON-LD: Core site schemas for SEO (static, non-visual) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://www.coachwilltumbles.com",
+        "name": "Coach Will Tumbles",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.coachwilltumbles.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "SportsActivityLocation"],
+        "name": "Coach Will Tumbles",
+        "image": "https://www.coachwilltumbles.com/icons/icon-512.png",
+        "telephone": "(585) 755-8122",
+        "email": "admin@coachwilltumbles.com",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1935 Ave. del Oro #A",
+          "addressLocality": "Oceanside",
+          "addressRegion": "CA",
+          "postalCode": "92056",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 33.2206,
+          "longitude": -117.3089
+        },
+        "sameAs": [
+100  4730    0  4730    0     0  37864      0 --:--:-- --:--:-- --:--:-- 38145
+          "https://www.facebook.com/coachwilltumbles",
+          "https://www.instagram.com/coachwilltumbles",
+          "https://www.youtube.com/@coachwilltumbles"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.coachwilltumbles.com" }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx?v=JUoJ2LNMqvX-_VeZ22c8y"></script>
+  </body>
+</html>

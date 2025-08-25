@@ -1,0 +1,4632 @@
+-- Comprehensive Database Schema Analysis
+-- 1. Get all table information
+[
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "admins",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "apparatus",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "archived_waivers",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "athletes",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "table_type": "VIEW",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "availability",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "availability_exceptions",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "blog_posts",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "booking_apparatus",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "booking_athletes",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "booking_focus_areas",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "booking_logs",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "booking_side_quests",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "bookings",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "email_logs",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "focus_areas",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "genders",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "lesson_types",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "parent_auth_codes",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "parents",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "parents_with_waiver_status",
+    "table_type": "VIEW",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "payment_logs",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "side_quests",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "slot_reservations",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "tips",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  },
+  {
+    "query_type": "TABLE_INFO",
+    "table_name": "waivers",
+    "table_type": "BASE TABLE",
+    "table_schema": "public"
+  }
+]
+
+-- 2. Get detailed column information for all tables
+[
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "admins",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('admins_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "admins",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "admins",
+    "column_name": "password_hash",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "admins",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "admins",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "apparatus",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('apparatus_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "apparatus",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "apparatus",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "apparatus",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('archived_waivers_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "original_waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "athlete_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "signer_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "relationship_to_athlete",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "signature",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "emergency_contact_number",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "understands_risks",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "agrees_to_policies",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "authorizes_emergency_care",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 10
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "allows_photo_video",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "confirms_authority",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "pdf_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 13
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "ip_address",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 14
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "user_agent",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 15
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 16
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "email_sent_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 17
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "archived_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 18
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "archive_reason",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 19
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "legal_retention_period",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 20
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "original_parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 21
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "original_athlete_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 22
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 23
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 24
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('athletes_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "allergies",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "experience",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "photo",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 10
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "date_of_birth",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 13
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "latest_waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 14
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes",
+    "column_name": "waiver_status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": "'pending'::character varying",
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 15
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "allergies",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "experience",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "photo",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 10
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "date_of_birth",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "latest_waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 13
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": 20,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 14
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 15
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_signature_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 16
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_signature_data",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 17
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 18
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "computed_waiver_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 19
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('availability_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "day_of_week",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "is_recurring",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "is_available",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "start_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability",
+    "column_name": "end_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('availability_exceptions_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "is_available",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "reason",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "date",
+    "data_type": "date",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "start_time",
+    "data_type": "time without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "end_time",
+    "data_type": "time without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 13
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('blog_posts_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "title",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "excerpt",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "category",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "image_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "published_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "blog_posts",
+    "column_name": "sections",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_apparatus",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_apparatus",
+    "column_name": "apparatus_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('booking_athletes_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "athlete_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "slot_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_focus_areas",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_focus_areas",
+    "column_name": "focus_area_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('booking_logs_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "action_type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "action_description",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "previous_value",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "new_value",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "performed_by",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_logs",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_side_quests",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "booking_side_quests",
+    "column_name": "side_quest_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('bookings_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "lesson_type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "parent_first_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 14
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "parent_last_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 15
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "parent_email",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 16
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "parent_phone",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 17
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "emergency_contact_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 18
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "emergency_contact_phone",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 19
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "amount",
+    "data_type": "numeric",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "ordinal_position": 20
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "booking_method",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'online'::text",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 22
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "waiver_signed",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 23
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "waiver_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 24
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "waiver_signature_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 25
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "reservation_fee_paid",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 28
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "paid_amount",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": "0.00",
+    "character_maximum_length": null,
+    "numeric_precision": 10,
+    "numeric_scale": 2,
+    "ordinal_position": 29
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "special_requests",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 30
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "admin_notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 31
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "dropoff_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 32
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "dropoff_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 33
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "dropoff_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 34
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 35
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 36
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 37
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "alt_pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 38
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "alt_pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 39
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "alt_pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 40
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "safety_verification_signed",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 41
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "safety_verification_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 42
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "stripe_session_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 43
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 44
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 45
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "NO",
+    "column_default": "'pending'::booking_status",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 46
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "payment_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "NO",
+    "column_default": "'unpaid'::payment_status",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 47
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "attendance_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "NO",
+    "column_default": "'pending'::attendance_status",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 48
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "preferred_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 49
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "preferred_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 50
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "bookings",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 51
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "email_logs",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('email_logs_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "email_logs",
+    "column_name": "recipient_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "email_logs",
+    "column_name": "email_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "email_logs",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "email_logs",
+    "column_name": "sent_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "email_logs",
+    "column_name": "error_message",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "focus_areas",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('focus_areas_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "focus_areas",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "focus_areas",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "focus_areas",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('genders_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "display_name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "is_active",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "genders",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('lesson_types_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "duration_minutes",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "is_private",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "total_price",
+    "data_type": "numeric",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "reservation_fee",
+    "data_type": "numeric",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "lesson_types",
+    "column_name": "description",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('parent_auth_codes_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "email",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "code",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 6,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "expires_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "used",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('parents_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "emergency_contact_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "emergency_contact_phone",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "emergency_contact_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "emergency_contact_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "total_athletes",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 64,
+    "numeric_scale": 0,
+    "ordinal_position": 10
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "athletes_with_signed_waivers",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 64,
+    "numeric_scale": 0,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "athletes_with_pending_waivers",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 64,
+    "numeric_scale": 0,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "athletes_with_expired_waivers",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 64,
+    "numeric_scale": 0,
+    "ordinal_position": 13
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "overall_waiver_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 14
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "most_recent_waiver_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 15
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "parents_with_waiver_status",
+    "column_name": "most_recent_waiver_created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 16
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "payment_logs",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('payment_logs_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "payment_logs",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "payment_logs",
+    "column_name": "stripe_event",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "payment_logs",
+    "column_name": "error_message",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "payment_logs",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "side_quests",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('side_quests_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "side_quests",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "side_quests",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "side_quests",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('slot_reservations_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "lesson_type",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 50,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "session_id",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "expires_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "start_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('tips_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "title",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "sections",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "category",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 5
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "difficulty",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 6
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "video_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "tips",
+    "column_name": "published_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('waivers_id_seq'::regclass)",
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 1
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 2
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 3
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": 32,
+    "numeric_scale": 0,
+    "ordinal_position": 4
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "relationship_to_athlete",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'Parent/Guardian'::text",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 7
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "signature",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 8
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "emergency_contact_number",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 9
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "understands_risks",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 10
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "agrees_to_policies",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 11
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "authorizes_emergency_care",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 12
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "allows_photo_video",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 13
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "confirms_authority",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 14
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "pdf_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 15
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "ip_address",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 16
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "user_agent",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 17
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 18
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "email_sent_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 19
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 20
+  },
+  {
+    "query_type": "COLUMN_INFO",
+    "table_name": "waivers",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "character_maximum_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "ordinal_position": 21
+  }
+]
+
+-- 3. Get foreign key constraints
+[
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "athletes",
+    "column_name": "gender",
+    "foreign_table_name": "genders",
+    "foreign_column_name": "name",
+    "constraint_name": "athletes_gender_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "athletes",
+    "column_name": "latest_waiver_id",
+    "foreign_table_name": "waivers",
+    "foreign_column_name": "id",
+    "constraint_name": "athletes_latest_waiver_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "athletes",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id",
+    "constraint_name": "athletes_parent_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_apparatus",
+    "column_name": "apparatus_id",
+    "foreign_table_name": "apparatus",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_apparatus_apparatus_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_apparatus",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_apparatus_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "athlete_id",
+    "foreign_table_name": "athletes",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_athletes_athlete_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_athletes_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_focus_areas",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_focus_areas_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_focus_areas",
+    "column_name": "focus_area_id",
+    "foreign_table_name": "focus_areas",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_focus_areas_focus_area_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_logs",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "fk_booking_logs_booking"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_logs",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_logs_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_side_quests",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_side_quests_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "booking_side_quests",
+    "column_name": "side_quest_id",
+    "foreign_table_name": "side_quests",
+    "foreign_column_name": "id",
+    "constraint_name": "booking_side_quests_side_quest_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "bookings",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id",
+    "constraint_name": "bookings_parent_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "payment_logs",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "fk_payment_logs_booking"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "payment_logs",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "payment_logs_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "foreign_table_name": "athletes",
+    "foreign_column_name": "id",
+    "constraint_name": "fk_waivers_athlete"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "foreign_table_name": "athletes",
+    "foreign_column_name": "id",
+    "constraint_name": "waivers_athlete_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "waivers_booking_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_name": "fk_waivers_booking"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id",
+    "constraint_name": "waivers_parent_id_fkey"
+  },
+  {
+    "query_type": "FOREIGN_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id",
+    "constraint_name": "fk_waivers_parent"
+  }
+]
+
+-- 4. Get primary key constraints
+[
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "admins",
+    "column_name": "id",
+    "constraint_name": "admins_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "apparatus",
+    "column_name": "id",
+    "constraint_name": "apparatus_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "archived_waivers",
+    "column_name": "id",
+    "constraint_name": "archived_waivers_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "athletes",
+    "column_name": "id",
+    "constraint_name": "athletes_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "availability",
+    "column_name": "id",
+    "constraint_name": "availability_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "availability_exceptions",
+    "column_name": "id",
+    "constraint_name": "availability_exceptions_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "blog_posts",
+    "column_name": "id",
+    "constraint_name": "blog_posts_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_apparatus",
+    "column_name": "booking_id",
+    "constraint_name": "booking_apparatus_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_apparatus",
+    "column_name": "apparatus_id",
+    "constraint_name": "booking_apparatus_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_athletes",
+    "column_name": "id",
+    "constraint_name": "booking_athletes_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_focus_areas",
+    "column_name": "focus_area_id",
+    "constraint_name": "booking_focus_areas_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_focus_areas",
+    "column_name": "booking_id",
+    "constraint_name": "booking_focus_areas_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_logs",
+    "column_name": "id",
+    "constraint_name": "booking_logs_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_side_quests",
+    "column_name": "side_quest_id",
+    "constraint_name": "booking_side_quests_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "booking_side_quests",
+    "column_name": "booking_id",
+    "constraint_name": "booking_side_quests_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "bookings",
+    "column_name": "id",
+    "constraint_name": "bookings_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "email_logs",
+    "column_name": "id",
+    "constraint_name": "email_logs_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "focus_areas",
+    "column_name": "id",
+    "constraint_name": "focus_areas_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "genders",
+    "column_name": "id",
+    "constraint_name": "genders_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "lesson_types",
+    "column_name": "id",
+    "constraint_name": "lesson_types_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "parent_auth_codes",
+    "column_name": "id",
+    "constraint_name": "parent_auth_codes_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "parents",
+    "column_name": "id",
+    "constraint_name": "parents_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "payment_logs",
+    "column_name": "id",
+    "constraint_name": "payment_logs_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "side_quests",
+    "column_name": "id",
+    "constraint_name": "side_quests_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "slot_reservations",
+    "column_name": "id",
+    "constraint_name": "slot_reservations_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "tips",
+    "column_name": "id",
+    "constraint_name": "tips_pkey"
+  },
+  {
+    "query_type": "PRIMARY_KEY_INFO",
+    "table_name": "waivers",
+    "column_name": "id",
+    "constraint_name": "waivers_pkey"
+  }
+]
+
+-- 5. Get unique constraints
+[
+  {
+    "query_type": "UNIQUE_CONSTRAINT_INFO",
+    "table_name": "admins",
+    "column_name": "email",
+    "constraint_name": "admins_email_key"
+  },
+  {
+    "query_type": "UNIQUE_CONSTRAINT_INFO",
+    "table_name": "apparatus",
+    "column_name": "name",
+    "constraint_name": "apparatus_name_key"
+  },
+  {
+    "query_type": "UNIQUE_CONSTRAINT_INFO",
+    "table_name": "focus_areas",
+    "column_name": "name",
+    "constraint_name": "focus_areas_name_key"
+  },
+  {
+    "query_type": "UNIQUE_CONSTRAINT_INFO",
+    "table_name": "genders",
+    "column_name": "name",
+    "constraint_name": "genders_name_key"
+  },
+  {
+    "query_type": "UNIQUE_CONSTRAINT_INFO",
+    "table_name": "lesson_types",
+    "column_name": "name",
+    "constraint_name": "lesson_types_name_key"
+  },
+  {
+    "query_type": "UNIQUE_CONSTRAINT_INFO",
+    "table_name": "side_quests",
+    "column_name": "name",
+    "constraint_name": "side_quests_name_key"
+  }
+]
+
+-- 6. Get check constraints (for enums)
+[
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "admins",
+    "constraint_name": "2200_17553_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "admins",
+    "constraint_name": "2200_17553_3_not_null",
+    "check_clause": "password_hash IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "admins",
+    "constraint_name": "2200_17553_2_not_null",
+    "check_clause": "email IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "apparatus",
+    "constraint_name": "2200_20790_4_not_null",
+    "check_clause": "created_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "apparatus",
+    "constraint_name": "2200_20790_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "apparatus",
+    "constraint_name": "2200_20790_2_not_null",
+    "check_clause": "name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "apparatus",
+    "constraint_name": "2200_20790_3_not_null",
+    "check_clause": "sort_order IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_10_not_null",
+    "check_clause": "authorizes_emergency_care IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_11_not_null",
+    "check_clause": "allows_photo_video IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_12_not_null",
+    "check_clause": "confirms_authority IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_16_not_null",
+    "check_clause": "signed_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_18_not_null",
+    "check_clause": "archived_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_19_not_null",
+    "check_clause": "archive_reason IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_23_not_null",
+    "check_clause": "created_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_24_not_null",
+    "check_clause": "updated_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_3_not_null",
+    "check_clause": "athlete_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_4_not_null",
+    "check_clause": "signer_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_5_not_null",
+    "check_clause": "relationship_to_athlete IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_6_not_null",
+    "check_clause": "signature IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_7_not_null",
+    "check_clause": "emergency_contact_number IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_8_not_null",
+    "check_clause": "understands_risks IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "archived_waivers",
+    "constraint_name": "2200_18877_9_not_null",
+    "check_clause": "agrees_to_policies IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "athletes",
+    "constraint_name": "2200_17411_8_not_null",
+    "check_clause": "experience IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "athletes",
+    "constraint_name": "athletes_waiver_status_check",
+    "check_clause": "((waiver_status)::text = ANY ((ARRAY['pending'::character varying, 'signed'::character varying, 'expired'::character varying])::text[]))"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "athletes",
+    "constraint_name": "2200_17411_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability",
+    "constraint_name": "2200_17529_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability",
+    "constraint_name": "2200_17529_2_not_null",
+    "check_clause": "day_of_week IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability",
+    "constraint_name": "availability_day_of_week_check",
+    "check_clause": "((day_of_week >= 0) AND (day_of_week <= 6))"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability_exceptions",
+    "constraint_name": "2200_17542_11_not_null",
+    "check_clause": "date IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability_exceptions",
+    "constraint_name": "2200_17542_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability_exceptions",
+    "constraint_name": "2200_17542_13_not_null",
+    "check_clause": "end_time IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "availability_exceptions",
+    "constraint_name": "2200_17542_12_not_null",
+    "check_clause": "start_time IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "blog_posts",
+    "constraint_name": "2200_17509_3_not_null",
+    "check_clause": "content IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "blog_posts",
+    "constraint_name": "2200_17509_4_not_null",
+    "check_clause": "excerpt IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "blog_posts",
+    "constraint_name": "2200_17509_5_not_null",
+    "check_clause": "category IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "blog_posts",
+    "constraint_name": "2200_17509_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "blog_posts",
+    "constraint_name": "2200_17509_2_not_null",
+    "check_clause": "title IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_apparatus",
+    "constraint_name": "2200_20836_2_not_null",
+    "check_clause": "apparatus_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_apparatus",
+    "constraint_name": "2200_20836_1_not_null",
+    "check_clause": "booking_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_athletes",
+    "constraint_name": "2200_20403_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_athletes",
+    "constraint_name": "2200_20403_4_not_null",
+    "check_clause": "slot_order IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_athletes",
+    "constraint_name": "2200_20403_3_not_null",
+    "check_clause": "athlete_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_athletes",
+    "constraint_name": "2200_20403_2_not_null",
+    "check_clause": "booking_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_focus_areas",
+    "constraint_name": "2200_20678_1_not_null",
+    "check_clause": "booking_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_focus_areas",
+    "constraint_name": "2200_20678_2_not_null",
+    "check_clause": "focus_area_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_logs",
+    "constraint_name": "2200_17446_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_logs",
+    "constraint_name": "2200_17446_4_not_null",
+    "check_clause": "action_description IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_logs",
+    "constraint_name": "2200_17446_7_not_null",
+    "check_clause": "performed_by IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_logs",
+    "constraint_name": "2200_17446_3_not_null",
+    "check_clause": "action_type IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_side_quests",
+    "constraint_name": "2200_20821_1_not_null",
+    "check_clause": "booking_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "booking_side_quests",
+    "constraint_name": "2200_20821_2_not_null",
+    "check_clause": "side_quest_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_15_not_null",
+    "check_clause": "parent_last_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_17_not_null",
+    "check_clause": "parent_phone IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_18_not_null",
+    "check_clause": "emergency_contact_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_19_not_null",
+    "check_clause": "emergency_contact_phone IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_48_not_null",
+    "check_clause": "attendance_status IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_47_not_null",
+    "check_clause": "payment_status IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_46_not_null",
+    "check_clause": "status IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_2_not_null",
+    "check_clause": "lesson_type IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_20_not_null",
+    "check_clause": "amount IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_16_not_null",
+    "check_clause": "parent_email IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "bookings",
+    "constraint_name": "2200_17427_14_not_null",
+    "check_clause": "parent_first_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "email_logs",
+    "constraint_name": "2200_19639_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "focus_areas",
+    "constraint_name": "2200_20668_3_not_null",
+    "check_clause": "sort_order IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "focus_areas",
+    "constraint_name": "2200_20668_4_not_null",
+    "check_clause": "created_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "focus_areas",
+    "constraint_name": "2200_20668_2_not_null",
+    "check_clause": "name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "focus_areas",
+    "constraint_name": "2200_20668_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "genders",
+    "constraint_name": "2200_34227_2_not_null",
+    "check_clause": "name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "genders",
+    "constraint_name": "2200_34227_3_not_null",
+    "check_clause": "display_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "genders",
+    "constraint_name": "2200_34227_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "lesson_types",
+    "constraint_name": "2200_19097_5_not_null",
+    "check_clause": "total_price IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "lesson_types",
+    "constraint_name": "2200_19097_3_not_null",
+    "check_clause": "duration_minutes IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "lesson_types",
+    "constraint_name": "2200_19097_6_not_null",
+    "check_clause": "reservation_fee IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "lesson_types",
+    "constraint_name": "2200_19097_2_not_null",
+    "check_clause": "name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "lesson_types",
+    "constraint_name": "2200_19097_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parent_auth_codes",
+    "constraint_name": "2200_17565_4_not_null",
+    "check_clause": "expires_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parent_auth_codes",
+    "constraint_name": "2200_17565_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parent_auth_codes",
+    "constraint_name": "2200_17565_2_not_null",
+    "check_clause": "email IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parent_auth_codes",
+    "constraint_name": "2200_17565_3_not_null",
+    "check_clause": "code IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_7_not_null",
+    "check_clause": "emergency_contact_phone IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_2_not_null",
+    "check_clause": "first_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_3_not_null",
+    "check_clause": "last_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_4_not_null",
+    "check_clause": "email IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_5_not_null",
+    "check_clause": "phone IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "parents",
+    "constraint_name": "2200_17399_6_not_null",
+    "check_clause": "emergency_contact_name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "payment_logs",
+    "constraint_name": "2200_17461_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "side_quests",
+    "constraint_name": "2200_20811_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "side_quests",
+    "constraint_name": "2200_20811_2_not_null",
+    "check_clause": "name IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "side_quests",
+    "constraint_name": "2200_20811_3_not_null",
+    "check_clause": "sort_order IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "side_quests",
+    "constraint_name": "2200_20811_4_not_null",
+    "check_clause": "created_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "slot_reservations",
+    "constraint_name": "2200_17574_6_not_null",
+    "check_clause": "expires_at IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "slot_reservations",
+    "constraint_name": "2200_17574_1_not_null",
+    "check_clause": "id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "slot_reservations",
+    "constraint_name": "2200_17574_4_not_null",
+    "check_clause": "lesson_type IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "slot_reservations",
+    "constraint_name": "2200_17574_5_not_null",
+    "check_clause": "session_id IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "tips",
+    "constraint_name": "2200_17519_5_not_null",
+    "check_clause": "category IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "tips",
+    "constraint_name": "2200_17519_3_not_null",
+    "check_clause": "content IS NOT NULL"
+  },
+  {
+    "query_type": "CHECK_CONSTRAINT_INFO",
+    "table_name": "tips",
+    "constraint_name": "2200_17519_6_not_null",
+    "check_clause": "difficulty IS NOT NULL"
+  }
+]
+
+-- 7. Get all views
+[
+  {
+    "query_type": "VIEW_INFO",
+    "view_name": "athletes_with_waiver_status",
+    "view_definition": " SELECT a.id,\n    a.parent_id,\n    a.name,\n    a.first_name,\n    a.last_name,\n    a.allergies,\n    a.experience,\n    a.photo,\n    a.created_at,\n    a.updated_at,\n    a.date_of_birth,\n    a.gender,\n    a.latest_waiver_id,\n    a.waiver_status,\n    w.signed_at AS waiver_signed_at,\n    w.parent_id AS waiver_signature_id,\n    w.signature AS waiver_signature_data,\n    w.created_at AS waiver_created_at,\n        CASE\n            WHEN (w.signed_at IS NOT NULL) THEN 'signed'::text\n            WHEN (w.id IS NOT NULL) THEN 'pending'::text\n            ELSE 'none'::text\n        END AS computed_waiver_status\n   FROM (athletes a\n     LEFT JOIN waivers w ON ((a.latest_waiver_id = w.id)));"
+  },
+  {
+    "query_type": "VIEW_INFO",
+    "view_name": "parents_with_waiver_status",
+    "view_definition": " SELECT p.id,\n    p.first_name,\n    p.last_name,\n    p.email,\n    p.phone,\n    p.emergency_contact_name,\n    p.emergency_contact_phone,\n    p.created_at,\n    p.updated_at,\n    count(a.id) AS total_athletes,\n    count(\n        CASE\n            WHEN ((a.waiver_status)::text = 'signed'::text) THEN 1\n            ELSE NULL::integer\n        END) AS athletes_with_signed_waivers,\n    count(\n        CASE\n            WHEN ((a.waiver_status)::text = 'pending'::text) THEN 1\n            ELSE NULL::integer\n        END) AS athletes_with_pending_waivers,\n    count(\n        CASE\n            WHEN ((a.waiver_status)::text = 'expired'::text) THEN 1\n            ELSE NULL::integer\n        END) AS athletes_with_expired_waivers,\n        CASE\n            WHEN (count(a.id) = 0) THEN 'no_athletes'::text\n            WHEN (count(\n            CASE\n                WHEN ((a.waiver_status)::text = 'signed'::text) THEN 1\n                ELSE NULL::integer\n            END) = count(a.id)) THEN 'all_signed'::text\n            WHEN (count(\n            CASE\n                WHEN ((a.waiver_status)::text = 'pending'::text) THEN 1\n                ELSE NULL::integer\n            END) > 0) THEN 'some_pending'::text\n            WHEN (count(\n            CASE\n                WHEN ((a.waiver_status)::text = 'expired'::text) THEN 1\n                ELSE NULL::integer\n            END) > 0) THEN 'some_expired'::text\n            ELSE 'mixed'::text\n        END AS overall_waiver_status,\n    max(w.signed_at) AS most_recent_waiver_signed_at,\n    max(w.created_at) AS most_recent_waiver_created_at\n   FROM ((parents p\n     LEFT JOIN athletes a ON ((p.id = a.parent_id)))\n     LEFT JOIN waivers w ON ((a.latest_waiver_id = w.id)))\n  GROUP BY p.id, p.first_name, p.last_name, p.email, p.phone, p.emergency_contact_name, p.emergency_contact_phone, p.created_at, p.updated_at;"
+  }
+]
+
+-- 8. Get all functions and stored procedures
+[
+  {
+    "query_type": "FUNCTION_INFO",
+    "routine_name": "create_booking_with_relations",
+    "routine_type": "FUNCTION",
+    "return_type": "jsonb",
+    "routine_definition": "\nDECLARE\n  booking_id INTEGER;\n  parent_id INTEGER;\n  athlete_id INTEGER;\n  athlete_data JSONB;\n  result JSONB;\nBEGIN\n  -- Start transaction (implicit in function)\n  \n  -- 1. Create or find parent\n  SELECT id INTO parent_id \n  FROM parents \n  WHERE email = (parent_data->>'email')::TEXT;\n  \n  IF parent_id IS NULL THEN\n    INSERT INTO parents (\n      first_name,\n      last_name, \n      email,\n      phone,\n      emergency_contact_name,\n      emergency_contact_phone,\n      created_at,\n      updated_at\n    ) VALUES (\n      (parent_data->>'first_name')::TEXT,\n      (parent_data->>'last_name')::TEXT,\n      (parent_data->>'email')::TEXT,\n      (parent_data->>'phone')::TEXT,\n      (parent_data->>'emergency_contact_name')::TEXT,\n      (parent_data->>'emergency_contact_phone')::TEXT,\n      NOW(),\n      NOW()\n    ) RETURNING id INTO parent_id;\n  ELSE\n    -- Update existing parent with latest info\n    UPDATE parents SET\n      first_name = (parent_data->>'first_name')::TEXT,\n      last_name = (parent_data->>'last_name')::TEXT,\n      phone = (parent_data->>'phone')::TEXT,\n      emergency_contact_name = (parent_data->>'emergency_contact_name')::TEXT,\n      emergency_contact_phone = (parent_data->>'emergency_contact_phone')::TEXT,\n      updated_at = NOW()\n    WHERE id = parent_id;\n  END IF;\n\n  -- 2. Create booking\n  INSERT INTO bookings (\n    lesson_type,\n    parent_first_name,\n    parent_last_name,\n    parent_email,\n    parent_phone,\n    emergency_contact_name,\n    emergency_contact_phone,\n    preferred_date,\n    preferred_time,\n    amount,\n    status,\n    payment_status,\n    attendance_status,\n    booking_method,\n    waiver_signed,\n    waiver_signed_at,\n    waiver_signature_name,\n    reservation_fee_paid,\n    paid_amount,\n    special_requests,\n    admin_notes,\n    dropoff_person_name,\n    dropoff_person_relationship,\n    dropoff_person_phone,\n    pickup_person_name,\n    pickup_person_relationship,\n    pickup_person_phone,\n    alt_pickup_person_name,\n    alt_pickup_person_relationship,\n    alt_pickup_person_phone,\n    safety_verification_signed,\n    safety_verification_signed_at,\n    stripe_session_id,\n    created_at,\n    updated_at\n  ) VALUES (\n    (booking_data->>'lesson_type')::TEXT,\n    (booking_data->>'parent_first_name')::TEXT,\n    (booking_data->>'parent_last_name')::TEXT,\n    (booking_data->>'parent_email')::TEXT,\n    (booking_data->>'parent_phone')::TEXT,\n    (booking_data->>'emergency_contact_name')::TEXT,\n    (booking_data->>'emergency_contact_phone')::TEXT,\n    (booking_data->>'preferred_date')::DATE,\n    (booking_data->>'preferred_time')::TIME,\n    (booking_data->>'amount')::NUMERIC,\n    COALESCE((booking_data->>'status')::booking_status, 'pending'),\n    COALESCE((booking_data->>'payment_status')::payment_status, 'unpaid'),\n    COALESCE((booking_data->>'attendance_status')::attendance_status, 'pending'),\n    COALESCE((booking_data->>'booking_method')::TEXT, 'online'),\n    COALESCE((booking_data->>'waiver_signed')::BOOLEAN, false),\n    (booking_data->>'waiver_signed_at')::TIMESTAMP,\n    (booking_data->>'waiver_signature_name')::TEXT,\n    COALESCE((booking_data->>'reservation_fee_paid')::BOOLEAN, false),\n    COALESCE((booking_data->>'paid_amount')::NUMERIC, 0.00),\n    (booking_data->>'special_requests')::TEXT,\n    (booking_data->>'admin_notes')::TEXT,\n    (booking_data->>'dropoff_person_name')::TEXT,\n    (booking_data->>'dropoff_person_relationship')::TEXT,\n    (booking_data->>'dropoff_person_phone')::TEXT,\n    (booking_data->>'pickup_person_name')::TEXT,\n    (booking_data->>'pickup_person_relationship')::TEXT,\n    (booking_data->>'pickup_person_phone')::TEXT,\n    (booking_data->>'alt_pickup_person_name')::TEXT,\n    (booking_data->>'alt_pickup_person_relationship')::TEXT,\n    (booking_data->>'alt_pickup_person_phone')::TEXT,\n    COALESCE((booking_data->>'safety_verification_signed')::BOOLEAN, false),\n    (booking_data->>'safety_verification_signed_at')::TIMESTAMP,\n    (booking_data->>'stripe_session_id')::TEXT,\n    NOW(),\n    NOW()\n  ) RETURNING id INTO booking_id;\n\n  -- 3. Create athletes and link to booking\n  FOREACH athlete_data IN ARRAY athletes_data\n  LOOP\n    -- Create athlete\n    INSERT INTO athletes (\n      parent_id,\n      name,\n      first_name,\n      last_name,\n      date_of_birth,\n      allergies,\n      experience,\n      created_at,\n      updated_at\n    ) VALUES (\n      parent_id,\n      (athlete_data->>'name')::TEXT,\n      (athlete_data->>'first_name')::TEXT,\n      (athlete_data->>'last_name')::TEXT,\n      (athlete_data->>'date_of_birth')::DATE,\n      (athlete_data->>'allergies')::TEXT,\n      (athlete_data->>'experience')::TEXT,\n      NOW(),\n      NOW()\n    ) RETURNING id INTO athlete_id;\n\n    -- Link athlete to booking\n    INSERT INTO booking_athletes (\n      booking_id,\n      athlete_id,\n      slot_order\n    ) VALUES (\n      booking_id,\n      athlete_id,\n      (SELECT COALESCE(MAX(slot_order), 0) + 1 FROM booking_athletes WHERE booking_id = booking_id)\n    );\n  END LOOP;\n\n  -- 4. Link focus areas to booking\n  IF array_length(focus_area_ids, 1) > 0 THEN\n    INSERT INTO booking_focus_areas (booking_id, focus_area_id)\n    SELECT booking_id, UNNEST(focus_area_ids);\n  END IF;\n\n  -- 5. Link apparatus to booking\n  IF array_length(apparatus_ids, 1) > 0 THEN\n    INSERT INTO booking_apparatus (booking_id, apparatus_id)\n    SELECT booking_id, UNNEST(apparatus_ids);\n  END IF;\n\n  -- 6. Link side quests to booking\n  IF array_length(side_quest_ids, 1) > 0 THEN\n    INSERT INTO booking_side_quests (booking_id, side_quest_id)\n    SELECT booking_id, UNNEST(side_quest_ids);\n  END IF;\n\n  -- Return booking info\n  result := jsonb_build_object(\n    'booking_id', booking_id,\n    'parent_id', parent_id,\n    'success', true\n  );\n\n  RETURN result;\n  \nEXCEPTION\n  WHEN OTHERS THEN\n    -- Log error and re-raise\n    RAISE EXCEPTION 'Error creating booking: %', SQLERRM;\nEND;\n"
+  },
+  {
+    "query_type": "FUNCTION_INFO",
+    "routine_name": "update_athlete_waiver_status",
+    "routine_type": "FUNCTION",
+    "return_type": "trigger",
+    "routine_definition": "\nBEGIN\n    IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN\n        UPDATE athletes \n        SET \n            latest_waiver_id = NEW.id,\n            waiver_status = CASE \n                WHEN NEW.signed_at IS NOT NULL THEN 'signed'\n                ELSE 'pending'\n            END\n        WHERE id = NEW.athlete_id;\n        RETURN NEW;\n    END IF;\n    \n    IF TG_OP = 'DELETE' THEN\n        WITH next_latest AS (\n            SELECT id, \n                   CASE WHEN signed_at IS NOT NULL THEN 'signed' ELSE 'pending' END as status\n            FROM waivers \n            WHERE athlete_id = OLD.athlete_id \n              AND id != OLD.id\n            ORDER BY created_at DESC \n            LIMIT 1\n        )\n        UPDATE athletes \n        SET \n            latest_waiver_id = COALESCE((SELECT id FROM next_latest), NULL),\n            waiver_status = COALESCE((SELECT status FROM next_latest), 'pending')\n        WHERE id = OLD.athlete_id;\n        RETURN OLD;\n    END IF;\n    \n    RETURN NULL;\nEND;\n"
+  },
+  {
+    "query_type": "FUNCTION_INFO",
+    "routine_name": "update_updated_at_column",
+    "routine_type": "FUNCTION",
+    "return_type": "trigger",
+    "routine_definition": "\nBEGIN\n    NEW.updated_at = CURRENT_TIMESTAMP;\n    RETURN NEW;\nEND;\n"
+  }
+]
+
+-- 9. Get all triggers
+[
+  {
+    "query_type": "TRIGGER_INFO",
+    "trigger_name": "update_genders_updated_at",
+    "event_manipulation": "UPDATE",
+    "event_object_table": "genders",
+    "action_timing": "BEFORE",
+    "action_statement": "EXECUTE FUNCTION update_updated_at_column()"
+  },
+  {
+    "query_type": "TRIGGER_INFO",
+    "trigger_name": "trigger_update_athlete_waiver_status",
+    "event_manipulation": "INSERT",
+    "event_object_table": "waivers",
+    "action_timing": "AFTER",
+    "action_statement": "EXECUTE FUNCTION update_athlete_waiver_status()"
+  },
+  {
+    "query_type": "TRIGGER_INFO",
+    "trigger_name": "trigger_update_athlete_waiver_status",
+    "event_manipulation": "DELETE",
+    "event_object_table": "waivers",
+    "action_timing": "AFTER",
+    "action_statement": "EXECUTE FUNCTION update_athlete_waiver_status()"
+  },
+  {
+    "query_type": "TRIGGER_INFO",
+    "trigger_name": "trigger_update_athlete_waiver_status",
+    "event_manipulation": "UPDATE",
+    "event_object_table": "waivers",
+    "action_timing": "AFTER",
+    "action_statement": "EXECUTE FUNCTION update_athlete_waiver_status()"
+  }
+]
+
+-- 10. Get all indexes
+[
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "admins",
+    "indexname": "admins_email_key",
+    "indexdef": "CREATE UNIQUE INDEX admins_email_key ON public.admins USING btree (email)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "admins",
+    "indexname": "admins_pkey",
+    "indexdef": "CREATE UNIQUE INDEX admins_pkey ON public.admins USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "apparatus",
+    "indexname": "apparatus_name_key",
+    "indexdef": "CREATE UNIQUE INDEX apparatus_name_key ON public.apparatus USING btree (name)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "apparatus",
+    "indexname": "apparatus_pkey",
+    "indexdef": "CREATE UNIQUE INDEX apparatus_pkey ON public.apparatus USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "archived_waivers",
+    "indexname": "archived_waivers_pkey",
+    "indexdef": "CREATE UNIQUE INDEX archived_waivers_pkey ON public.archived_waivers USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "athletes",
+    "indexname": "athletes_pkey",
+    "indexdef": "CREATE UNIQUE INDEX athletes_pkey ON public.athletes USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "athletes",
+    "indexname": "idx_athletes_parent_id",
+    "indexdef": "CREATE INDEX idx_athletes_parent_id ON public.athletes USING btree (parent_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "availability",
+    "indexname": "availability_pkey",
+    "indexdef": "CREATE UNIQUE INDEX availability_pkey ON public.availability USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "availability",
+    "indexname": "idx_availability_day_of_week",
+    "indexdef": "CREATE INDEX idx_availability_day_of_week ON public.availability USING btree (day_of_week)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "availability_exceptions",
+    "indexname": "availability_exceptions_pkey",
+    "indexdef": "CREATE UNIQUE INDEX availability_exceptions_pkey ON public.availability_exceptions USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "blog_posts",
+    "indexname": "blog_posts_pkey",
+    "indexdef": "CREATE UNIQUE INDEX blog_posts_pkey ON public.blog_posts USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "blog_posts",
+    "indexname": "idx_blog_posts_category",
+    "indexdef": "CREATE INDEX idx_blog_posts_category ON public.blog_posts USING btree (category)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_apparatus",
+    "indexname": "booking_apparatus_pkey",
+    "indexdef": "CREATE UNIQUE INDEX booking_apparatus_pkey ON public.booking_apparatus USING btree (booking_id, apparatus_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_athletes",
+    "indexname": "booking_athletes_pkey",
+    "indexdef": "CREATE UNIQUE INDEX booking_athletes_pkey ON public.booking_athletes USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_athletes",
+    "indexname": "idx_booking_athletes_athlete_id",
+    "indexdef": "CREATE INDEX idx_booking_athletes_athlete_id ON public.booking_athletes USING btree (athlete_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_athletes",
+    "indexname": "idx_booking_athletes_booking_id",
+    "indexdef": "CREATE INDEX idx_booking_athletes_booking_id ON public.booking_athletes USING btree (booking_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_focus_areas",
+    "indexname": "booking_focus_areas_pkey",
+    "indexdef": "CREATE UNIQUE INDEX booking_focus_areas_pkey ON public.booking_focus_areas USING btree (booking_id, focus_area_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_focus_areas",
+    "indexname": "idx_booking_focus_areas_booking_id",
+    "indexdef": "CREATE INDEX idx_booking_focus_areas_booking_id ON public.booking_focus_areas USING btree (booking_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_focus_areas",
+    "indexname": "idx_booking_focus_areas_focus_area_id",
+    "indexdef": "CREATE INDEX idx_booking_focus_areas_focus_area_id ON public.booking_focus_areas USING btree (focus_area_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_logs",
+    "indexname": "booking_logs_pkey",
+    "indexdef": "CREATE UNIQUE INDEX booking_logs_pkey ON public.booking_logs USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_logs",
+    "indexname": "idx_booking_logs_booking_id",
+    "indexdef": "CREATE INDEX idx_booking_logs_booking_id ON public.booking_logs USING btree (booking_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "booking_side_quests",
+    "indexname": "booking_side_quests_pkey",
+    "indexdef": "CREATE UNIQUE INDEX booking_side_quests_pkey ON public.booking_side_quests USING btree (booking_id, side_quest_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "bookings",
+    "indexname": "bookings_pkey",
+    "indexdef": "CREATE UNIQUE INDEX bookings_pkey ON public.bookings USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "bookings",
+    "indexname": "idx_bookings_parent_email",
+    "indexdef": "CREATE INDEX idx_bookings_parent_email ON public.bookings USING btree (parent_email)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "bookings",
+    "indexname": "idx_bookings_parent_first_name",
+    "indexdef": "CREATE INDEX idx_bookings_parent_first_name ON public.bookings USING btree (parent_first_name)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "bookings",
+    "indexname": "idx_bookings_stripe_session_id",
+    "indexdef": "CREATE INDEX idx_bookings_stripe_session_id ON public.bookings USING btree (stripe_session_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "email_logs",
+    "indexname": "email_logs_pkey",
+    "indexdef": "CREATE UNIQUE INDEX email_logs_pkey ON public.email_logs USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "focus_areas",
+    "indexname": "focus_areas_name_key",
+    "indexdef": "CREATE UNIQUE INDEX focus_areas_name_key ON public.focus_areas USING btree (name)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "focus_areas",
+    "indexname": "focus_areas_pkey",
+    "indexdef": "CREATE UNIQUE INDEX focus_areas_pkey ON public.focus_areas USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "genders",
+    "indexname": "genders_name_key",
+    "indexdef": "CREATE UNIQUE INDEX genders_name_key ON public.genders USING btree (name)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "genders",
+    "indexname": "genders_pkey",
+    "indexdef": "CREATE UNIQUE INDEX genders_pkey ON public.genders USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "genders",
+    "indexname": "idx_genders_active_sort",
+    "indexdef": "CREATE INDEX idx_genders_active_sort ON public.genders USING btree (is_active, sort_order)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "lesson_types",
+    "indexname": "lesson_types_name_key",
+    "indexdef": "CREATE UNIQUE INDEX lesson_types_name_key ON public.lesson_types USING btree (name)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "lesson_types",
+    "indexname": "lesson_types_pkey",
+    "indexdef": "CREATE UNIQUE INDEX lesson_types_pkey ON public.lesson_types USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "parent_auth_codes",
+    "indexname": "parent_auth_codes_pkey",
+    "indexdef": "CREATE UNIQUE INDEX parent_auth_codes_pkey ON public.parent_auth_codes USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "parents",
+    "indexname": "idx_parents_email",
+    "indexdef": "CREATE INDEX idx_parents_email ON public.parents USING btree (email)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "parents",
+    "indexname": "parents_pkey",
+    "indexdef": "CREATE UNIQUE INDEX parents_pkey ON public.parents USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "payment_logs",
+    "indexname": "idx_payment_logs_booking_id",
+    "indexdef": "CREATE INDEX idx_payment_logs_booking_id ON public.payment_logs USING btree (booking_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "payment_logs",
+    "indexname": "payment_logs_pkey",
+    "indexdef": "CREATE UNIQUE INDEX payment_logs_pkey ON public.payment_logs USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "side_quests",
+    "indexname": "side_quests_name_key",
+    "indexdef": "CREATE UNIQUE INDEX side_quests_name_key ON public.side_quests USING btree (name)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "side_quests",
+    "indexname": "side_quests_pkey",
+    "indexdef": "CREATE UNIQUE INDEX side_quests_pkey ON public.side_quests USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "slot_reservations",
+    "indexname": "slot_reservations_pkey",
+    "indexdef": "CREATE UNIQUE INDEX slot_reservations_pkey ON public.slot_reservations USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "tips",
+    "indexname": "idx_tips_category",
+    "indexdef": "CREATE INDEX idx_tips_category ON public.tips USING btree (category)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "tips",
+    "indexname": "idx_tips_difficulty",
+    "indexdef": "CREATE INDEX idx_tips_difficulty ON public.tips USING btree (difficulty)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "tips",
+    "indexname": "tips_pkey",
+    "indexdef": "CREATE UNIQUE INDEX tips_pkey ON public.tips USING btree (id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "waivers",
+    "indexname": "idx_waivers_athlete_id",
+    "indexdef": "CREATE INDEX idx_waivers_athlete_id ON public.waivers USING btree (athlete_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "waivers",
+    "indexname": "idx_waivers_booking_id",
+    "indexdef": "CREATE INDEX idx_waivers_booking_id ON public.waivers USING btree (booking_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "waivers",
+    "indexname": "idx_waivers_parent_id",
+    "indexdef": "CREATE INDEX idx_waivers_parent_id ON public.waivers USING btree (parent_id)"
+  },
+  {
+    "query_type": "INDEX_INFO",
+    "tablename": "waivers",
+    "indexname": "waivers_pkey",
+    "indexdef": "CREATE UNIQUE INDEX waivers_pkey ON public.waivers USING btree (id)"
+  }
+]
+
+-- 11. Specific table data samples to understand structure
+-- Athletes table
+[
+  {
+    "query_type": "ATHLETES_SAMPLE",
+    "id": 66,
+    "parent_id": 49,
+    "name": "Alfred S.",
+    "first_name": "Alfred",
+    "last_name": "S.",
+    "date_of_birth": "2010-07-15",
+    "waiver_status": "signed",
+    "latest_waiver_id": 18,
+    "experience": "beginner",
+    "created_at": "2025-07-13 21:22:22.543986"
+  }
+]
+
+-- Parents table
+[
+  {
+    "query_type": "PARENTS_SAMPLE",
+    "id": 49,
+    "first_name": "Thomas",
+    "last_name": "S.",
+    "email": "swyrwilliam12@gmail.com",
+    "phone": "5555555555",
+    "emergency_contact_name": "Evelyn S.",
+    "emergency_contact_phone": "4444444444",
+    "created_at": "2025-07-13 21:22:22.488155"
+  }
+]
+
+-- Waivers table
+[
+  {
+    "query_type": "WAIVERS_SAMPLE",
+    "id": 18,
+    "parent_id": 49,
+    "athlete_id": 66,
+    "booking_id": 83,
+    "relationship_to_athlete": "Parent/Guardian",
+    "signature": "data:image/png;base64,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",
+    "emergency_contact_number": "4444444444",
+    "understands_risks": true,
+    "allows_photo_video": true,
+    "signed_at": "2025-07-13 21:22:18.77",
+    "created_at": "2025-07-13 21:22:19.533567"
+  }
+]
+
+-- Bookings table sample
+We need to update this one to use foreign keys based on the data inputted during the booking process. Athlete, parent, focus areas, apparatus all will be pulled from existing tables.
+
+-- 12. Check if athlete_waiver_status view exists and its structure
+Success. No rows returned
+
+-- 13. Get enum types if they exist
+[
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "attendance_status",
+    "enum_value": "pending"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "attendance_status",
+    "enum_value": "confirmed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "attendance_status",
+    "enum_value": "cancelled"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "attendance_status",
+    "enum_value": "no-show"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "attendance_status",
+    "enum_value": "completed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "attendance_status",
+    "enum_value": "manual"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "pending"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "paid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "confirmed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "manual"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "manual-paid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "completed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "no-show"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "failed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "cancelled"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "reservation-pending"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "reservation-paid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "booking_status",
+    "enum_value": "reservation-failed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "unpaid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "paid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "failed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "refunded"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "reservation-pending"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "reservation-paid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "reservation-failed"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "session-paid"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "reservation-refunded"
+  },
+  {
+    "query_type": "ENUM_TYPES",
+    "enum_name": "payment_status",
+    "enum_value": "session-refunded"
+  }
+]

@@ -1,0 +1,111 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Development Server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"label": "Clean Start Development Server",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev:clean"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"label": "Start Frontend Only",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev:client"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Backend Only",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev:server"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "Build Production",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"build"
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "Type Check",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"check"
+			],
+			"group": "test",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "Database Push",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"db:push"
+			],
+			"group": "build"
+		}
+	]
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Internal page for verifying banner video playback formats.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Banner Video Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .video-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background-color: #000;
+            border-radius: 8px;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #0F0276;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #D8BD2A;
+        }
+        .file-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 8px;
+        }
+        .video-formats {
+            margin-top: 20px;
+        }
+        .format-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Banner Video Test Page</h1>
+        
+        <div class="video-section">
+            <video id="mp4Video" autoplay muted loop playsInline>
+                <source src="/attached_assets/Banner_video_new.MP4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div class="controls">
+            <button id="playPauseBtn">Pause</button>
+            <button id="muteBtn">Unmute</button>
+            <button id="restartBtn">Restart</button>
+        </div>
+        
+        <div class="file-info">
+            <h3>Current Video Information:</h3>
+            <div id="videoInfo">Loading video information...</div>
+        </div>
+        
+        <div class="video-formats">
+            <h2>Test Alternative Format</h2>
+            
+            <div class="format-section">
+                <h3>MOV Format</h3>
+                <div class="video-section">
+                    <video id="movVideo" autoplay muted loop playsInline>
+                        <source src="/banner-video.mov" type="video/quicktime">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="controls">
+                    <button id="playPauseBtnMov">Pause</button>
+                    <button id="muteBtnMov">Unmute</button>
+                </div>
+                <div id="movInfo">Loading MOV information...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // MP4 Video
+            const mp4Video = document.getElementById('mp4Video');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const videoInfo = document.getElementById('videoInfo');
+            
+            // MOV Video
+            const movVideo = document.getElementById('movVideo');
+            const playPauseBtnMov = document.getElementById('playPauseBtnMov');
+            const muteBtnMov = document.getElementById('muteBtnMov');
+            const movInfo = document.getElementById('movInfo');
+            
+            // Update video info
+            function updateVideoInfo() {
+                if (mp4Video.readyState > 0) {
+                    videoInfo.innerHTML = `
+                        <p><strong>Duration:</strong> ${Math.round(mp4Video.duration)} seconds</p>
+                        <p><strong>Dimensions:</strong> ${mp4Video.videoWidth} x ${mp4Video.videoHeight}</p>
+                        <p><strong>Current Time:</strong> <span id="currentTime">${Math.round(mp4Video.currentTime)}</span> seconds</p>
+                        <p><strong>Status:</strong> <span id="status">${mp4Video.paused ? 'Paused' : 'Playing'}</span></p>
+                        <p><strong>Muted:</strong> <span id="mutedStatus">${mp4Video.muted ? 'Yes' : 'No'}</span></p>
+                        <p><strong>Network State:</strong> ${getNetworkState(mp4Video.networkState)}</p>
+                        <p><strong>Ready State:</strong> ${getReadyState(mp4Video.readyState)}</p>
+                    `;
+                    
+                    // Update MOV info
+                    if (movVideo.readyState > 0) {
+                        movInfo.innerHTML = `
+                            <p><strong>Duration:</strong> ${Math.round(movVideo.duration)} seconds</p>
+                            <p><strong>Dimensions:</strong> ${movVideo.videoWidth} x ${movVideo.videoHeight}</p>
+                            <p><strong>Status:</strong> ${movVideo.paused ? 'Paused' : 'Playing'}</p>
+                            <p><strong>Network State:</strong> ${getNetworkState(movVideo.networkState)}</p>
+                            <p><strong>Ready State:</strong> ${getReadyState(movVideo.readyState)}</p>
+                        `;
+                    }
+                }
+            }
+            
+            // Helper functions for readable states
+            function getNetworkState(state) {
+                const states = {
+                    0: 'NETWORK_EMPTY',
+                    1: 'NETWORK_IDLE',
+                    2: 'NETWORK_LOADING',
+                    3: 'NETWORK_NO_SOURCE'
+                };
+                return states[state] || 'Unknown';
+            }
+            
+            function getReadyState(state) {
+                const states = {
+                    0: 'HAVE_NOTHING',
+                    1: 'HAVE_METADATA',
+                    2: 'HAVE_CURRENT_DATA',
+                    3: 'HAVE_FUTURE_DATA',
+                    4: 'HAVE_ENOUGH_DATA'
+                };
+                return states[state] || 'Unknown';
+            }
+            
+            // MP4 Controls
+            playPauseBtn.addEventListener('click', function() {
+                if (mp4Video.paused) {
+                    mp4Video.play();
+                    playPauseBtn.textContent = 'Pause';
+                } else {
+                    mp4Video.pause();
+                    playPauseBtn.textContent = 'Play';
+                }
+                updateVideoInfo();
+            });
+            
+            muteBtn.addEventListener('click', function() {
+                mp4Video.muted = !mp4Video.muted;
+                muteBtn.textContent = mp4Video.muted ? 'Unmute' : 'Mute';
+                updateVideoInfo();
+            });
+            
+            restartBtn.addEventListener('click', function() {
+                mp4Video.currentTime = 0;
+                mp4Video.play();
+                playPauseBtn.textContent = 'Pause';
+                updateVideoInfo();
+            });
+            
+            // MOV Controls
+            playPauseBtnMov.addEventListener('click', function() {
+                if (movVideo.paused) {
+                    movVideo.play();
+                    playPauseBtnMov.textContent = 'Pause';
+                } else {
+                    movVideo.pause();
+                    playPauseBtnMov.textContent = 'Play';
+                }
+                updateVideoInfo();
+            });
+            
+            muteBtnMov.addEventListener('click', function() {
+                movVideo.muted = !movVideo.muted;
+                muteBtnMov.textContent = movVideo.muted ? 'Unmute' : 'Mute';
+                updateVideoInfo();
+            });
+            
+            // Update video info periodically
+            mp4Video.addEventListener('loadedmetadata', updateVideoInfo);
+            movVideo.addEventListener('loadedmetadata', updateVideoInfo);
+            
+            setInterval(updateVideoInfo, 1000);
+            
+            // Log video events for debugging
+            const videoEvents = [
+                'loadstart', 'progress', 'suspend', 'abort', 'error', 
+                'emptied', 'stalled', 'loadedmetadata', 'loadeddata', 
+                'canplay', 'canplaythrough', 'playing', 'waiting', 
+                'seeking', 'seeked', 'ended', 'durationchange', 
+                'play', 'pause', 'volumechange'
+            ];
+            
+            videoEvents.forEach(event => {
+                mp4Video.addEventListener(event, () => {
+                    console.log(`MP4 Video event: ${event}`);
+                });
+                
+                movVideo.addEventListener(event, () => {
+                    console.log(`MOV Video event: ${event}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

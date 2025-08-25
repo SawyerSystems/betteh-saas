@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Diagnostic page to test banner video compatibility across formats.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Banner Video Check</title>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        h1 { 
+            text-align: center; 
+            margin-bottom: 30px;
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .video-test {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background: #000;
+            margin-bottom: 10px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Banner Video Compatibility Test</h1>
+    
+    <div class="video-container">
+        <div class="video-test">
+            <h2>MP4 Video Test</h2>
+            <video id="mp4Video" controls muted>
+                <source src="/attached_assets/Banner_video_new.MP4" type="video/mp4">
+                Your browser doesn't support this video format.
+            </video>
+            <div class="controls">
+                <button onclick="document.getElementById('mp4Video').play()">Play</button>
+                <button onclick="document.getElementById('mp4Video').pause()">Pause</button>
+                <button onclick="toggleMute('mp4Video')">Toggle Mute</button>
+            </div>
+            <div class="status" id="mp4Status">Checking MP4 video...</div>
+        </div>
+        
+        <div class="video-test">
+            <h2>MOV Video Test</h2>
+            <video id="movVideo" controls muted>
+                <source src="/banner-video.mov" type="video/quicktime">
+                Your browser doesn't support this video format.
+            </video>
+            <div class="controls">
+                <button onclick="document.getElementById('movVideo').play()">Play</button>
+                <button onclick="document.getElementById('movVideo').pause()">Pause</button>
+                <button onclick="toggleMute('movVideo')">Toggle Mute</button>
+            </div>
+            <div class="status" id="movStatus">Checking MOV video...</div>
+        </div>
+        
+        <div class="video-test">
+            <h2>Combined Sources Test (Fallback)</h2>
+            <video id="combinedVideo" controls muted>
+                <source src="/attached_assets/Banner_video_new.MP4" type="video/mp4">
+                <source src="/banner-video.mov" type="video/quicktime">
+                Your browser doesn't support these video formats.
+            </video>
+            <div class="controls">
+                <button onclick="document.getElementById('combinedVideo').play()">Play</button>
+                <button onclick="document.getElementById('combinedVideo').pause()">Pause</button>
+                <button onclick="toggleMute('combinedVideo')">Toggle Mute</button>
+            </div>
+            <div class="status" id="combinedStatus">Checking combined video...</div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleMute(videoId) {
+            const video = document.getElementById(videoId);
+            video.muted = !video.muted;
+        }
+        
+        function checkVideo(videoId, statusId) {
+            const video = document.getElementById(videoId);
+            const status = document.getElementById(statusId);
+            
+            video.addEventListener('loadeddata', () => {
+                status.innerHTML = `<span class="success">SUCCESS:</span> Video loaded successfully! Duration: ${Math.round(video.duration)}s, Size: ${video.videoWidth}x${video.videoHeight}px`;
+            });
+            
+            video.addEventListener('error', () => {
+                status.innerHTML = `<span class="error">ERROR:</span> Failed to load video. Your browser may not support this format.`;
+            });
+            
+            // Check if already loaded
+            if (video.readyState >= 3) {
+                status.innerHTML = `<span class="success">SUCCESS:</span> Video already loaded! Duration: ${Math.round(video.duration)}s, Size: ${video.videoWidth}x${video.videoHeight}px`;
+            }
+        }
+        
+        // Check all videos when page loads
+        window.addEventListener('load', () => {
+            checkVideo('mp4Video', 'mp4Status');
+            checkVideo('movVideo', 'movStatus');
+            checkVideo('combinedVideo', 'combinedStatus');
+        });
+    </script>
+</body>
+</html>

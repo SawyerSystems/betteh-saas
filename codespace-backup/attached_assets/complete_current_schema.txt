@@ -1,0 +1,1612 @@
+Complete Schema - Auto-updated via script
+TABLE LIST:
+- admins
+- apparatus
+- archived_bookings
+- archived_waivers
+- athlete_skill_videos
+- athlete_skills
+- athletes
+- availability
+- availability_exceptions
+- blog_email_signups
+- blog_posts
+- booking_apparatus
+- booking_athletes
+- booking_focus_areas
+- booking_side_quests
+- bookings
+- focus_areas
+- genders
+- gym_payout_rates
+- gym_payout_runs
+- lesson_types
+- parent_password_reset_tokens
+- parent_verification_tokens
+- parents
+- progress_share_links
+- side_quests
+- site_content
+- site_faqs
+- site_inquiries
+- skill_components
+- skills
+- skills_prerequisites
+- slot_reservations
+- testimonials
+- tips
+- waivers
+
+DETAILED SCHEMA DATA:
+{
+  "tables": {
+    "admins": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "email",
+          "data_type": "text"
+        },
+        {
+          "column_name": "password_hash",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "apparatus": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "sort_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "archived_bookings": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "original_booking_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "lesson_type_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "waiver_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "preferred_date",
+          "data_type": "date"
+        },
+        {
+          "column_name": "preferred_time",
+          "data_type": "time without time zone"
+        },
+        {
+          "column_name": "focus_areas",
+          "data_type": "ARRAY"
+        },
+        {
+          "column_name": "status",
+          "data_type": "text"
+        },
+        {
+          "column_name": "payment_status",
+          "data_type": "text"
+        },
+        {
+          "column_name": "attendance_status",
+          "data_type": "text"
+        },
+        {
+          "column_name": "booking_method",
+          "data_type": "text"
+        },
+        {
+          "column_name": "reservation_fee_paid",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "paid_amount",
+          "data_type": "numeric"
+        },
+        {
+          "column_name": "stripe_session_id",
+          "data_type": "text"
+        },
+        {
+          "column_name": "special_requests",
+          "data_type": "text"
+        },
+        {
+          "column_name": "admin_notes",
+          "data_type": "text"
+        },
+        {
+          "column_name": "dropoff_person_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "dropoff_person_relationship",
+          "data_type": "text"
+        },
+        {
+          "column_name": "dropoff_person_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "pickup_person_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "pickup_person_relationship",
+          "data_type": "text"
+        },
+        {
+          "column_name": "pickup_person_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "alt_pickup_person_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "alt_pickup_person_relationship",
+          "data_type": "text"
+        },
+        {
+          "column_name": "alt_pickup_person_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "safety_verification_signed",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "safety_verification_signed_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "archived_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "archive_reason",
+          "data_type": "text"
+        }
+      ]
+    },
+    "archived_waivers": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "original_waiver_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "signer_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "relationship_to_athlete",
+          "data_type": "text"
+        },
+        {
+          "column_name": "signature",
+          "data_type": "text"
+        },
+        {
+          "column_name": "emergency_contact_number",
+          "data_type": "text"
+        },
+        {
+          "column_name": "understands_risks",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "agrees_to_policies",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "authorizes_emergency_care",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "allows_photo_video",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "confirms_authority",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "pdf_path",
+          "data_type": "text"
+        },
+        {
+          "column_name": "ip_address",
+          "data_type": "text"
+        },
+        {
+          "column_name": "user_agent",
+          "data_type": "text"
+        },
+        {
+          "column_name": "signed_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "email_sent_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "archived_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "archive_reason",
+          "data_type": "text"
+        },
+        {
+          "column_name": "legal_retention_period",
+          "data_type": "text"
+        },
+        {
+          "column_name": "original_parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "original_athlete_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    },
+    "athlete_skill_videos": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_skill_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "url",
+          "data_type": "text"
+        },
+        {
+          "column_name": "title",
+          "data_type": "text"
+        },
+        {
+          "column_name": "recorded_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "caption",
+          "data_type": "text"
+        },
+        {
+          "column_name": "is_visible",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "is_featured",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "display_date",
+          "data_type": "date"
+        },
+        {
+          "column_name": "sort_index",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "thumbnail_url",
+          "data_type": "text"
+        },
+        {
+          "column_name": "optimized_url",
+          "data_type": "text"
+        },
+        {
+          "column_name": "processing_status",
+          "data_type": "text"
+        },
+        {
+          "column_name": "processing_error",
+          "data_type": "text"
+        }
+      ]
+    },
+    "athlete_skills": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "skill_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "status",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "notes",
+          "data_type": "text"
+        },
+        {
+          "column_name": "unlock_date",
+          "data_type": "date"
+        },
+        {
+          "column_name": "first_tested_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "last_tested_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "athletes": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "first_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "last_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "allergies",
+          "data_type": "text"
+        },
+        {
+          "column_name": "experience",
+          "data_type": "text"
+        },
+        {
+          "column_name": "photo",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "date_of_birth",
+          "data_type": "date"
+        },
+        {
+          "column_name": "gender",
+          "data_type": "text"
+        },
+        {
+          "column_name": "latest_waiver_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "waiver_signed",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "waiver_status",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "is_gym_member",
+          "data_type": "boolean"
+        }
+      ]
+    },
+    "availability": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "day_of_week",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "is_recurring",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "is_available",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "start_time",
+          "data_type": "time without time zone"
+        },
+        {
+          "column_name": "end_time",
+          "data_type": "time without time zone"
+        }
+      ]
+    },
+    "availability_exceptions": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "is_available",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "reason",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "date",
+          "data_type": "date"
+        },
+        {
+          "column_name": "start_time",
+          "data_type": "time without time zone"
+        },
+        {
+          "column_name": "end_time",
+          "data_type": "time without time zone"
+        }
+      ]
+    },
+    "blog_email_signups": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "email",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    },
+    "blog_posts": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "title",
+          "data_type": "text"
+        },
+        {
+          "column_name": "content",
+          "data_type": "text"
+        },
+        {
+          "column_name": "excerpt",
+          "data_type": "text"
+        },
+        {
+          "column_name": "category",
+          "data_type": "text"
+        },
+        {
+          "column_name": "image_url",
+          "data_type": "text"
+        },
+        {
+          "column_name": "published_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "sections",
+          "data_type": "jsonb"
+        }
+      ]
+    },
+    "booking_apparatus": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "booking_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "apparatus_id",
+          "data_type": "integer"
+        }
+      ]
+    },
+    "booking_athletes": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "booking_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "slot_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "gym_member_at_booking",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "duration_minutes",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "gym_rate_applied_cents",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "gym_payout_owed_cents",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "gym_payout_computed_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "gym_payout_override_cents",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "gym_payout_override_reason",
+          "data_type": "text"
+        }
+      ]
+    },
+    "booking_focus_areas": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "booking_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "focus_area_id",
+          "data_type": "integer"
+        }
+      ]
+    },
+    "booking_side_quests": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "booking_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "side_quest_id",
+          "data_type": "integer"
+        }
+      ]
+    },
+    "bookings": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "booking_method",
+          "data_type": "text"
+        },
+        {
+          "column_name": "reservation_fee_paid",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "paid_amount",
+          "data_type": "numeric"
+        },
+        {
+          "column_name": "special_requests",
+          "data_type": "text"
+        },
+        {
+          "column_name": "admin_notes",
+          "data_type": "text"
+        },
+        {
+          "column_name": "dropoff_person_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "dropoff_person_relationship",
+          "data_type": "text"
+        },
+        {
+          "column_name": "dropoff_person_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "pickup_person_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "pickup_person_relationship",
+          "data_type": "text"
+        },
+        {
+          "column_name": "pickup_person_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "alt_pickup_person_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "alt_pickup_person_relationship",
+          "data_type": "text"
+        },
+        {
+          "column_name": "alt_pickup_person_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "safety_verification_signed",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "safety_verification_signed_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "stripe_session_id",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "status",
+          "data_type": "booking_status"
+        },
+        {
+          "column_name": "payment_status",
+          "data_type": "payment_status"
+        },
+        {
+          "column_name": "attendance_status",
+          "data_type": "attendance_status"
+        },
+        {
+          "column_name": "preferred_date",
+          "data_type": "date"
+        },
+        {
+          "column_name": "preferred_time",
+          "data_type": "time without time zone"
+        },
+        {
+          "column_name": "parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "lesson_type_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "focus_areas",
+          "data_type": "ARRAY"
+        },
+        {
+          "column_name": "progress_note",
+          "data_type": "text"
+        },
+        {
+          "column_name": "coach_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "focus_area_other",
+          "data_type": "text"
+        },
+        {
+          "column_name": "session_confirmation_email_sent",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "session_confirmation_email_sent_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "focus_areas": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "sort_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "level",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "apparatus_id",
+          "data_type": "integer"
+        }
+      ]
+    },
+    "genders": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "display_name",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "is_active",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "sort_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    },
+    "gym_payout_rates": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "duration_minutes",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "is_member",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "rate_cents",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "effective_from",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "effective_to",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "gym_payout_runs": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "period_start",
+          "data_type": "date"
+        },
+        {
+          "column_name": "period_end",
+          "data_type": "date"
+        },
+        {
+          "column_name": "status",
+          "data_type": "text"
+        },
+        {
+          "column_name": "total_sessions",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "total_owed_cents",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "generated_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "lesson_types": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "duration_minutes",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "is_private",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "total_price",
+          "data_type": "numeric"
+        },
+        {
+          "column_name": "reservation_fee",
+          "data_type": "numeric"
+        },
+        {
+          "column_name": "description",
+          "data_type": "text"
+        },
+        {
+          "column_name": "max_athletes",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "min_athletes",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "is_active",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "key_points",
+          "data_type": "jsonb"
+        }
+      ]
+    },
+    "parent_password_reset_tokens": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "token",
+          "data_type": "text"
+        },
+        {
+          "column_name": "expires_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "used",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "parent_verification_tokens": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "token",
+          "data_type": "text"
+        },
+        {
+          "column_name": "expires_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    },
+    "parents": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "first_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "last_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "email",
+          "data_type": "text"
+        },
+        {
+          "column_name": "phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "emergency_contact_name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "emergency_contact_phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "password_hash",
+          "data_type": "text"
+        },
+        {
+          "column_name": "is_verified",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "blog_emails",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "last_login_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "progress_share_links": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "token",
+          "data_type": "text"
+        },
+        {
+          "column_name": "expires_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "side_quests": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "sort_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "site_content": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "banner_video",
+          "data_type": "text"
+        },
+        {
+          "column_name": "hero_images",
+          "data_type": "jsonb"
+        },
+        {
+          "column_name": "about",
+          "data_type": "jsonb"
+        },
+        {
+          "column_name": "contact",
+          "data_type": "jsonb"
+        },
+        {
+          "column_name": "hours",
+          "data_type": "jsonb"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "equipment_images",
+          "data_type": "jsonb"
+        },
+        {
+          "column_name": "logo",
+          "data_type": "jsonb"
+        }
+      ]
+    },
+    "site_faqs": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "question",
+          "data_type": "text"
+        },
+        {
+          "column_name": "answer",
+          "data_type": "text"
+        },
+        {
+          "column_name": "category",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "display_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "site_inquiries": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "bigint"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "email",
+          "data_type": "text"
+        },
+        {
+          "column_name": "phone",
+          "data_type": "text"
+        },
+        {
+          "column_name": "athlete_info",
+          "data_type": "text"
+        },
+        {
+          "column_name": "message",
+          "data_type": "text"
+        },
+        {
+          "column_name": "status",
+          "data_type": "text"
+        },
+        {
+          "column_name": "source",
+          "data_type": "text"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "skill_components": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "parent_skill_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "component_skill_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "position",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "skills": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "text"
+        },
+        {
+          "column_name": "category",
+          "data_type": "text"
+        },
+        {
+          "column_name": "level",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "description",
+          "data_type": "text"
+        },
+        {
+          "column_name": "display_order",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "apparatus_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "is_connected_combo",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "reference_videos",
+          "data_type": "jsonb"
+        }
+      ]
+    },
+    "skills_prerequisites": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "skill_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "prerequisite_skill_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "slot_reservations": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "date",
+          "data_type": "text"
+        },
+        {
+          "column_name": "start_time",
+          "data_type": "text"
+        },
+        {
+          "column_name": "lesson_type",
+          "data_type": "text"
+        },
+        {
+          "column_name": "session_id",
+          "data_type": "text"
+        },
+        {
+          "column_name": "expires_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    },
+    "testimonials": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "name",
+          "data_type": "character varying"
+        },
+        {
+          "column_name": "text",
+          "data_type": "text"
+        },
+        {
+          "column_name": "rating",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "featured",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp with time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp with time zone"
+        }
+      ]
+    },
+    "tips": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "title",
+          "data_type": "text"
+        },
+        {
+          "column_name": "content",
+          "data_type": "text"
+        },
+        {
+          "column_name": "sections",
+          "data_type": "jsonb"
+        },
+        {
+          "column_name": "category",
+          "data_type": "text"
+        },
+        {
+          "column_name": "difficulty",
+          "data_type": "text"
+        },
+        {
+          "column_name": "video_url",
+          "data_type": "text"
+        },
+        {
+          "column_name": "published_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    },
+    "waivers": {
+      "exists": true,
+      "columns": [
+        {
+          "column_name": "id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "booking_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "athlete_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "parent_id",
+          "data_type": "integer"
+        },
+        {
+          "column_name": "relationship_to_athlete",
+          "data_type": "text"
+        },
+        {
+          "column_name": "signature",
+          "data_type": "text"
+        },
+        {
+          "column_name": "emergency_contact_number",
+          "data_type": "text"
+        },
+        {
+          "column_name": "understands_risks",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "agrees_to_policies",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "authorizes_emergency_care",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "allows_photo_video",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "confirms_authority",
+          "data_type": "boolean"
+        },
+        {
+          "column_name": "pdf_path",
+          "data_type": "text"
+        },
+        {
+          "column_name": "ip_address",
+          "data_type": "text"
+        },
+        {
+          "column_name": "user_agent",
+          "data_type": "text"
+        },
+        {
+          "column_name": "signed_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "email_sent_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "created_at",
+          "data_type": "timestamp without time zone"
+        },
+        {
+          "column_name": "updated_at",
+          "data_type": "timestamp without time zone"
+        }
+      ]
+    }
+  }
+}

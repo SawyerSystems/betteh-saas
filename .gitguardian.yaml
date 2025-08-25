@@ -1,0 +1,26 @@
+# GitGuardian configuration file
+
+# Paths to ignore during scanning
+paths-ignore:
+  - "*.log"
+  - "*.md"
+  - "**/node_modules/**"
+  - ".venv/**"
+  - "**/__pycache__/**"
+  - ".git/**"
+  - "*.pyc"
+
+# Matches to ignore (use carefully!)
+matches-ignore:
+  # Ignore secrets in environment template files
+  - name: "Environment template files"
+    match: "*.env.example"
+
+# Verbose output for debugging
+verbose: false
+
+# Exit with code 1 if secrets are found (good for CI/CD)
+exit-zero: false
+
+# Show detected secrets even if they're ignored
+all-policies: false

@@ -1,0 +1,20 @@
+[
+  {
+    "email": "admin@coachwilltumbles.com",
+    "passwordHash": "$2b$10$dup7SMnEDhB.u0LB5ztSD.2L1YcyG7oWg3SpzPUNp102Umg4M4E22",
+    "id": 1,
+    "createdAt": "2025-07-03T07:34:48.356Z"
+  },
+  {
+    "email": "admin@coachwilltumbles.com",
+    "passwordHash": "$2b$10$AY7uJPgyNV3MWuGMzw0BWuNg5tHTNolBI6U/wRs6lq3xNvH7Fszz6",
+    "id": 2,
+    "createdAt": "2025-07-03T17:16:40.595Z"
+  },
+  {
+    "email": "admin@coachwilltumbles.com",
+    "passwordHash": "$2b$10$9dLEv7fW4dGLP42SUg3NeOxwo0RzsKk0p8uAOpMXoucCFBF.0nZhi",
+    "id": 3,
+    "createdAt": "2025-07-03T22:30:34.012Z"
+  }
+]

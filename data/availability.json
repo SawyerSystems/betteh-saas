@@ -1,0 +1,56 @@
+[
+  {
+    "dayOfWeek": 1,
+    "startTime": "09:00",
+    "endTime": "16:00",
+    "isRecurring": true,
+    "isAvailable": true,
+    "id": 8,
+    "createdAt": "2025-06-29T16:07:35.291Z"
+  },
+  {
+    "dayOfWeek": 2,
+    "startTime": "09:00",
+    "endTime": "16:00",
+    "isRecurring": true,
+    "isAvailable": true,
+    "id": 9,
+    "createdAt": "2025-06-29T16:07:50.075Z"
+  },
+  {
+    "dayOfWeek": 3,
+    "startTime": "09:00",
+    "endTime": "16:00",
+    "isRecurring": true,
+    "isAvailable": true,
+    "id": 10,
+    "createdAt": "2025-06-29T16:07:58.294Z"
+  },
+  {
+    "dayOfWeek": 4,
+    "startTime": "09:00",
+    "endTime": "15:30",
+    "isRecurring": true,
+    "isAvailable": true,
+    "id": 11,
+    "createdAt": "2025-06-29T16:08:15.582Z"
+  },
+  {
+    "dayOfWeek": 5,
+    "startTime": "09:00",
+    "endTime": "16:00",
+    "isRecurring": true,
+    "isAvailable": true,
+    "id": 12,
+    "createdAt": "2025-06-29T16:08:21.706Z"
+  },
+  {
+    "dayOfWeek": 6,
+    "startTime": "12:00",
+    "endTime": "13:30",
+    "isRecurring": true,
+    "isAvailable": true,
+    "id": 15,
+    "createdAt": "2025-06-29T16:09:21.688Z"
+  }
+]

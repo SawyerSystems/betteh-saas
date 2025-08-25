@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-06-30",
+    "startTime": "12:00",
+    "endTime": "16:00",
+    "isAvailable": false,
+    "reason": "Camp",
+    "id": 1,
+    "createdAt": "2025-06-29T16:14:03.717Z"
+  },
+  {
+    "date": "2025-07-04",
+    "startTime": "08:00",
+    "endTime": "20:00",
+    "isAvailable": false,
+    "reason": "Gym Closed",
+    "id": 5,
+    "createdAt": "2025-06-29T16:18:30.642Z"
+  },
+  {
+    "date": "2025-07-09",
+    "startTime": "08:15",
+    "endTime": "12:00",
+    "isAvailable": false,
+    "reason": "Camp",
+    "id": 6,
+    "createdAt": "2025-07-01T05:51:50.932Z"
+  },
+  {
+    "date": "2025-07-05",
+    "startTime": "08:00",
+    "endTime": "17:00",
+    "isAvailable": false,
+    "reason": "Gym Closed",
+    "id": 9,
+    "createdAt": "2025-07-02T04:23:34.334Z"
+  }
+]

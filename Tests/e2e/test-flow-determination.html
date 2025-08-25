@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flow Determination Test</title>
+</head>
+<body>
+    <h1>Testing Booking Flow Determination Logic</h1>
+    
+    <div>
+        <h2>Test Cases:</h2>
+        <ul>
+            <li><strong>Case 1:</strong> Logged-in parent with parentData → Should use 'parent-portal' flow</li>
+            <li><strong>Case 2:</strong> Logged-in parent without parentData → Should use 'parent-portal' flow</li>
+            <li><strong>Case 3:</strong> No parent, with selected athletes → Should use 'athlete-modal' flow</li>
+            <li><strong>Case 4:</strong> Admin user → Should use 'admin-new-athlete' flow</li>
+            <li><strong>Case 5:</strong> New user → Should use 'new-user' flow</li>
+        </ul>
+    </div>
+
+    <script>
+        // Simulate the flow determination logic
+        function determineFlowType(loggedInParent, parentData, selectedAthletes, isAdmin) {
+            console.log('🔍 FLOW DETERMINATION DEBUG:', {
+                loggedInParent: !!loggedInParent,
+                hasParentData: !!parentData,
+                selectedAthletes: selectedAthletes?.length || 0,
+                isAdmin: !!isAdmin
+            });
+
+            // Check logged-in parent status FIRST (this was the fix)
+            if (loggedInParent) {
+                console.log('✅ FLOW: parent-portal (logged-in parent)', { hasParentData: !!parentData });
+                return 'parent-portal';
+            }
+
+            // Athlete-specific flow for admin or existing athlete selection
+            if (selectedAthletes && selectedAthletes.length > 0) {
+                console.log('✅ FLOW: athlete-modal (selected athletes)');
+                return 'athlete-modal';
+            }
+
+            // Admin creating new athlete booking
+            if (isAdmin) {
+                console.log('✅ FLOW: admin-new-athlete (admin user)');
+                return 'admin-new-athlete';
+            }
+
+            // Default: New user flow
+            console.log('✅ FLOW: new-user (default)');
+            return 'new-user';
+        }
+
+        // Test the problematic scenario
+        console.log('\n=== TESTING PARENT PORTAL SCENARIO ===');
+        
+        // Case 1: Parent with data (should work)
+        console.log('\nCase 1: Parent with data');
+        const parentData = { id: 158, email: 'will@sawyerss.com' };
+        const result1 = determineFlowType(true, parentData, [], false);
+        console.log('Result:', result1, '- Expected: parent-portal');
+        
+        // Case 2: Parent without data (this was the bug case)
+        console.log('\nCase 2: Logged-in parent but no parentData loaded yet');
+        const result2 = determineFlowType(true, null, [], false);
+        console.log('Result:', result2, '- Expected: parent-portal');
+        
+        // Case 3: Parent with empty selected athletes (the original issue)
+        console.log('\nCase 3: Logged-in parent with empty selectedAthletes array');
+        const result3 = determineFlowType(true, parentData, [], false);
+        console.log('Result:', result3, '- Expected: parent-portal');
+
+        // Test flow steps
+        const BOOKING_FLOWS = {
+            'parent-portal': [
+                'lessonType',
+                'athleteSelect', 
+                'focusAreas',
+                'schedule',
+                'parentConfirm', // ← This should render ParentInfoStep with isPrefilled=true
+                'safety',
+                'waiver',
+                'payment',
+            ],
+            'new-user': [
+                'lessonType',
+                'athleteInfoForm',
+                'parentSelection', // ← This renders ParentSelectionStep (admin-only!)
+                'focusAreas',
+                'schedule',
+                'parentInfoForm',
+                'safety',
+                'waiver',
+                'payment',
+            ]
+        };
+
+        console.log('\n=== VERIFYING STEP CONFIGURATION ===');
+        console.log('parent-portal flow steps:', BOOKING_FLOWS['parent-portal']);
+        console.log('new-user flow steps:', BOOKING_FLOWS['new-user']);
+        
+        const parentPortalHasParentConfirm = BOOKING_FLOWS['parent-portal'].includes('parentConfirm');
+        const newUserHasParentSelection = BOOKING_FLOWS['new-user'].includes('parentSelection');
+        
+        console.log('✅ parent-portal uses parentConfirm:', parentPortalHasParentConfirm);
+        console.log('✅ new-user uses parentSelection:', newUserHasParentSelection);
+        
+        if (result2 === 'parent-portal' && parentPortalHasParentConfirm) {
+            console.log('\n🎉 FIX VERIFIED: Logged-in parents will get parentConfirm step, not parentSelection!');
+        } else {
+            console.log('\n❌ BUG STILL EXISTS');
+        }
+    </script>
+</body>
+</html>

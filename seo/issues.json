@@ -1,0 +1,28 @@
+{
+  "home": {
+    "issues": [
+      "Title/description were generic and location-inaccurate",
+      "Canonical missing",
+      "No OG/Twitter defaults",
+      "No robots meta",
+      "No sitemap reference in robots.txt"
+    ]
+  },
+  "booking": {
+    "issues": [
+      "Needs specific title/description for 'book private lessons'",
+      "Add Service schema and breadcrumbs"
+    ]
+  },
+  "contact": {
+    "issues": [
+      "Add LocalBusiness schema with full NAP and geo"
+    ]
+  },
+  "blog": {
+    "issues": [
+      "Article/BlogPosting schema for posts",
+      "BreadcrumbList schema"
+    ]
+  }
+}

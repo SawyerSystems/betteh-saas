@@ -1,0 +1,32 @@
+name: SEO & Build CI
+
+on:
+  push:
+    branches: [ codex ]
+  pull_request:
+    branches: [ codex ]
+
+jobs:
+  build-seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run check
+      - name: Build
+        env:
+          SITE_URL: "https://www.coachwilltumbles.com"
+        run: npm run build
+      - name: JSON-LD smoke test
+        run: npm run seo:jsonld
+      - name: Lint SEO metadata
+        run: npm run seo:lint
+      - name: Validate robots/sitemap
+        run: npm run seo:validate
+      - name: Install Lighthouse CI
+        run: npm i -g @lhci/cli@0.13.x
+      - name: Lighthouse CI
+        run: npm run seo:lhci

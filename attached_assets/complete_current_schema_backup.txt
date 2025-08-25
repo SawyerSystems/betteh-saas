@@ -1,0 +1,2989 @@
+Complete Schema
+-- ENUM TYPES
+CREATE TYPE payment_status AS ENUM (
+  'unpaid',
+  'reservation-pending',
+  'reservation-paid',
+  'reservation-failed',
+  'session-paid',
+  'reservation-refunded',
+  'session-refunded'
+);
+
+-- TABLE: archived_bookings
+CREATE TABLE IF NOT EXISTS archived_bookings (
+  id SERIAL PRIMARY KEY,
+  original_booking_id INTEGER,
+  parent_id INTEGER,
+  athlete_id INTEGER,
+  lesson_type_id INTEGER,
+  waiver_id INTEGER,
+  preferred_date DATE,
+  preferred_time TIME,
+  focus_areas TEXT[],
+  status TEXT,
+  payment_status TEXT,
+  attendance_status TEXT,
+  booking_method TEXT,
+  reservation_fee_paid BOOLEAN,
+  paid_amount NUMERIC(10,2),
+  stripe_session_id TEXT,
+  special_requests TEXT,
+  admin_notes TEXT,
+  dropoff_person_name TEXT,
+  dropoff_person_relationship TEXT,
+  dropoff_person_phone TEXT,
+  pickup_person_name TEXT,
+  pickup_person_relationship TEXT,
+  pickup_person_phone TEXT,
+  alt_pickup_person_name TEXT,
+  alt_pickup_person_relationship TEXT,
+  alt_pickup_person_phone TEXT,
+  safety_verification_signed BOOLEAN,
+  safety_verification_signed_at TIMESTAMP,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  archived_at TIMESTAMP DEFAULT NOW(),
+  archive_reason TEXT NOT NULL
+);
+
+[
+  {
+    "table_name": "bookings",
+    "column_name": "waiver_id",
+    "foreign_table_name": "waivers",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "foreign_table_name": "athletes",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "foreign_table_name": "athletes",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id",
+    "on_delete": "CASCADE"
+  },
+  {
+    "table_name": "booking_athletes",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id"
+  {
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "foreign_table_name": "athletes",
+    "foreign_column_name": "id",
+    "on_delete": "SET NULL"
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id",
+    "on_delete": "SET NULL"
+  },
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "gender",
+    "foreign_table_name": "genders",
+    "foreign_column_name": "name"
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "latest_waiver_id",
+    "foreign_table_name": "waivers",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "parent_id",
+    "foreign_table_name": "parents",
+    "foreign_column_name": "id"
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "lesson_type_id",
+    "foreign_table_name": "lesson_types",
+    "foreign_column_name": "id"
+  }
+]
+
+[
+  {
+    "table_name": "admins",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('admins_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "admins",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "admins",
+    "column_name": "password_hash",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "admins",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "admins",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()",
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "apparatus",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('apparatus_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "apparatus",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "apparatus",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "apparatus",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('archived_waivers_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "original_waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "athlete_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "signer_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "relationship_to_athlete",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "signature",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "emergency_contact_number",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "understands_risks",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "agrees_to_policies",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "authorizes_emergency_care",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "allows_photo_video",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "confirms_authority",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "pdf_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "ip_address",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "user_agent",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 16
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "email_sent_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 17
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "archived_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "ordinal_position": 18
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "archive_reason",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 19
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "legal_retention_period",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 20
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "original_parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 21
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "original_athlete_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 22
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "ordinal_position": 23
+  },
+  {
+    "table_name": "archived_waivers",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "ordinal_position": 24
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('athletes_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "allergies",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "experience",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "photo",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "date_of_birth",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "latest_waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "athletes",
+    "column_name": "waiver_status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": "'pending'::character varying",
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "date_of_birth",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "experience",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "allergies",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "latest_waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "athlete_waiver_status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_signature_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_signature_data",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "waiver_created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 16
+  },
+  {
+    "table_name": "athletes_with_waiver_status",
+    "column_name": "computed_waiver_status",
+    "data_type": "character varying",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 17
+  },
+  {
+    "table_name": "availability",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('availability_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "availability",
+    "column_name": "day_of_week",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "availability",
+    "column_name": "is_recurring",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "availability",
+    "column_name": "is_available",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "availability",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "availability",
+    "column_name": "start_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "availability",
+    "column_name": "end_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('availability_exceptions_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "is_available",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "reason",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "date",
+    "data_type": "date",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "start_time",
+    "data_type": "time without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "availability_exceptions",
+    "column_name": "end_time",
+    "data_type": "time without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('blog_posts_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "title",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "excerpt",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "category",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "image_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "published_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "blog_posts",
+    "column_name": "sections",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "booking_athletes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('booking_athletes_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "booking_athletes",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "booking_athletes",
+    "column_name": "athlete_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "booking_athletes",
+    "column_name": "slot_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('bookings_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "booking_method",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'Website'::text",
+    "ordinal_position": 22
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "reservation_fee_paid",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 28
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "paid_amount",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": "0.00",
+    "ordinal_position": 29
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "special_requests",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 30
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "admin_notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 31
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "dropoff_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 32
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "dropoff_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 33
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "dropoff_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 34
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 35
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 36
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 37
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "alt_pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 38
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "alt_pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 39
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "alt_pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 40
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "safety_verification_signed",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 41
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "safety_verification_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 42
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "stripe_session_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 43
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 44
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 45
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "NO",
+    "column_default": "'pending'::booking_status",
+    "ordinal_position": 46
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "payment_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "NO",
+    "column_default": "'unpaid'::payment_status",
+    "ordinal_position": 47
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "attendance_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "NO",
+    "column_default": "'pending'::attendance_status",
+    "ordinal_position": 48
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "preferred_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 49
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "preferred_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 50
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 51
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "lesson_type_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 52
+  },
+  {
+    "table_name": "bookings",
+    "column_name": "waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 53
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "booking_method",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "reservation_fee_paid",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "paid_amount",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "special_requests",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "admin_notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "dropoff_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "dropoff_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "dropoff_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "alt_pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "alt_pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "alt_pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "safety_verification_signed",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 16
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "safety_verification_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 17
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "stripe_session_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 18
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 19
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 20
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 21
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "payment_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 22
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "attendance_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 23
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "preferred_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 24
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "preferred_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 25
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 26
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "lesson_type_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 27
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 28
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "lesson_type_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 29
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "is_private",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 30
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "parent_first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 31
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "parent_last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 32
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "parent_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 33
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "parent_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 34
+  },
+  {
+    "table_name": "bookings_with_athletes",
+    "column_name": "athletes",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 35
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "preferred_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "preferred_time",
+    "data_type": "time without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "payment_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "attendance_status",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "booking_method",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "special_requests",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "admin_notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "stripe_session_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "paid_amount",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "reservation_fee_paid",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "dropoff_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "dropoff_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 16
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "dropoff_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 17
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "pickup_person_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 18
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "pickup_person_relationship",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 19
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "pickup_person_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 20
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 21
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "parent_first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 22
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "parent_last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 23
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "parent_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 24
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "parent_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 25
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "emergency_contact_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 26
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "emergency_contact_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 27
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "lesson_type_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 28
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "lesson_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 29
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "duration_minutes",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 30
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "is_private",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 31
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "total_price",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 32
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "reservation_fee",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 33
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "lesson_description",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 34
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "waiver_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 35
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "waiver_signed",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 36
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "waiver_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 37
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "waiver_signature_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 38
+  },
+  {
+    "table_name": "bookings_with_details",
+    "column_name": "athletes",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 39
+  },
+  {
+    "table_name": "focus_areas",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('focus_areas_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "focus_areas",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "focus_areas",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "focus_areas",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "genders",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('genders_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "genders",
+    "column_name": "name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "genders",
+    "column_name": "display_name",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "genders",
+    "column_name": "is_active",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "genders",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": "0",
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "genders",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "genders",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('lesson_types_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "duration_minutes",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "is_private",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "total_price",
+    "data_type": "numeric",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "reservation_fee",
+    "data_type": "numeric",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "lesson_types",
+    "column_name": "description",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "parent_auth_codes",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('parent_auth_codes_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "parent_auth_codes",
+    "column_name": "email",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "parent_auth_codes",
+    "column_name": "code",
+    "data_type": "character varying",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "parent_auth_codes",
+    "column_name": "expires_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "parent_auth_codes",
+    "column_name": "used",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "parent_auth_codes",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "parents",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('parents_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "parents",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "parents",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "parents",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "parents",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "parents",
+    "column_name": "emergency_contact_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "parents",
+    "column_name": "emergency_contact_phone",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "parents",
+    "column_name": "password_hash",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "parents",
+    "column_name": "is_verified",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": false,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "parents",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "parents",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "parent_verification_tokens",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('parent_verification_tokens_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "parent_verification_tokens",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "parent_verification_tokens",
+    "column_name": "token",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "parent_verification_tokens",
+    "column_name": "expires_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "parent_verification_tokens",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "emergency_contact_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "emergency_contact_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "total_athletes",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "athletes_with_signed_waivers",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "athletes_with_pending_waivers",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "athletes_with_expired_waivers",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "overall_waiver_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "most_recent_waiver_signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "parents_with_waiver_status",
+    "column_name": "most_recent_waiver_created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 16
+  },
+  {
+    "table_name": "side_quests",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('side_quests_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "side_quests",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "side_quests",
+    "column_name": "sort_order",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "0",
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "side_quests",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()",
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "tips",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('tips_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "tips",
+    "column_name": "title",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "tips",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "tips",
+    "column_name": "sections",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "tips",
+    "column_name": "category",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 5
+  },
+  {
+    "table_name": "tips",
+    "column_name": "difficulty",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 6
+  },
+  {
+    "table_name": "tips",
+    "column_name": "video_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "tips",
+    "column_name": "published_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "nextval('waivers_id_seq'::regclass)",
+    "ordinal_position": 1
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "booking_id",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 2
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "athlete_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 3
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "parent_id",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 4
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "relationship_to_athlete",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'Parent/Guardian'::text",
+    "ordinal_position": 7
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "signature",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 8
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "emergency_contact_number",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null,
+    "ordinal_position": 9
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "understands_risks",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 10
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "agrees_to_policies",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 11
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "authorizes_emergency_care",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 12
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "allows_photo_video",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true",
+    "ordinal_position": 13
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "confirms_authority",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false",
+    "ordinal_position": 14
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "pdf_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 15
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "ip_address",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 16
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "user_agent",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 17
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "signed_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 18
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "email_sent_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": null,
+    "ordinal_position": 19
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "created_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 20
+  },
+  {
+    "table_name": "waivers",
+    "column_name": "updated_at",
+    "data_type": "timestamp without time zone",
+    "is_nullable": "YES",
+    "column_default": "CURRENT_TIMESTAMP",
+    "ordinal_position": 21
+  }
+]
+
+-- TABLE: slot_reservations
+CREATE TABLE IF NOT EXISTS slot_reservations (
+  id SERIAL PRIMARY KEY,
+  date TEXT NOT NULL,
+  start_time TEXT NOT NULL,
+  lesson_type TEXT NOT NULL,
+  session_id TEXT NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+Triggers and Functions
+-- Trigger: Set waiver_signed to false on waiver delete
+CREATE OR REPLACE FUNCTION unset_waiver_signed_on_waiver_delete()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE athletes
+  SET waiver_signed = FALSE
+  WHERE latest_waiver_id = OLD.id;
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trg_unset_waiver_signed_on_waiver_delete ON waivers;
+
+CREATE TRIGGER trg_unset_waiver_signed_on_waiver_delete
+AFTER DELETE ON waivers
+FOR EACH ROW
+EXECUTE FUNCTION unset_waiver_signed_on_waiver_delete();
+[
+  {
+    "schemaname": "public",
+    "tablename": "admins",
+    "indexname": "admins_email_key",
+    "indexdef": "CREATE UNIQUE INDEX admins_email_key ON public.admins USING btree (email)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "admins",
+    "indexname": "admins_pkey",
+    "indexdef": "CREATE UNIQUE INDEX admins_pkey ON public.admins USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "apparatus",
+    "indexname": "apparatus_name_key",
+    "indexdef": "CREATE UNIQUE INDEX apparatus_name_key ON public.apparatus USING btree (name)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "apparatus",
+    "indexname": "apparatus_pkey",
+    "indexdef": "CREATE UNIQUE INDEX apparatus_pkey ON public.apparatus USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "archived_waivers",
+    "indexname": "archived_waivers_pkey",
+    "indexdef": "CREATE UNIQUE INDEX archived_waivers_pkey ON public.archived_waivers USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "athletes",
+    "indexname": "athletes_pkey",
+    "indexdef": "CREATE UNIQUE INDEX athletes_pkey ON public.athletes USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "athletes",
+    "indexname": "idx_athletes_parent_id",
+    "indexdef": "CREATE INDEX idx_athletes_parent_id ON public.athletes USING btree (parent_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability",
+    "indexname": "availability_pkey",
+    "indexdef": "CREATE UNIQUE INDEX availability_pkey ON public.availability USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability",
+    "indexname": "idx_availability_day_of_week",
+    "indexdef": "CREATE INDEX idx_availability_day_of_week ON public.availability USING btree (day_of_week)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability_exceptions",
+    "indexname": "availability_exceptions_pkey",
+    "indexdef": "CREATE UNIQUE INDEX availability_exceptions_pkey ON public.availability_exceptions USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "blog_posts",
+    "indexname": "blog_posts_pkey",
+    "indexdef": "CREATE UNIQUE INDEX blog_posts_pkey ON public.blog_posts USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "blog_posts",
+    "indexname": "idx_blog_posts_category",
+    "indexdef": "CREATE INDEX idx_blog_posts_category ON public.blog_posts USING btree (category)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "booking_athletes",
+    "indexname": "booking_athletes_pkey",
+    "indexdef": "CREATE UNIQUE INDEX booking_athletes_pkey ON public.booking_athletes USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "booking_athletes",
+    "indexname": "idx_booking_athletes_athlete_id",
+    "indexdef": "CREATE INDEX idx_booking_athletes_athlete_id ON public.booking_athletes USING btree (athlete_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "booking_athletes",
+    "indexname": "idx_booking_athletes_booking_id",
+    "indexdef": "CREATE INDEX idx_booking_athletes_booking_id ON public.booking_athletes USING btree (booking_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "bookings",
+    "indexname": "bookings_pkey",
+    "indexdef": "CREATE UNIQUE INDEX bookings_pkey ON public.bookings USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "bookings",
+    "indexname": "idx_bookings_stripe_session_id",
+    "indexdef": "CREATE INDEX idx_bookings_stripe_session_id ON public.bookings USING btree (stripe_session_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "focus_areas",
+    "indexname": "focus_areas_name_key",
+    "indexdef": "CREATE UNIQUE INDEX focus_areas_name_key ON public.focus_areas USING btree (name)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "focus_areas",
+    "indexname": "focus_areas_pkey",
+    "indexdef": "CREATE UNIQUE INDEX focus_areas_pkey ON public.focus_areas USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "genders",
+    "indexname": "genders_name_key",
+    "indexdef": "CREATE UNIQUE INDEX genders_name_key ON public.genders USING btree (name)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "genders",
+    "indexname": "genders_pkey",
+    "indexdef": "CREATE UNIQUE INDEX genders_pkey ON public.genders USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "genders",
+    "indexname": "idx_genders_active_sort",
+    "indexdef": "CREATE INDEX idx_genders_active_sort ON public.genders USING btree (is_active, sort_order)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "lesson_types",
+    "indexname": "lesson_types_name_key",
+    "indexdef": "CREATE UNIQUE INDEX lesson_types_name_key ON public.lesson_types USING btree (name)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "lesson_types",
+    "indexname": "lesson_types_pkey",
+    "indexdef": "CREATE UNIQUE INDEX lesson_types_pkey ON public.lesson_types USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parent_auth_codes",
+    "indexname": "parent_auth_codes_pkey",
+    "indexdef": "CREATE UNIQUE INDEX parent_auth_codes_pkey ON public.parent_auth_codes USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parents",
+    "indexname": "idx_parents_email",
+    "indexdef": "CREATE INDEX idx_parents_email ON public.parents USING btree (email)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parents",
+    "indexname": "parents_pkey",
+    "indexdef": "CREATE UNIQUE INDEX parents_pkey ON public.parents USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "side_quests",
+    "indexname": "side_quests_name_key",
+    "indexdef": "CREATE UNIQUE INDEX side_quests_name_key ON public.side_quests USING btree (name)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "side_quests",
+    "indexname": "side_quests_pkey",
+    "indexdef": "CREATE UNIQUE INDEX side_quests_pkey ON public.side_quests USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "tips",
+    "indexname": "idx_tips_category",
+    "indexdef": "CREATE INDEX idx_tips_category ON public.tips USING btree (category)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "tips",
+    "indexname": "idx_tips_difficulty",
+    "indexdef": "CREATE INDEX idx_tips_difficulty ON public.tips USING btree (difficulty)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "tips",
+    "indexname": "tips_pkey",
+    "indexdef": "CREATE UNIQUE INDEX tips_pkey ON public.tips USING btree (id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "waivers",
+    "indexname": "idx_waivers_athlete_id",
+    "indexdef": "CREATE INDEX idx_waivers_athlete_id ON public.waivers USING btree (athlete_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "waivers",
+    "indexname": "idx_waivers_booking_id",
+    "indexdef": "CREATE INDEX idx_waivers_booking_id ON public.waivers USING btree (booking_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "waivers",
+    "indexname": "idx_waivers_parent_id",
+    "indexdef": "CREATE INDEX idx_waivers_parent_id ON public.waivers USING btree (parent_id)"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "waivers",
+    "indexname": "waivers_pkey",
+    "indexdef": "CREATE UNIQUE INDEX waivers_pkey ON public.waivers USING btree (id)"
+  }
+]
+
+-- RLS status and policies for all tables
+[
+  {
+    "schemaname": "public",
+    "tablename": "admins",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "apparatus",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "archived_waivers",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "athletes",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability_exceptions",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "blog_posts",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "booking_athletes",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "bookings",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "focus_areas",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "genders",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "lesson_types",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parent_auth_codes",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parents",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "side_quests",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "tips",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "waivers",
+    "rls_enabled": true,
+    "status": "RLS ENABLED"
+  }
+]
+
+
+-- Detailed RLS policies
+[
+  {
+    "schemaname": "public",
+    "tablename": "admins",
+    "policyname": "Allow service role full access",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(auth.role() = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "admins",
+    "policyname": "Service role can manage admins",
+    "permissive": "PERMISSIVE",
+    "roles": "{service_role}",
+    "cmd": "ALL",
+    "qual": "true",
+    "with_check": "true"
+  },
+  {
+    "schemaname": "public",
+    "tablename": "apparatus",
+    "policyname": "Public read access to apparatus",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "SELECT",
+    "qual": "true",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "apparatus",
+    "policyname": "Service role can manage apparatus",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "archived_waivers",
+    "policyname": "Service role can manage archived_waivers",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "athletes",
+    "policyname": "Service role can manage athletes",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability",
+    "policyname": "Service role can manage availability",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "availability_exceptions",
+    "policyname": "Service role can manage availability_exceptions",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "blog_posts",
+    "policyname": "Service role can manage blog_posts",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "booking_athletes",
+    "policyname": "Service role can manage booking_athletes",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "bookings",
+    "policyname": "Service role can manage bookings",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "focus_areas",
+    "policyname": "Public read access to focus_areas",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "SELECT",
+    "qual": "true",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "focus_areas",
+    "policyname": "Service role can manage focus_areas",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "genders",
+    "policyname": "Public read access to genders",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "SELECT",
+    "qual": "true",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "genders",
+    "policyname": "Service role can manage genders",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "lesson_types",
+    "policyname": "Public read access to lesson_types",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "SELECT",
+    "qual": "true",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "lesson_types",
+    "policyname": "Service role can manage lesson_types",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parent_auth_codes",
+    "policyname": "Service role can manage parent_auth_codes",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "parents",
+    "policyname": "Service role can manage parents",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "side_quests",
+    "policyname": "Public read access to side_quests",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "SELECT",
+    "qual": "true",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "side_quests",
+    "policyname": "Service role can manage side_quests",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "tips",
+    "policyname": "Service role can manage tips",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  },
+  {
+    "schemaname": "public",
+    "tablename": "waivers",
+    "policyname": "Service role can manage waivers",
+    "permissive": "PERMISSIVE",
+    "roles": "{public}",
+    "cmd": "ALL",
+    "qual": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check": null
+  }
+]
+
+--  specific parents and bookings table policies
+[
+  {
+    "section": "PARENTS TABLE POLICIES",
+    "policyname": "Service role can manage parents",
+    "command": "ALL",
+    "roles": "{public}",
+    "using_expression": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check_expression": null
+  },
+  {
+    "section": "BOOKINGS TABLE POLICIES",
+    "policyname": "Service role can manage bookings",
+    "command": "ALL",
+    "roles": "{public}",
+    "using_expression": "(( SELECT auth.role() AS role) = 'service_role'::text)",
+    "with_check_expression": null
+  }
+]
+

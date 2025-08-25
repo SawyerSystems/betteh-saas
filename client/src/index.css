@@ -1,0 +1,509 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Anton&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Sidebar Animation Styles */
+@keyframes slideInFromLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slideInFromLeft {
+  animation: slideInFromLeft 0.3s ease-out forwards;
+}
+
+@keyframes slideOutToLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.animate-slideOutToLeft {
+  animation: slideOutToLeft 0.3s ease-in forwards;
+}
+
+/* Scrollbar hide utility */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 100%, 9%);
+  --muted: hsl(45, 100%, 92%);
+  --muted-foreground: hsl(240, 100%, 9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 100%, 9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 100%, 9%);
+  --border: hsl(45, 100%, 85%);
+  --input: hsl(45, 100%, 85%);
+  --primary: hsl(240, 100%, 25%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(45, 100%, 85%);
+  --secondary-foreground: hsl(240, 100%, 9%);
+  --accent: hsl(0, 89%, 47%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 89%, 47%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(45, 100%, 42%);
+  --radius: 0.5rem;
+
+  /* Coach Will Tumbles Athletic Brand Colors */
+  --cwt-gold: #D8BD2A;
+  --cwt-navy: #0F0276;
+  --cwt-red: #E10B0B;
+  --cwt-black: #000000;
+  --cwt-white: #FFFFFF;
+  
+  /* Athletic Theme Colors */
+  --athletic-gold: hsl(45, 100%, 42%);
+  --athletic-gold-light: hsl(45, 100%, 85%);
+  --athletic-navy: hsl(240, 100%, 25%);
+  --athletic-navy-light: hsl(240, 100%, 95%);
+  --athletic-red: hsl(0, 89%, 47%);
+  --athletic-red-light: hsl(0, 89%, 95%);
+  --athletic-shadow: hsla(0, 0%, 0%, 0.3);
+
+  /* Glassmorphism (Light) */
+  --glass-blur: 12px; /* 8–15px target */
+  --glass-bg: hsla(0, 0%, 100%, 0.55);
+  --glass-bg-strong: hsla(0, 0%, 100%, 0.7);
+  --glass-border: hsla(0, 0%, 100%, 0.35); /* subtle white border */
+  --glass-shadow: 0 8px 24px hsla(240, 10%, 20%, 0.12);
+  --glass-grad-1: hsla(0, 0%, 100%, 0.18);
+  --glass-grad-2: hsla(0, 0%, 100%, 0.04);
+}
+
+.dark {
+  --background: hsl(240, 100%, 9%);
+  --foreground: hsl(0, 0%, 100%);
+  --muted: hsl(240, 100%, 15%);
+  --muted-foreground: hsl(45, 100%, 85%);
+  --popover: hsl(240, 100%, 9%);
+  --popover-foreground: hsl(0, 0%, 100%);
+  --card: hsl(240, 100%, 9%);
+  --card-foreground: hsl(0, 0%, 100%);
+  --border: hsl(240, 100%, 20%);
+  --input: hsl(240, 100%, 20%);
+  --primary: hsl(45, 100%, 42%);
+  --primary-foreground: hsl(240, 100%, 9%);
+  --secondary: hsl(240, 100%, 15%);
+  --secondary-foreground: hsl(45, 100%, 85%);
+  --accent: hsl(0, 89%, 47%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 89%, 47%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(45, 100%, 42%);
+
+  /* Glassmorphism (Dark) */
+  --glass-blur: 12px;
+  --glass-bg: hsla(240, 10%, 12%, 0.55); /* translucent dark */
+  --glass-bg-strong: hsla(240, 10%, 12%, 0.7);
+  --glass-border: hsla(0, 0%, 0%, 0.45); /* subtle black border */
+  --glass-shadow: 0 8px 28px hsla(0, 0%, 0%, 0.35);
+  --glass-grad-1: hsla(240, 20%, 20%, 0.22);
+  --glass-grad-2: hsla(240, 20%, 10%, 0.06);
+}
+
+/* Athletic Typography */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Oswald', sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Athletic Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-6xl lg:text-7xl;
+    text-shadow: 2px 2px 4px var(--athletic-shadow);
+  }
+  
+  h2 {
+    @apply text-2xl md:text-4xl lg:text-5xl;
+    text-shadow: 1px 1px 2px var(--athletic-shadow);
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+    text-shadow: 1px 1px 2px var(--athletic-shadow);
+  }
+  
+  /* Athletic Body Text */
+  p, span, div {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+  }
+  
+  /* Strong Athletic Text */
+  .athletic-title {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-shadow: 2px 2px 4px var(--athletic-shadow);
+  }
+  
+  .coach-chant {
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
+
+/* Athletic Component Styles */
+@layer components {
+  /* Theme transition helper */
+  .theme-smooth {
+    transition-property: background-color, color, border-color, box-shadow, opacity, transform, backdrop-filter;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Glassmorphism surfaces */
+  .glass-surface {
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-strong {
+    background-color: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-gradient {
+    background-image: linear-gradient(135deg, var(--glass-grad-1), var(--glass-grad-2));
+    background-blend-mode: overlay;
+  }
+
+  .glass-card {
+    @apply rounded-xl;
+  }
+
+  .glass-navbar {
+    @apply sticky top-0 z-40; 
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-modal {
+    background-color: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+    backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-button {
+    background-color: var(--glass-bg);
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 12px hsla(0, 0%, 0%, 0.15);
+  }
+
+  /* Athletic Buttons */
+  .btn-athletic-gold {
+    @apply bg-[#D8BD2A] hover:bg-[#C7AA1F] text-black font-bold px-6 py-3 rounded-lg;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 8px var(--athletic-shadow);
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  .btn-athletic-gold:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px var(--athletic-shadow);
+  }
+  
+  .btn-athletic-red {
+    @apply bg-[#E10B0B] hover:bg-[#C70A0A] text-white font-bold px-6 py-3 rounded-lg;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 8px var(--athletic-shadow);
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  .btn-athletic-red:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px var(--athletic-shadow);
+  }
+  
+  .btn-athletic-navy {
+    @apply bg-[#0F0276] hover:bg-[#0A0159] text-white font-bold px-6 py-3 rounded-lg;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 8px var(--athletic-shadow);
+    transition: all 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  .btn-athletic-navy:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px var(--athletic-shadow);
+  }
+  
+  /* Athletic Cards */
+  .athletic-card {
+    @apply bg-white rounded-lg shadow-lg border-2 border-[#D8BD2A] p-6;
+    transition: all 0.3s ease;
+  }
+  
+  .athletic-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 16px var(--athletic-shadow);
+    border-color: #E10B0B;
+  }
+  
+  /* Athletic Sections */
+  .athletic-section {
+    @apply py-12 px-4;
+    border-bottom: 2px solid #D8BD2A;
+  }
+  
+  .athletic-divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-[#D8BD2A] to-transparent;
+    box-shadow: 0 1px 2px var(--athletic-shadow);
+  }
+}
+
+/* Athletic Animations */
+@layer utilities {
+  .animate-bounce-in {
+    animation: bounceIn 0.6s ease-out;
+  }
+  
+  .animate-scale-up {
+    animation: scaleUp 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-pulse-gold {
+    animation: pulseGold 2s ease-in-out infinite;
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes scaleUp {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px #D8BD2A;
+    }
+    100% {
+      box-shadow: 0 0 20px #D8BD2A, 0 0 30px #D8BD2A;
+    }
+  }
+  
+  @keyframes glowBlue {
+    0% {
+      box-shadow: 0 0 5px #0F0276;
+    }
+    100% {
+      box-shadow: 0 0 20px #0F0276, 0 0 30px #0F0276;
+    }
+  }
+  
+  @keyframes glowYellow {
+    0% {
+      box-shadow: 0 0 5px #D8BD2A;
+    }
+    100% {
+      box-shadow: 0 0 20px #D8BD2A, 0 0 30px #D8BD2A;
+    }
+  }
+  
+  .animate-glow-blue {
+    animation: glowBlue 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-glow-yellow {
+    animation: glowYellow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-logo-spin {
+    animation: logoSpin 15s ease-in-out infinite;
+  }
+  
+  .animate-logo-spin:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes logoSpin {
+    0%, 80% {
+      transform: rotate(0deg);
+    }
+    6.67%, 13.33% {
+      transform: rotate(360deg);
+    }
+    20%, 26.67% {
+      transform: rotate(720deg);
+    }
+    33.33%, 40% {
+      transform: rotate(1080deg);
+    }
+  }
+  
+  @keyframes pulseGold {
+    0%, 100% {
+      background-color: #D8BD2A;
+    }
+    50% {
+      background-color: #E10B0B;
+    }
+  }
+}
+
+/* Legacy support - maintain old color scheme references */
+.gym-gradient-blue {
+  @apply bg-gradient-to-r from-[#0F0276] to-[#1a0bb8];
+}
+
+.gym-gradient-red {
+  @apply bg-gradient-to-r from-[#E10B0B] to-[#ff1f1f];
+}
+
+.gym-gradient-gold {
+  @apply bg-gradient-to-r from-[#D8BD2A] to-[#f0d73a];
+}
+
+/* Google Places Autocomplete Dropdown Styles */
+.pac-container {
+  z-index: 9999 !important;
+  border-radius: 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  margin-top: 2px !important;
+}
+
+.pac-item {
+  cursor: pointer !important;
+  padding: 8px 12px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+.pac-item:hover {
+  background-color: #f8fafc !important;
+}
+
+.pac-item-selected {
+  background-color: #e2e8f0 !important;
+}
+
+.pac-item-query {
+  font-weight: 600 !important;
+  color: #1e293b !important;
+}
+
+.pac-matched {
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+
+.pac-item:last-child {
+  border-bottom: none !important;
+}
+
+/* Dark mode support for Google Places */
+@media (prefers-color-scheme: dark) {
+  .pac-container {
+    background-color: #1e293b !important;
+    border-color: #475569 !important;
+  }
+  
+  .pac-item {
+    color: #e2e8f0 !important;
+    border-bottom-color: #374151 !important;
+  }
+  
+  .pac-item:hover {
+    background-color: #374151 !important;
+  }
+  
+  .pac-item-selected {
+    background-color: #475569 !important;
+  }
+  
+  .pac-item-query {
+    color: #f1f5f9 !important;
+  }
+  
+  .pac-matched {
+    color: #ffffff !important;
+  }
+}

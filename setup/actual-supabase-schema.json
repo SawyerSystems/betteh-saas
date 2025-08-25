@@ -1,0 +1,190 @@
+{
+  "all_tables": [
+    "admins",
+    "apparatus",
+    "archived_bookings",
+    "archived_waivers",
+    "athletes",
+    "athletes_with_waiver_status",
+    "availability",
+    "availability_exceptions",
+    "blog_email_signups",
+    "blog_posts",
+    "booking_apparatus",
+    "booking_athletes",
+    "booking_focus_areas",
+    "booking_side_quests",
+    "booking_waiver_status",
+    "bookings",
+    "focus_areas",
+    "genders",
+    "lesson_types",
+    "parent_password_reset_tokens",
+    "parent_verification_tokens",
+    "parents",
+    "parents_with_waiver_status",
+    "side_quests",
+    "slot_reservations",
+    "tips",
+    "waivers"
+  ],
+  "auth_tables": [
+    "parent_password_reset_tokens",
+    "parent_verification_tokens"
+  ],
+  "detailed_schemas": {
+    "parent_password_reset_tokens": {
+      "columns": [
+        [
+          "id",
+          "integer",
+          "NO",
+          "nextval('parent_password_reset_tokens_id_seq'::regclass)",
+          null,
+          32,
+          0
+        ],
+        [
+          "parent_id",
+          "integer",
+          "NO",
+          null,
+          null,
+          32,
+          0
+        ],
+        [
+          "token",
+          "text",
+          "NO",
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "expires_at",
+          "timestamp with time zone",
+          "NO",
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "used",
+          "boolean",
+          "NO",
+          "false",
+          null,
+          null,
+          null
+        ],
+        [
+          "created_at",
+          "timestamp with time zone",
+          "NO",
+          "now()",
+          null,
+          null,
+          null
+        ]
+      ],
+      "constraints": [
+        [
+          "parent_password_reset_tokens_parent_id_fkey",
+          "FOREIGN KEY",
+          "parent_id",
+          "parents",
+          "id"
+        ],
+        [
+          "parent_password_reset_tokens_pkey",
+          "PRIMARY KEY",
+          "id",
+          "parent_password_reset_tokens",
+          "id"
+        ],
+        [
+          "parent_password_reset_tokens_token_key",
+          "UNIQUE",
+          "token",
+          "parent_password_reset_tokens",
+          "token"
+        ]
+      ]
+    },
+    "parent_verification_tokens": {
+      "columns": [
+        [
+          "id",
+          "integer",
+          "NO",
+          "nextval('parent_verification_tokens_id_seq'::regclass)",
+          null,
+          32,
+          0
+        ],
+        [
+          "parent_id",
+          "integer",
+          "NO",
+          null,
+          null,
+          32,
+          0
+        ],
+        [
+          "token",
+          "text",
+          "NO",
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "expires_at",
+          "timestamp without time zone",
+          "NO",
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          "created_at",
+          "timestamp without time zone",
+          "NO",
+          "now()",
+          null,
+          null,
+          null
+        ]
+      ],
+      "constraints": [
+        [
+          "parent_verification_tokens_parent_id_fkey",
+          "FOREIGN KEY",
+          "parent_id",
+          "parents",
+          "id"
+        ],
+        [
+          "parent_verification_tokens_pkey",
+          "PRIMARY KEY",
+          "id",
+          "parent_verification_tokens",
+          "id"
+        ],
+        [
+          "parent_verification_tokens_token_key",
+          "UNIQUE",
+          "token",
+          "parent_verification_tokens",
+          "token"
+        ]
+      ]
+    }
+  }
+}

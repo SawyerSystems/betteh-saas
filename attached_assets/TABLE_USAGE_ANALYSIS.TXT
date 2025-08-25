@@ -1,0 +1,248 @@
+-- 1. Basic table statistics - row counts and recent activity
+[
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "booking_apparatus",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "TABLE_DOES_NOT_EXIST"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "booking_focus_areas",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "TABLE_DOES_NOT_EXIST"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "booking_logs",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "EXISTS"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "booking_side_quests",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "TABLE_DOES_NOT_EXIST"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "email_logs",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "EXISTS"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "parent_auth_codes",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "EXISTS"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "payment_logs",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "EXISTS"
+  },
+  {
+    "analysis_type": "TABLE_STATS",
+    "table_name": "slot_reservations",
+    "total_rows": 0,
+    "recent_rows_30_days": 0,
+    "table_status": "EXISTS"
+  }
+]
+
+-- 2. Check for foreign key relationships and constraints (only existing tables)
+[
+  {
+    "analysis_type": "FOREIGN_KEYS",
+    "table_name": "booking_logs",
+    "constraint_name": "booking_logs_booking_id_fkey",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_type": "FOREIGN KEY"
+  },
+  {
+    "analysis_type": "FOREIGN_KEYS",
+    "table_name": "booking_logs",
+    "constraint_name": "fk_booking_logs_booking",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_type": "FOREIGN KEY"
+  },
+  {
+    "analysis_type": "FOREIGN_KEYS",
+    "table_name": "payment_logs",
+    "constraint_name": "fk_payment_logs_booking",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_type": "FOREIGN KEY"
+  },
+  {
+    "analysis_type": "FOREIGN_KEYS",
+    "table_name": "payment_logs",
+    "constraint_name": "payment_logs_booking_id_fkey",
+    "column_name": "booking_id",
+    "foreign_table_name": "bookings",
+    "foreign_column_name": "id",
+    "constraint_type": "FOREIGN KEY"
+  }
+]
+
+-- 3. Check if tables are referenced by other tables (only existing tables)
+Success. No rows returned
+
+-- 4. Check if lookup tables exist (for context about missing junction tables)
+[
+  {
+    "analysis_type": "MISSING_JUNCTION_TABLES",
+    "missing_tables": "booking_apparatus, booking_focus_areas, booking_side_quests",
+    "status": "These junction tables do not exist in the database",
+    "apparatus_status": "apparatus table exists",
+    "focus_areas_status": "focus_areas table exists",
+    "side_quests_status": "side_quests table exists"
+  }
+]
+
+-- 5. Analyze logging tables for recent activity patterns (only existing tables)
+[
+  {
+    "analysis_type": "LOGGING_ANALYSIS",
+    "table_name": "booking_logs",
+    "total_logs": 0,
+    "unique_action_types": 0,
+    "action_types": null,
+    "earliest_log": null,
+    "latest_log": null,
+    "logs_last_7_days": 0
+  },
+  {
+    "analysis_type": "LOGGING_ANALYSIS",
+    "table_name": "email_logs",
+    "total_logs": 0,
+    "unique_action_types": 0,
+    "action_types": null,
+    "earliest_log": null,
+    "latest_log": null,
+    "logs_last_7_days": 0
+  },
+  {
+    "analysis_type": "LOGGING_ANALYSIS",
+    "table_name": "payment_logs",
+    "total_logs": 0,
+    "unique_action_types": 0,
+    "action_types": null,
+    "earliest_log": null,
+    "latest_log": null,
+    "logs_last_7_days": 0
+  }
+]
+
+-- 6. Check parent authentication usage
+ERROR:  42703: column "used_at" does not exist
+LINE 7:   COUNT(*) FILTER (WHERE used_at IS NOT NULL) as used_codes,
+                                 ^
+HINT:  Perhaps you meant to reference the column "parent_auth_codes.used".
+
+-- 7. Analyze slot reservations
+ERROR:  42703: column "booking_id" does not exist
+LINE 7:   COUNT(*) FILTER (WHERE booking_id IS NOT NULL) as confirmed_reservations,
+                                 ^
+
+-- 8. Final recommendations based on analysis
+[
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "booking_apparatus",
+    "recommendation": "DROP - Table does not exist, junction table not implemented",
+    "purpose": "Junction table for booking relationships (NOT IMPLEMENTED)",
+    "existence_status": "TABLE_MISSING"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "booking_focus_areas",
+    "recommendation": "DROP - Table does not exist, junction table not implemented",
+    "purpose": "Junction table for booking relationships (NOT IMPLEMENTED)",
+    "existence_status": "TABLE_MISSING"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "booking_logs",
+    "recommendation": "CONSIDER_DROP - No logging data, but useful for auditing",
+    "purpose": "Logging/audit table for system monitoring",
+    "existence_status": "TABLE_EXISTS"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "booking_side_quests",
+    "recommendation": "DROP - Table does not exist, junction table not implemented",
+    "purpose": "Junction table for booking relationships (NOT IMPLEMENTED)",
+    "existence_status": "TABLE_MISSING"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "email_logs",
+    "recommendation": "CONSIDER_DROP - No email logging, but useful for troubleshooting",
+    "purpose": "Logging/audit table for system monitoring",
+    "existence_status": "TABLE_EXISTS"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "parent_auth_codes",
+    "recommendation": "KEEP - Essential for parent authentication system",
+    "purpose": "Authentication system table",
+    "existence_status": "TABLE_EXISTS"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "payment_logs",
+    "recommendation": "CONSIDER_DROP - No payment logging, but useful for financial auditing",
+    "purpose": "Logging/audit table for system monitoring",
+    "existence_status": "TABLE_EXISTS"
+  },
+  {
+    "analysis_type": "RECOMMENDATIONS",
+    "table_name": "slot_reservations",
+    "recommendation": "CONSIDER_DROP - No reservations, may not be implemented",
+    "purpose": "Booking flow management table",
+    "existence_status": "TABLE_EXISTS"
+  }
+]
+
+-- 9. SUMMARY: Tables that exist vs requested
+[
+  {
+    "analysis_type": "ACTION_ITEMS",
+    "action_priority": 1,
+    "action_description": "IMMEDIATE: Remove references to booking_apparatus, booking_focus_areas, booking_side_quests from application code"
+  },
+  {
+    "analysis_type": "ACTION_ITEMS",
+    "action_priority": 2,
+    "action_description": "REVIEW: Check if apparatus/focus_areas/side_quests functionality is needed and implement properly"
+  },
+  {
+    "analysis_type": "ACTION_ITEMS",
+    "action_priority": 3,
+    "action_description": "MONITOR: Review logging tables (booking_logs, email_logs, payment_logs) for actual usage"
+  },
+  {
+    "analysis_type": "ACTION_ITEMS",
+    "action_priority": 4,
+    "action_description": "MAINTAIN: Keep parent_auth_codes and slot_reservations as they are essential for authentication and booking flow"
+  },
+  {
+    "analysis_type": "ACTION_ITEMS",
+    "action_priority": 5,
+    "action_description": "CONSIDER: Add created_at column to email_logs for better monitoring and debugging"
+  }
+]

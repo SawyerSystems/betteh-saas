@@ -1,0 +1,188 @@
+{
+  "extraction_date": "2025-08-02T03:52:44.228520",
+  "batch_type": "authentication_tables",
+  "tables": {
+    "parent_password_reset_tokens": {
+      "columns": [
+        [
+          "id",
+          "integer",
+          "NO",
+          "nextval('parent_password_reset_tokens_id_seq'::regclass)",
+          null,
+          32,
+          0,
+          1
+        ],
+        [
+          "parent_id",
+          "integer",
+          "NO",
+          null,
+          null,
+          32,
+          0,
+          2
+        ],
+        [
+          "token",
+          "text",
+          "NO",
+          null,
+          null,
+          null,
+          null,
+          3
+        ],
+        [
+          "expires_at",
+          "timestamp with time zone",
+          "NO",
+          null,
+          null,
+          null,
+          null,
+          4
+        ],
+        [
+          "used",
+          "boolean",
+          "NO",
+          "false",
+          null,
+          null,
+          null,
+          5
+        ],
+        [
+          "created_at",
+          "timestamp with time zone",
+          "NO",
+          "now()",
+          null,
+          null,
+          null,
+          6
+        ]
+      ],
+      "constraints": [
+        [
+          "parent_password_reset_tokens_parent_id_fkey",
+          "FOREIGN KEY",
+          "parent_id",
+          "parents",
+          "id",
+          "NO ACTION",
+          "CASCADE"
+        ],
+        [
+          "parent_password_reset_tokens_pkey",
+          "PRIMARY KEY",
+          "id",
+          "parent_password_reset_tokens",
+          "id",
+          null,
+          null
+        ],
+        [
+          "parent_password_reset_tokens_token_key",
+          "UNIQUE",
+          "token",
+          "parent_password_reset_tokens",
+          "token",
+          null,
+          null
+        ]
+      ],
+      "policies": [],
+      "triggers": [],
+      "row_count": 0
+    },
+    "parent_verification_tokens": {
+      "columns": [
+        [
+          "id",
+          "integer",
+          "NO",
+          "nextval('parent_verification_tokens_id_seq'::regclass)",
+          null,
+          32,
+          0,
+          1
+        ],
+        [
+          "parent_id",
+          "integer",
+          "NO",
+          null,
+          null,
+          32,
+          0,
+          2
+        ],
+        [
+          "token",
+          "text",
+          "NO",
+          null,
+          null,
+          null,
+          null,
+          3
+        ],
+        [
+          "expires_at",
+          "timestamp without time zone",
+          "NO",
+          null,
+          null,
+          null,
+          null,
+          4
+        ],
+        [
+          "created_at",
+          "timestamp without time zone",
+          "NO",
+          "now()",
+          null,
+          null,
+          null,
+          5
+        ]
+      ],
+      "constraints": [
+        [
+          "parent_verification_tokens_parent_id_fkey",
+          "FOREIGN KEY",
+          "parent_id",
+          "parents",
+          "id",
+          "NO ACTION",
+          "CASCADE"
+        ],
+        [
+          "parent_verification_tokens_pkey",
+          "PRIMARY KEY",
+          "id",
+          "parent_verification_tokens",
+          "id",
+          null,
+          null
+        ],
+        [
+          "parent_verification_tokens_token_key",
+          "UNIQUE",
+          "token",
+          "parent_verification_tokens",
+          "token",
+          null,
+          null
+        ]
+      ],
+      "policies": [],
+      "triggers": [],
+      "row_count": 0
+    }
+  }
+}

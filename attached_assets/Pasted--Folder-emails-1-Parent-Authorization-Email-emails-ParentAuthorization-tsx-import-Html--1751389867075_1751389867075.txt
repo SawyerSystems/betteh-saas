@@ -1,0 +1,184 @@
+// Folder: emails/
+
+// 1. Parent Authorization Email — emails/ParentAuthorization.tsx
+import { Html, Text, Heading, Section, Container } from 'react-email';
+
+export function ParentAuthorization({ parentName, authCode }: { parentName: string; authCode: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#3B82F6', fontSize: '24px' }}>🗝️ Access Code to Begin Your Journey</Heading>
+        <Text>Hi {parentName},</Text>
+        <Text>Welcome to the Tumbleverse! You're one step closer to unlocking your athlete's next level.</Text>
+        <Text style={{ fontSize: '18px', fontWeight: 'bold' }}>Your Access Code: {authCode}</Text>
+        <Text>This code expires in 10 minutes. Let the journey begin!</Text>
+      </Container>
+    </Html>
+  );
+}
+
+// 2. Session Confirmation — emails/SessionConfirmation.tsx
+import { Html, Text, Heading, Section, Container } from 'react-email';
+
+export function SessionConfirmation({ parentName, athleteName, sessionDate, sessionTime }: { parentName: string; athleteName: string; sessionDate: string; sessionTime: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#10B981' }}>✅ Session Confirmed!</Heading>
+        <Text>Hi {parentName},</Text>
+        <Text>Your session with {athleteName} is locked in for {sessionDate} at {sessionTime}.</Text>
+        <Text>🎒 Pro Tip: Stretch and hydrate before training for max XP!</Text>
+        <Text>We’re pumped to see y’all on the mats.</Text>
+      </Container>
+    </Html>
+  );
+}
+
+// 3. Manual Booking Confirmation — emails/ManualBookingConfirmation.tsx
+import { Html, Text, Heading, Section, Container, Button } from 'react-email';
+
+export function ManualBookingConfirmation({ parentName, confirmLink }: { parentName: string; confirmLink: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#F59E0B' }}>⚠️ Action Required: Confirm Your Session</Heading>
+        <Text>Hey {parentName},</Text>
+        <Text>Coach Will has scheduled a session just for you. Hit the button below to confirm and complete your booking quest:</Text>
+        <Button href={confirmLink} style={{ backgroundColor: '#F59E0B', color: '#fff', padding: '10px 20px', borderRadius: '5px', textDecoration: 'none' }}>Confirm My Session</Button>
+        <Text>If you didn’t request this, no worries — you can ignore it.</Text>
+      </Container>
+    </Html>
+  );
+}
+
+// 4. Waiver Reminder — emails/WaiverReminder.tsx
+import { Html, Text, Heading, Section, Container, Button } from 'react-email';
+
+export function WaiverReminder({ parentName, waiverLink }: { parentName: string; waiverLink: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#EF4444' }}>📜 Complete Your Training Scroll</Heading>
+        <Text>Hey {parentName},</Text>
+        <Text>You’re almost ready to begin your training journey — but we still need your waiver to activate your hero’s badge.</Text>
+        <Button href={waiverLink} style={{ backgroundColor: '#EF4444', color: '#fff', padding: '10px 20px', borderRadius: '5px', textDecoration: 'none' }}>Complete the Waiver</Button>
+      </Container>
+    </Html>
+  );
+}
+
+// 5. Session Reminder — emails/SessionReminder.tsx
+import { Html, Text, Heading, Container } from 'react-email';
+
+export function SessionReminder({ athleteName, sessionDate, sessionTime }: { athleteName: string; sessionDate: string; sessionTime: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#6366F1' }}>⏰ Adventure Incoming!</Heading>
+        <Text>{athleteName} has a session on {sessionDate} at {sessionTime}.</Text>
+        <Text>🧘‍♀️ Don’t forget to stretch, hydrate, and bring that warrior mindset!</Text>
+      </Container>
+    </Html>
+  );
+}
+
+// 6. Session Cancellation Notice — emails/SessionCancellation.tsx
+import { Html, Text, Heading, Container, Button } from 'react-email';
+
+export function SessionCancellation({ parentName, rescheduleLink }: { parentName: string; rescheduleLink: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#DC2626' }}>❌ Session Cancelled</Heading>
+        <Text>Hi {parentName},</Text>
+        <Text>Your session has been cancelled. But don’t worry — the journey continues!</Text>
+        <Button href={rescheduleLink} style={{ backgroundColor: '#DC2626', color: '#fff', padding: '10px 20px', borderRadius: '5px' }}>Reschedule Now</Button>
+      </Container>
+    </Html>
+  );
+}
+
+// 7. Reschedule Confirmation — emails/RescheduleConfirmation.tsx
+import { Html, Text, Heading, Container } from 'react-email';
+
+export function RescheduleConfirmation({ newSessionDate, newSessionTime }: { newSessionDate: string; newSessionTime: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#4ADE80' }}>🔄 New Adventure Scheduled!</Heading>
+        <Text>Your session has been successfully rescheduled.</Text>
+        <Text>🗓️ New Date: {newSessionDate}</Text>
+        <Text>🕓 New Time: {newSessionTime}</Text>
+      </Container>
+    </Html>
+  );
+}
+
+// 8. Session Follow-Up — emails/SessionFollowUp.tsx
+import { Html, Text, Heading, Container, Button } from 'react-email';
+
+export function SessionFollowUp({ athleteName, bookingLink }: { athleteName: string; bookingLink: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#0EA5E9' }}>🏆 Training with Coach Will!</Heading>
+        <Text>{athleteName} crushed it today! Time to rest, recharge, and prepare for the next challenge.</Text>
+        <Button href={bookingLink} style={{ backgroundColor: '#0EA5E9', color: '#fff', padding: '10px 20px', borderRadius: '5px' }}>Book Your Next Session</Button>
+      </Container>
+    </Html>
+  );
+}
+
+// 9. Birthday Email — emails/BirthdayEmail.tsx
+import { Html, Text, Heading, Container } from 'react-email';
+
+export function BirthdayEmail({ athleteName }: { athleteName: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Comic Sans MS, cursive' }}>
+        <Heading style={{ color: '#F472B6' }}>🎉 Happy Birthday, {athleteName}!</Heading>
+        <Text>Another year stronger, faster, and braver — the hero’s path continues!</Text>
+        <Text>🎂 May your flips be high, your landings clean, and your cake magical!</Text>
+        <Text>We’re cheering for you loud from the Tumbleverse 🥳</Text>
+      </Container>
+    </Html>
+  );
+}
+
+// 10. New Tip or Blog Post — emails/NewTipOrBlog.tsx
+import { Html, Text, Heading, Container, Button } from 'react-email';
+
+export function NewTipOrBlog({ blogTitle, blogLink }: { blogTitle: string; blogLink: string }) {
+  return (
+    <Html>
+      <Container style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <Heading style={{ color: '#8B5CF6' }}>✨ New Tip Unlocked!</Heading>
+        <Text>{blogTitle} is now live on the Tumbleverse journal. Time to level up your training knowledge.</Text>
+        <Button href={blogLink} style={{ backgroundColor: '#8B5CF6', color: '#fff', padding: '10px 20px', borderRadius: '5px' }}>View the Tip</Button>
+      </Container>
+    </Html>
+  );
+}
+
+// ----------------------------
+// 📤 How to Send with Resend
+// ----------------------------
+// Example using render() + Resend's SDK
+// In your server or API route:
+
+/*
+import { render } from '@react-email/render';
+import { SessionConfirmation } from './emails/SessionConfirmation';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const html = render(<SessionConfirmation parentName="Lena" athleteName="Kai" sessionDate="July 4" sessionTime="2:00 PM" />);
+
+await resend.emails.send({
+  from: 'coach@coachwilltumbles.com',
+  to: 'parent@email.com',
+  subject: '✅ Session Confirmed! — Coach Will Tumbles',
+  html,
+});
+*/

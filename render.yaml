@@ -1,0 +1,27 @@
+services:
+  # Main web service for the full-stack application
+  - type: web
+    name: coachwilltumbles
+    runtime: node
+    env: node
+    plan: starter
+    buildCommand: npm run build:render
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # These will need to be set manually in Render dashboard:
+      # - SUPABASE_URL
+      # - SUPABASE_ANON_KEY  
+      # - SUPABASE_SERVICE_ROLE_KEY
+      # - STRIPE_SECRET_KEY
+      # - STRIPE_WEBHOOK_SECRET
+      # - RESEND_API_KEY
+      # - SESSION_SECRET
+      # - ADMIN_EMAIL
+      # - ADMIN_PASSWORD
+      # - BASE_URL (set to your Render app URL)
+
+# Note: This application uses Supabase as the database.
+# No additional database service needed in Render.

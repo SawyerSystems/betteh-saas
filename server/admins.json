@@ -1,0 +1,14 @@
+[
+  {
+    "email": "admin@coachwilltumbles.com",
+    "passwordHash": "$2b$10$HO4yBGHe.jTCGfiJB4HZK.1kq.JcMV/2AGPPps69Vpi6Mzo4I57re",
+    "id": 1,
+    "createdAt": "2025-06-30T17:21:52.146Z"
+  },
+  {
+    "email": "admin@coachwilltumbles.com",
+    "passwordHash": "$2b$10$vt7RhAADzWPY5z2ZtW/JRepZlyHAztDuciPFPGC3/Ez04.k5cbHvS",
+    "id": 2,
+    "createdAt": "2025-06-30T17:28:23.999Z"
+  }
+]

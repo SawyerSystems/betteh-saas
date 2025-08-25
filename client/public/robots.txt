@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# Allow crawling; point to sitemap
+Sitemap: https://www.coachwilltumbles.com/sitemap.xml

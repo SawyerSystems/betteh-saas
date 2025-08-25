@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { MapPin, Phone, Mail, Clock, Instagram, Youtube, MessageCircle, Facebook } from "lucide-react";
 import cwtLogo from "/assets/betteh_logo_black_font.png";
+import bettehTextLogo from "/assets/betteh_textlogo_black_font.png";
 
 interface HourSchedule {
   available: boolean;
@@ -167,18 +168,14 @@ export function Footer() {
       </div>
       
   <div className="container mx-auto px-4 py-12 relative z-10">
-        {/* Header Section with Logo and Description */}
+        {/* Header Section with Text Logo */}
         <div className="mb-12 text-center">
-          <div className="flex items-center justify-center space-x-3 mb-6">
+          <div className="mb-6 flex justify-center">
             <img 
-              src={cwtLogo} 
+              src={bettehTextLogo} 
               alt="Betteh" 
-              className="w-12 h-12"
+              className="h-12 dark:invert"
             />
-            <h3 className="text-lg font-bold">
-              <span className="text-blue-600">BETT</span>
-              <span className="text-green-600">EH</span>
-            </h3>
           </div>
           <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed max-w-2xl mx-auto mb-6">
             The complete coaching business management platform. Streamline bookings, track athlete progress, and grow your coaching business with intelligent tools designed for modern coaches.

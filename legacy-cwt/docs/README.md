@@ -1,19 +1,18 @@
 # Betteh - Multi-Tenant Gymnastics SaaS Platform
 
-A comprehensive multi-tenant SaaS platform for gymnastics coaches to manage their athletes, bookings, and business operations. Successfully migrated from the single-tenant "Coach Will Tumbles" platform.
+A multi-tenant SaaS platform for gymnastics coaches to manage their athletes, bookings, and business operations.
 
 ## 🎯 Vision
 
-Transform gymnastics coaching with a scalable SaaS platform that supports both individual coaches and large gym organizations with sophisticated multi-tenant architecture.
+Transform the single-tenant "Coach Will Tumbles" application into "Betteh" - a comprehensive SaaS platform serving multiple gymnastics coaches and their communities.
 
 ## 🏗️ Architecture
 
 - **Frontend**: React + TypeScript + Tailwind CSS + TanStack Query
-- **Backend**: Express.js + Supabase PostgreSQL with Row Level Security
-- **Multi-Tenant**: Complete tenant isolation with organizational hierarchy support
-- **Authentication**: Dual auth system (Admin + Parent) with 9 role types
-- **Payments**: Stripe integration with seat-based billing
-- **Storage**: Supabase Storage with tenant-scoped access
+- **Backend**: Express.js + Supabase PostgreSQL
+- **Authentication**: Supabase Auth with JWT + Row Level Security
+- **Payments**: Stripe Connect for multi-tenant payouts
+- **Storage**: Supabase Storage with tenant isolation
 
 ## 🚀 Quick Start
 
@@ -27,51 +26,47 @@ cp .env.example .env
 
 # Start development servers
 npm run dev:clean
-
-# Create admin account
-node saas-setup/scripts/create-admin-quick.mjs
 ```
 
 ## 📊 Migration Progress
 
-**Current Status: Phase 1.5 Complete - 60% Overall**
+**Current Status: 35% Complete**
 
-- ✅ **Phase 1.0**: Database Foundation (100% Complete)
-- ✅ **Phase 1.5**: Enhanced User Types & Plans (100% Complete)
-- � **Phase 2.0**: Frontend Integration (In Progress)
-- ⏳ **Phase 3.0**: Authentication Enhancement
-- ⏳ **Phase 4.0**: Billing Integration
-- ⏳ **Phase 5.0**: Advanced Features
+- ✅ **Phase 1**: Database Foundation (100% Complete)
+- ✅ **Phase 2**: JWT & Authentication (100% Complete)  
+- 🔄 **Phase 3**: Branding System (Next Up)
+- ⏳ **Phase 4**: Tenant Routing
+- ⏳ **Phase 5**: Platform Features
+- ⏳ **Phase 6**: Billing Integration
 
-See `saas-setup/docs/BETTEH_SAAS_MIGRATION_PLAN.md` for detailed migration roadmap.
+See `BETTEH_SAAS_MIGRATION_PLAN.md` for detailed migration roadmap.
 
 ## 🔑 Key Features
 
-### ✅ Individual Coaches
-- Solo coaching operations with assistant support
-- Complete athlete and booking management
-- Video analysis and progress tracking
-- Integrated payment processing
+### For Platform Admins
+- Multi-tenant management
+- Usage analytics and billing
+- Coach onboarding and support
 
-### ✅ Gym Organizations
-- Multi-coach facilities with role hierarchies
-- Location-based staff assignments
-- Franchise/multi-location support
-- Seat-based billing for scalable revenue
+### For Coaches
+- Complete athlete management
+- Booking and scheduling system
+- Progress tracking and videos
+- Payment processing
+- Custom branding
 
-### ✅ Advanced Multi-Tenant Features
-- **9 Role Types**: Platform Admin → Gym Owner → Head Coach → Assistant Coach → Front Desk → Parent → Athlete
-- **65+ Permissions**: Granular role-based access control
-- **Organization Hierarchy**: Parent-child tenant relationships
-- **Multi-Location Support**: Staff assignments across locations
+### For Parents
+- Easy booking interface
+- Progress visibility
+- Secure payments
+- Digital waivers
 
 ## 🏢 Multi-Tenant Architecture
 
-- **Tenant Types**: Individual coaches and organizational gyms
-- **Complete Isolation**: Row Level Security (RLS) ensures data separation
-- **Custom Domains**: `coach-name.betteh.app` subdomains (planned)
-- **Organizational Hierarchy**: Support for franchise operations
-- **Seat-Based Billing**: Scalable revenue model for organizations
+- **Tenant Isolation**: Row Level Security (RLS) ensures complete data separation
+- **Custom Domains**: `coach-name.betteh.app` subdomains
+- **Role-Based Access**: Platform Admin → Coach Admin → Coach Staff → Parent → Athlete
+- **Billing**: Per-tenant Stripe Connect accounts with platform fees
 
 ## 🛠️ Development
 
@@ -85,40 +80,20 @@ npm run db:push
 # Production build
 npm run build
 
-# Start development
-npm run dev:clean
-
-# Create admin account
-node saas-setup/scripts/create-admin-quick.mjs
-
-# Run test suites
-node saas-tests/database/test-schema.mjs
-node saas-tests/api/test-phase-1.5-api.mjs
+# Run tests
+npm run test
 ```
 
 ## 📁 Project Structure
 
 ```
-├── client/           # React frontend application
-├── server/           # Express.js backend API  
-├── shared/           # Shared types and schema (Drizzle ORM)
-├── emails/           # Email templates (React Email)
-├── migrations/       # Database migration scripts
-├── scripts/          # Utility scripts
-├── saas-setup/       # SaaS platform setup and documentation
-│   ├── migrations/   # SaaS-specific database migrations
-│   ├── scripts/      # Setup and utility scripts
-│   └── docs/         # SaaS documentation and guides
-├── saas-tests/       # SaaS platform test suites
-│   ├── api/          # API endpoint tests
-│   ├── database/     # Database and schema tests
-│   └── auth/         # Authentication tests
-└── legacy-cwt/       # Original Coach Will Tumbles platform files
-    ├── setup/        # Legacy setup documentation
-    ├── Tests/        # Legacy test suites
-    ├── migrations/   # Legacy SQL migrations
-    ├── scripts/      # Legacy utility scripts
-    └── docs/         # Legacy documentation
+├── client/          # React frontend application
+├── server/          # Express.js backend API
+├── shared/          # Shared types and utilities
+├── emails/          # Email templates (React Email)
+├── migrations/      # Database migration scripts
+├── scripts/         # Utility and setup scripts
+└── attached_assets/ # Database schema and reference files
 ```
 
 ## 🔒 Security

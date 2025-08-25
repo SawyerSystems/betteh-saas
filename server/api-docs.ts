@@ -16,10 +16,21 @@ export function setupApiDocs(app: Express) {
         "POST /api/parent-auth/verify-code": "Verify magic code and login",
         "GET /api/parent-auth/status": "Check parent auth status"
       },
-      "Multi-Tenant (NEW)": {
+      "Multi-Tenant": {
         "GET /api/test/service-role": "Test service role database access",
-        "POST /api/tenant/invitations": "Create tenant invitations (Coming Soon)",
-        "GET /api/tenant/settings": "Get tenant settings (Coming Soon)"
+        "GET /api/tenants": "List all tenants with plans and statistics",
+        "POST /api/tenants": "Create new tenant (individual or organization)",
+        "PUT /api/tenants/:id": "Update tenant information and settings",
+        "GET /api/tenants/:tenantId/users": "List all users assigned to a tenant with roles",
+        "POST /api/tenants/:tenantId/users": "Assign user to tenant with specific role",
+        "GET /api/tenants/:tenantId/locations": "List all locations for a tenant",
+        "POST /api/tenants/:tenantId/locations": "Create new location for tenant",
+        "GET /api/tenants/:tenantId/staff-locations": "List staff-location assignments",
+        "GET /api/organizations/:parentId/children": "Get organization hierarchy children",
+        "POST /api/organizations/hierarchy": "Create organization hierarchy relationship",
+        "GET /api/feature-plans": "List available feature plans",
+        "GET /api/roles/permissions": "Get role permissions and capabilities",
+        "GET /api/admin/tenant-analytics": "Get comprehensive tenant analytics"
       },
       "Bookings": {
         "GET /api/admin/bookings": "Get all bookings (Admin)",
@@ -171,10 +182,22 @@ export function setupApiDocs(app: Express) {
         <span class="method">GET</span> <code>/api/auth/test</code> - <span class="status complete">NEW</span> Test Supabase auth middleware
     </div>
 
-    <h2>🏢 Multi-Tenant (NEW)</h2>
+    <h2>🏢 Multi-Tenant</h2>
     <div class="endpoint">
         <span class="method">GET</span> <code>/api/test/service-role</code> - <span class="status complete">ACTIVE</span> Test service role database access<br>
-        <span class="method">POST</span> <code>/api/tenant/invitations</code> - <span class="status pending">COMING SOON</span> Create tenant invitations
+        <span class="method">GET</span> <code>/api/tenants</code> - <span class="status complete">NEW</span> List all tenants with plans and statistics<br>
+        <span class="method">POST</span> <code>/api/tenants</code> - <span class="status complete">NEW</span> Create new tenant (individual or organization)<br>
+        <span class="method">PUT</span> <code>/api/tenants/:id</code> - <span class="status complete">NEW</span> Update tenant information and settings<br>
+        <span class="method">GET</span> <code>/api/tenants/:tenantId/users</code> - <span class="status complete">NEW</span> List all users assigned to a tenant with roles<br>
+        <span class="method">POST</span> <code>/api/tenants/:tenantId/users</code> - <span class="status complete">NEW</span> Assign user to tenant with specific role<br>
+        <span class="method">GET</span> <code>/api/tenants/:tenantId/locations</code> - <span class="status complete">NEW</span> List all locations for a tenant<br>
+        <span class="method">POST</span> <code>/api/tenants/:tenantId/locations</code> - <span class="status complete">NEW</span> Create new location for tenant<br>
+        <span class="method">GET</span> <code>/api/tenants/:tenantId/staff-locations</code> - <span class="status complete">NEW</span> List staff-location assignments<br>
+        <span class="method">GET</span> <code>/api/organizations/:parentId/children</code> - <span class="status complete">NEW</span> Get organization hierarchy children<br>
+        <span class="method">POST</span> <code>/api/organizations/hierarchy</code> - <span class="status complete">NEW</span> Create organization hierarchy relationship<br>
+        <span class="method">GET</span> <code>/api/feature-plans</code> - <span class="status complete">NEW</span> List available feature plans<br>
+        <span class="method">GET</span> <code>/api/roles/permissions</code> - <span class="status complete">NEW</span> Get role permissions and capabilities<br>
+        <span class="method">GET</span> <code>/api/admin/tenant-analytics</code> - <span class="status complete">NEW</span> Get comprehensive tenant analytics
     </div>
 
     <h2>📅 Bookings</h2>
@@ -215,6 +238,7 @@ export function setupApiDocs(app: Express) {
     <p><span class="status complete">✅ Database Foundation (100%)</span> - RLS, JWT claims, tenant isolation</p>
     <p><span class="status complete">✅ Authentication (100%)</span> - Supabase Auth + dual middleware</p>
     <p><span class="status complete">✅ Backend Infrastructure (100%)</span> - Service role, policies, triggers</p>
+    <p><span class="status complete">✅ Multi-Tenant API (100%)</span> - 14 new endpoints for Phase 1.5 features</p>
     <p><span class="status pending">🚧 Frontend Integration</span> - Supabase Auth client setup</p>
     <p><span class="status pending">🚧 Branding System</span> - Replace hardcoded references</p>
 

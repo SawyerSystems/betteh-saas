@@ -12508,6 +12508,481 @@ setTimeout(async () => {
     }
   });
 
+  // =============================================================================
+  // PHASE 1.5: ENHANCED MULTI-TENANT API ENDPOINTS
+  // =============================================================================
+
+  // TENANT MANAGEMENT ENDPOINTS
+  app.get('/api/tenants', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { data: tenants, error } = await supabaseAdmin
+        .from('tenants')
+        .select(`
+          id,
+          name,
+          slug,
+          status,
+          tenant_type,
+          parent_tenant_id,
+          coach_count,
+          timezone,
+          stripe_customer_id,
+          plan_id,
+          created_at,
+          feature_plans (
+            id,
+            name,
+            tier,
+            price,
+            billing_period,
+            max_coaches,
+            features
+          )
+        `)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        tenants: tenants || [],
+        count: tenants?.length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching tenants:', error);
+      res.status(500).json({ error: 'Failed to fetch tenants' });
+    }
+  });
+
+  app.post('/api/tenants', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { name, slug, tenant_type = 'individual', parent_tenant_id, plan_id, timezone = 'UTC' } = req.body;
+
+      if (!name || !slug) {
+        return res.status(400).json({ error: 'Name and slug are required' });
+      }
+
+      const { data: tenant, error } = await supabaseAdmin
+        .from('tenants')
+        .insert({
+          name,
+          slug,
+          tenant_type,
+          parent_tenant_id,
+          plan_id,
+          timezone,
+          status: 'active'
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      res.status(201).json({
+        success: true,
+        tenant,
+        message: `${tenant_type} tenant created successfully`
+      });
+    } catch (error) {
+      console.error('Error creating tenant:', error);
+      res.status(500).json({ error: 'Failed to create tenant' });
+    }
+  });
+
+  app.put('/api/tenants/:id', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, status, tenant_type, parent_tenant_id, coach_count, timezone } = req.body;
+
+      const { data: tenant, error } = await supabaseAdmin
+        .from('tenants')
+        .update({
+          name,
+          status,
+          tenant_type,
+          parent_tenant_id,
+          coach_count,
+          timezone,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        tenant,
+        message: 'Tenant updated successfully'
+      });
+    } catch (error) {
+      console.error('Error updating tenant:', error);
+      res.status(500).json({ error: 'Failed to update tenant' });
+    }
+  });
+
+  // TENANT USERS & ROLES ENDPOINTS
+  app.get('/api/tenants/:tenantId/users', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { tenantId } = req.params;
+
+      const { data: tenantUsers, error } = await supabaseAdmin
+        .from('tenant_users')
+        .select(`
+          tenant_id,
+          user_id,
+          role,
+          status,
+          created_at,
+          users (
+            id,
+            email,
+            name,
+            created_at
+          )
+        `)
+        .eq('tenant_id', tenantId)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        tenantUsers: tenantUsers || [],
+        count: tenantUsers?.length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching tenant users:', error);
+      res.status(500).json({ error: 'Failed to fetch tenant users' });
+    }
+  });
+
+  app.post('/api/tenants/:tenantId/users', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { tenantId } = req.params;
+      const { user_id, role, status = 'active' } = req.body;
+
+      if (!user_id || !role) {
+        return res.status(400).json({ error: 'User ID and role are required' });
+      }
+
+      const { data: tenantUser, error } = await supabaseAdmin
+        .from('tenant_users')
+        .insert({
+          tenant_id: tenantId,
+          user_id,
+          role,
+          status
+        })
+        .select(`
+          *,
+          users (
+            id,
+            email,
+            name
+          )
+        `)
+        .single();
+
+      if (error) throw error;
+
+      res.status(201).json({
+        success: true,
+        tenantUser,
+        message: 'User assigned to tenant successfully'
+      });
+    } catch (error) {
+      console.error('Error assigning user to tenant:', error);
+      res.status(500).json({ error: 'Failed to assign user to tenant' });
+    }
+  });
+
+  // LOCATIONS MANAGEMENT ENDPOINTS
+  app.get('/api/tenants/:tenantId/locations', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { tenantId } = req.params;
+
+      const { data: locations, error } = await supabaseAdmin
+        .from('locations')
+        .select(`
+          id,
+          name,
+          address,
+          timezone,
+          is_primary,
+          created_at,
+          updated_at
+        `)
+        .eq('tenant_id', tenantId)
+        .order('is_primary', { ascending: false });
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        locations: locations || [],
+        count: locations?.length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+      res.status(500).json({ error: 'Failed to fetch locations' });
+    }
+  });
+
+  app.post('/api/tenants/:tenantId/locations', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { tenantId } = req.params;
+      const { name, address, timezone = 'UTC', is_primary = false } = req.body;
+
+      if (!name) {
+        return res.status(400).json({ error: 'Location name is required' });
+      }
+
+      const { data: location, error } = await supabaseAdmin
+        .from('locations')
+        .insert({
+          tenant_id: tenantId,
+          name,
+          address,
+          timezone,
+          is_primary
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      res.status(201).json({
+        success: true,
+        location,
+        message: 'Location created successfully'
+      });
+    } catch (error) {
+      console.error('Error creating location:', error);
+      res.status(500).json({ error: 'Failed to create location' });
+    }
+  });
+
+  // ORGANIZATION HIERARCHY ENDPOINTS
+  app.get('/api/organizations/:parentId/children', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { parentId } = req.params;
+
+      const { data: hierarchy, error } = await supabaseAdmin
+        .from('organization_hierarchy')
+        .select(`
+          id,
+          relationship_type,
+          created_at,
+          child_tenant:child_tenant_id (
+            id,
+            name,
+            slug,
+            tenant_type,
+            status,
+            coach_count
+          )
+        `)
+        .eq('parent_tenant_id', parentId)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        children: hierarchy || [],
+        count: hierarchy?.length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching organization children:', error);
+      res.status(500).json({ error: 'Failed to fetch organization hierarchy' });
+    }
+  });
+
+  app.post('/api/organizations/hierarchy', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { parent_tenant_id, child_tenant_id, relationship_type = 'franchise' } = req.body;
+
+      if (!parent_tenant_id || !child_tenant_id) {
+        return res.status(400).json({ error: 'Parent and child tenant IDs are required' });
+      }
+
+      const { data: hierarchy, error } = await supabaseAdmin
+        .from('organization_hierarchy')
+        .insert({
+          parent_tenant_id,
+          child_tenant_id,
+          relationship_type
+        })
+        .select(`
+          *,
+          parent_tenant:parent_tenant_id (name),
+          child_tenant:child_tenant_id (name)
+        `)
+        .single();
+
+      if (error) throw error;
+
+      res.status(201).json({
+        success: true,
+        hierarchy,
+        message: 'Organization hierarchy relationship created'
+      });
+    } catch (error) {
+      console.error('Error creating organization hierarchy:', error);
+      res.status(500).json({ error: 'Failed to create organization hierarchy' });
+    }
+  });
+
+  // FEATURE PLANS ENDPOINTS
+  app.get('/api/feature-plans', async (req, res) => {
+    try {
+      const { data: plans, error } = await supabaseAdmin
+        .from('feature_plans')
+        .select('*')
+        .eq('is_active', true)
+        .order('tier', { ascending: true });
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        plans: plans || [],
+        count: plans?.length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching feature plans:', error);
+      res.status(500).json({ error: 'Failed to fetch feature plans' });
+    }
+  });
+
+  // STAFF LOCATIONS ENDPOINTS
+  app.get('/api/tenants/:tenantId/staff-locations', isAdminAuthenticated, async (req, res) => {
+    try {
+      const { tenantId } = req.params;
+
+      const { data: staffLocations, error } = await supabaseAdmin
+        .from('staff_locations')
+        .select(`
+          id,
+          is_primary,
+          created_at,
+          users (
+            id,
+            email,
+            name
+          ),
+          locations (
+            id,
+            name,
+            address
+          )
+        `)
+        .eq('tenant_id', tenantId)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      res.json({
+        success: true,
+        staffLocations: staffLocations || [],
+        count: staffLocations?.length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching staff locations:', error);
+      res.status(500).json({ error: 'Failed to fetch staff locations' });
+    }
+  });
+
+  // ROLE PERMISSIONS ENDPOINT
+  app.get('/api/roles/permissions', async (req, res) => {
+    try {
+      // Import from schema to get role permissions
+      const { ROLE_PERMISSIONS, TenantUserRoleEnum, hasPermission } = await import('../shared/schema.js').catch(() => {
+        // Fallback if compiled schema not available
+        return {
+          ROLE_PERMISSIONS: {},
+          TenantUserRoleEnum: {},
+          hasPermission: () => false
+        };
+      });
+
+      res.json({
+        success: true,
+        roles: Object.keys(TenantUserRoleEnum),
+        permissions: ROLE_PERMISSIONS,
+        hasPermissionFunction: 'Available via hasPermission(role, resource, action, ownership?)'
+      });
+    } catch (error) {
+      console.error('Error fetching role permissions:', error);
+      res.status(500).json({ error: 'Failed to fetch role permissions' });
+    }
+  });
+
+  // ENHANCED TENANT ANALYTICS ENDPOINT
+  app.get('/api/admin/tenant-analytics', isAdminAuthenticated, async (req, res) => {
+    try {
+      // Get tenant statistics
+      const { data: tenantStats, error: tenantError } = await supabaseAdmin
+        .from('tenants')
+        .select('tenant_type, status')
+        .neq('status', 'deleted');
+
+      if (tenantError) throw tenantError;
+
+      // Get user role distribution
+      const { data: roleStats, error: roleError } = await supabaseAdmin
+        .from('tenant_users')
+        .select('role, status')
+        .eq('status', 'active');
+
+      if (roleError) throw roleError;
+
+      // Get location count by tenant
+      const { data: locationStats, error: locationError } = await supabaseAdmin
+        .from('locations')
+        .select('tenant_id')
+        .order('tenant_id');
+
+      if (locationError) throw locationError;
+
+      // Process statistics
+      const tenantTypeBreakdown = (tenantStats || []).reduce((acc: any, tenant) => {
+        acc[tenant.tenant_type] = (acc[tenant.tenant_type] || 0) + 1;
+        return acc;
+      }, {});
+
+      const roleBreakdown = (roleStats || []).reduce((acc: any, user) => {
+        acc[user.role] = (acc[user.role] || 0) + 1;
+        return acc;
+      }, {});
+
+      const locationBreakdown = (locationStats || []).reduce((acc: any, location) => {
+        acc[location.tenant_id] = (acc[location.tenant_id] || 0) + 1;
+        return acc;
+      }, {});
+
+      res.json({
+        success: true,
+        analytics: {
+          totalTenants: tenantStats?.length || 0,
+          tenantTypes: tenantTypeBreakdown,
+          totalUsers: roleStats?.length || 0,
+          roleDistribution: roleBreakdown,
+          totalLocations: locationStats?.length || 0,
+          averageLocationsPerTenant: Object.keys(locationBreakdown).length > 0 
+            ? (locationStats?.length || 0) / Object.keys(locationBreakdown).length 
+            : 0
+        },
+        generatedAt: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error fetching tenant analytics:', error);
+      res.status(500).json({ error: 'Failed to fetch tenant analytics' });
+    }
+  });
+
   const httpServer = createServer(app);
   
   // Configure server timeouts for Render deployment

@@ -1,5 +1,5 @@
-import { relations } from "drizzle-orm";
-import { boolean, date, decimal, integer, json, jsonb, pgEnum, pgTable, serial, text, time, timestamp, varchar, uuid, bigserial, bigint, unique } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { boolean, check, date, decimal, integer, json, jsonb, pgEnum, pgTable, serial, text, time, timestamp, varchar, uuid, bigserial, bigint, unique } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -35,16 +35,26 @@ export const attendanceStatusEnum = pgEnum("attendance_status", [
 // Multi-tenant enums
 export const tenantUserRoleEnum = pgEnum("tenant_user_role", [
   "platform_admin",
-  "coach_admin",
+  "coach_admin", 
   "coach_staff",
   "parent",
-  "athlete"
+  "athlete",
+  // Enhanced organizational roles
+  "gym_owner",
+  "head_coach", 
+  "assistant_coach",
+  "front_desk"
 ]);
 
 export const tenantStatusEnum = pgEnum("tenant_status", [
   "active",
   "inactive",
   "suspended"
+]);
+
+export const tenantTypeEnum = pgEnum("tenant_type", [
+  "individual",
+  "organization"
 ]);
 
 // Create TypeScript enums from the PostgreSQL enums for type safety
@@ -95,6 +105,155 @@ export enum BookingMethodEnum {
   EMAIL = "Email"
 }
 
+// TypeScript enum for tenant user roles
+export enum TenantUserRoleEnum {
+  PLATFORM_ADMIN = "platform_admin",
+  COACH_ADMIN = "coach_admin",
+  COACH_STAFF = "coach_staff", 
+  PARENT = "parent",
+  ATHLETE = "athlete",
+  // Enhanced organizational roles
+  GYM_OWNER = "gym_owner",
+  HEAD_COACH = "head_coach",
+  ASSISTANT_COACH = "assistant_coach",
+  FRONT_DESK = "front_desk"
+}
+
+// TypeScript enum for tenant types
+export enum TenantTypeEnum {
+  INDIVIDUAL = "individual",
+  ORGANIZATION = "organization"
+}
+
+// Enhanced permission system types
+export interface FeatureLimits {
+  maxAthletes: number; // -1 = unlimited
+  maxMonthlyBookings: number;
+  maxStaff: number;
+  maxLocations: number;
+  features: {
+    videoAnalysis: boolean;
+    advancedReporting: boolean;
+    customBranding: boolean;
+    apiAccess: boolean;
+    multiLocation: boolean;
+    whiteLabel: boolean;
+    customIntegrations: boolean;
+  };
+}
+
+export interface PlanPricing {
+  individual: {
+    solo: { price: number; limits: FeatureLimits };
+    pro: { price: number; limits: FeatureLimits };
+  };
+  organization: {
+    starter: { price: number; limits: FeatureLimits };
+    professional: { price: number; limits: FeatureLimits };
+    enterprise: { price: number; limits: FeatureLimits };
+  };
+}
+
+// Permission matrix type
+export type Permission = 
+  // Tenant management
+  | 'tenants:create' | 'tenants:read' | 'tenants:update' | 'tenants:delete' | 'tenants:*'
+  // User management  
+  | 'users:read' | 'users:*'
+  // Staff management
+  | 'staff:invite' | 'staff:manage' | 'staff:manage:coaches' | 'staff:*'
+  // Location management
+  | 'locations:read' | 'locations:create' | 'locations:update' | 'locations:delete' | 'locations:*'
+  // Athlete management
+  | 'athletes:read' | 'athletes:create' | 'athletes:update' | 'athletes:delete' | 'athletes:*'
+  | 'athletes:read:own' | 'athletes:update:assigned'
+  // Booking management
+  | 'bookings:read' | 'bookings:create' | 'bookings:update' | 'bookings:delete' | 'bookings:*'
+  | 'bookings:read:own' | 'bookings:create:own' | 'bookings:update:assigned'
+  // Program management
+  | 'programs:read' | 'programs:create' | 'programs:update' | 'programs:delete' | 'programs:*'
+  // Schedule management
+  | 'schedules:read' | 'schedules:create' | 'schedules:update' | 'schedules:delete' | 'schedules:*'
+  // Waiver management
+  | 'waivers:read' | 'waivers:sign' | 'waivers:manage' | 'waivers:sign:own'
+  // Payment management
+  | 'payments:view' | 'payments:process' | 'payments:view:own'
+  // Reporting
+  | 'reports:read' | 'reports:*'
+  // System/platform - Fixed billing permissions
+  | 'system:*' | 'billing:read' | 'billing:manage' | 'billing:*' | 'analytics:read' | 'analytics:*'
+  // Settings
+  | 'settings:update'
+  // Profile management
+  | 'profile:read:own' | 'progress:read:own' | 'bookings:view:own';
+
+export const ROLE_PERMISSIONS: Record<TenantUserRoleEnum, Permission[]> = {
+  // Platform Level
+  [TenantUserRoleEnum.PLATFORM_ADMIN]: [
+    'tenants:*', 'users:*', 'billing:*', 'analytics:*', 'system:*'
+  ],
+  
+  // Organizational Tenant Roles
+  [TenantUserRoleEnum.GYM_OWNER]: [
+    'tenants:read', 'tenants:update', 'staff:*', 'locations:*', 'billing:read',
+    'athletes:*', 'bookings:*', 'programs:*', 'reports:*', 'settings:update'
+  ],
+  
+  [TenantUserRoleEnum.HEAD_COACH]: [
+    'staff:invite', 'staff:manage:coaches', 'programs:*', 'schedules:*',
+    'athletes:*', 'bookings:*', 'reports:read', 'locations:read'
+  ],
+  
+  [TenantUserRoleEnum.ASSISTANT_COACH]: [
+    'athletes:read', 'athletes:update:assigned', 'bookings:read', 
+    'bookings:update:assigned', 'schedules:read', 'programs:read'
+  ],
+  
+  [TenantUserRoleEnum.FRONT_DESK]: [
+    'athletes:read', 'athletes:create', 'bookings:*', 'schedules:read',
+    'payments:process', 'waivers:manage'
+  ],
+  
+  // Individual Tenant Roles  
+  [TenantUserRoleEnum.COACH_ADMIN]: [
+    'athletes:*', 'bookings:*', 'schedules:*', 'programs:*',
+    'billing:read', 'settings:update', 'reports:*'
+  ],
+  
+  [TenantUserRoleEnum.COACH_STAFF]: [
+    'athletes:read', 'athletes:update', 'bookings:read', 'bookings:update',
+    'schedules:read', 'programs:read'
+  ],
+  
+  // Client Roles (shared across tenant types)
+  [TenantUserRoleEnum.PARENT]: [
+    'athletes:read:own', 'bookings:read:own', 'bookings:create:own',
+    'waivers:sign:own', 'payments:view:own'
+  ],
+  
+  [TenantUserRoleEnum.ATHLETE]: [
+    'profile:read:own', 'progress:read:own', 'bookings:view:own'
+  ]
+};
+
+export function hasPermission(
+  userRole: TenantUserRoleEnum, 
+  resource: string, 
+  action: string,
+  ownership?: 'own' | 'assigned' | 'any'
+): boolean {
+  const rolePermissions = ROLE_PERMISSIONS[userRole] || [];
+  
+  // Check wildcard permissions
+  if (rolePermissions.includes(`${resource}:*` as Permission)) return true;
+  
+  // Check specific permission
+  const permission = ownership 
+    ? `${resource}:${action}:${ownership}` as Permission
+    : `${resource}:${action}` as Permission;
+  return rolePermissions.includes(permission);
+}
+
 
 // ---------------------------------------------------------------------------
 // Multi-tenant core infrastructure tables (added before tenant-scoped tables)
@@ -103,8 +262,13 @@ export const featurePlans = pgTable("feature_plans", {
   id: uuid("id").primaryKey().defaultRandom(),
   code: text("code").notNull(),
   name: text("name").notNull(),
+  description: text("description"),
   limits: jsonb("limits").notNull().default({}),
   priceLookupKey: text("price_lookup_key"),
+  // Enhanced feature plan fields
+  tenantType: tenantTypeEnum("tenant_type").notNull().default("individual"),
+  isPerSeat: boolean("is_per_seat").default(false),
+  maxCoaches: integer("max_coaches").default(1),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => ({
   featurePlansCodeKey: unique("feature_plans_code_key").on(table.code),
@@ -119,9 +283,15 @@ export const tenants = pgTable("tenants", {
   timezone: text("timezone").notNull().default("UTC"),
   stripeCustomerId: text("stripe_customer_id"),
   stripeAccountId: text("stripe_account_id"),
+  // Enhanced tenant fields
+  tenantType: tenantTypeEnum("tenant_type").notNull().default("individual"),
+  parentTenantId: uuid("parent_tenant_id"), // Remove self-reference for now
+  coachCount: integer("coach_count").default(1),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 }, (table) => ({
-  tenantsSlugKey: unique("tenants_slug_key").on(table.slug)
+  tenantsSlugKey: unique("tenants_slug_key").on(table.slug),
+  tenantTypeCheck: check("tenants_tenant_type_check", sql`tenant_type IN ('individual', 'organization')`),
+  coachCountCheck: check("tenants_coach_count_check", sql`coach_count > 0`)
 }));
 
 export const users = pgTable("users", {
@@ -167,6 +337,40 @@ export const invitations = pgTable("invitations", {
 }, (table) => ({
   invitationsTokenKey: unique("invitations_token_key").on(table.token),
   invitationsEmailPerTenant: unique("invitations_email_per_tenant").on(table.tenantId, table.email)
+}));
+
+// Enhanced multi-tenant tables for organizational structure
+export const locations = pgTable("locations", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  tenantId: uuid("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  address: jsonb("address"),
+  timezone: text("timezone").notNull().default("UTC"),
+  isPrimary: boolean("is_primary").default(false),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const staffLocations = pgTable("staff_locations", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  tenantId: uuid("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" }),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  locationId: uuid("location_id").notNull().references(() => locations.id, { onDelete: "cascade" }),
+  isPrimary: boolean("is_primary").default(false),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => ({
+  staffLocationUnique: unique("staff_locations_unique").on(table.tenantId, table.userId, table.locationId)
+}));
+
+export const organizationHierarchy = pgTable("organization_hierarchy", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  parentTenantId: uuid("parent_tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" }),
+  childTenantId: uuid("child_tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" }),
+  relationshipType: text("relationship_type").notNull().default("location"), // 'location', 'franchise', 'division'
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+}, (table) => ({
+  orgHierarchyUnique: unique("organization_hierarchy_unique").on(table.parentTenantId, table.childTenantId),
+  parentChildCheck: check("organization_hierarchy_parent_child_check", sql`parent_tenant_id != child_tenant_id`)
 }));
 
 // ---------------------------------------------------------------------------
@@ -1127,6 +1331,28 @@ export type InsertParentVerificationToken = typeof parentVerificationTokens.$inf
 export type ParentPasswordResetToken = typeof parentPasswordResetTokens.$inferSelect;
 export type InsertParentPasswordResetToken = typeof parentPasswordResetTokens.$inferInsert;
 
+// Enhanced multi-tenant types
+export type Tenant = typeof tenants.$inferSelect;
+export type InsertTenant = typeof tenants.$inferInsert;
+export type TenantUser = typeof tenantUsers.$inferSelect;
+export type InsertTenantUser = typeof tenantUsers.$inferInsert;
+export type FeaturePlan = typeof featurePlans.$inferSelect;
+export type InsertFeaturePlan = typeof featurePlans.$inferInsert;
+export type TenantSettings = typeof tenantSettings.$inferSelect;
+export type InsertTenantSettings = typeof tenantSettings.$inferInsert;
+export type Invitation = typeof invitations.$inferSelect;
+export type InsertInvitation = typeof invitations.$inferInsert;
+export type User = typeof users.$inferSelect;
+export type InsertUser = typeof users.$inferInsert;
+
+// New enhanced tables
+export type Location = typeof locations.$inferSelect;
+export type InsertLocation = typeof locations.$inferInsert;
+export type StaffLocation = typeof staffLocations.$inferSelect;
+export type InsertStaffLocation = typeof staffLocations.$inferInsert;
+export type OrganizationHierarchy = typeof organizationHierarchy.$inferSelect;
+export type InsertOrganizationHierarchy = typeof organizationHierarchy.$inferInsert;
+
 // Lesson types
 export type LessonType = typeof lessonTypes.$inferSelect;
 export type InsertLessonType = typeof lessonTypes.$inferInsert;
@@ -1294,6 +1520,86 @@ export const athleteWaiverRelations = relations(athletes, ({ one }) => ({
     fields: [athletes.latestWaiverId],
     references: [waivers.id],
   }),
+}));
+
+// Enhanced multi-tenant relations
+export const tenantsRelations = relations(tenants, ({ one, many }) => ({
+  parent: one(tenants, {
+    fields: [tenants.parentTenantId],
+    references: [tenants.id],
+  }),
+  children: many(tenants, {
+    relationName: "parent"
+  }),
+  plan: one(featurePlans, {
+    fields: [tenants.planId],
+    references: [featurePlans.id],
+  }),
+  users: many(tenantUsers),
+  locations: many(locations),
+  staffLocations: many(staffLocations),
+  parentHierarchy: many(organizationHierarchy, {
+    relationName: "parent"
+  }),
+  childHierarchy: many(organizationHierarchy, {
+    relationName: "child" 
+  }),
+}));
+
+export const locationsRelations = relations(locations, ({ one, many }) => ({
+  tenant: one(tenants, {
+    fields: [locations.tenantId],
+    references: [tenants.id],
+  }),
+  staff: many(staffLocations),
+}));
+
+export const staffLocationsRelations = relations(staffLocations, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [staffLocations.tenantId],
+    references: [tenants.id],
+  }),
+  user: one(users, {
+    fields: [staffLocations.userId], 
+    references: [users.id],
+  }),
+  location: one(locations, {
+    fields: [staffLocations.locationId],
+    references: [locations.id],
+  }),
+}));
+
+export const organizationHierarchyRelations = relations(organizationHierarchy, ({ one }) => ({
+  parentTenant: one(tenants, {
+    fields: [organizationHierarchy.parentTenantId],
+    references: [tenants.id],
+    relationName: "parent"
+  }),
+  childTenant: one(tenants, {
+    fields: [organizationHierarchy.childTenantId],
+    references: [tenants.id],
+    relationName: "child"
+  }),
+}));
+
+export const featurePlansRelations = relations(featurePlans, ({ many }) => ({
+  tenants: many(tenants),
+}));
+
+export const tenantUsersRelations = relations(tenantUsers, ({ one }) => ({
+  tenant: one(tenants, {
+    fields: [tenantUsers.tenantId],
+    references: [tenants.id],
+  }),
+  user: one(users, {
+    fields: [tenantUsers.userId],
+    references: [users.id],
+  }),
+}));
+
+export const usersRelations = relations(users, ({ many }) => ({
+  tenantMemberships: many(tenantUsers),
+  staffLocations: many(staffLocations),
 }));
 
 export const insertArchivedWaiverSchema = createInsertSchema(archivedWaivers).omit({

@@ -135,8 +135,8 @@ const FEATURE_PLANS = {
 ### 3.2 Introduce Betteh Constants
 - Replace hardcoded strings with brand provider / context.
 ### 3.3 Domain Strategy
-- Primary: `betteh.com`.
-- Tenant subdomains: `<coachSlug>.betteh.com` via wildcard DNS + edge middleware to resolve tenant.
+- Primary: `betteh.app` ('`betteh.com` forwards to `betteh.app`).
+- Tenant subdomains: `<coachSlug>.betteh.app` via wildcard DNS + edge middleware to resolve tenant.
 ### 3.4 Transitional Redirects
 - Configure 301 redirects from legacy domain paths to new host once migrated.
 
